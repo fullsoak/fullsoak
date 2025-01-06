@@ -10,8 +10,8 @@ type Props = {
 const importMapJs = `
 {
   "imports": {
-    "preact": "https://esm.sh/preact@10.25.2",
-    "preact/hooks": "https://esm.sh/preact@10.25.2/hooks",
+    "preact": "https://esm.sh/preact@10.25.4",
+    "preact/hooks": "https://esm.sh/preact@10.25.4/hooks",
     "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
   }
 }
