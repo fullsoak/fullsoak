@@ -2,11 +2,12 @@ import { Controller, ControllerMethodArgs, Get } from "@dklab/oak-routing-ctrl";
 import type { Context } from "@oak/oak/context";
 import { getClientSideJsForRoute } from "./getClientSideJsForRoute.ts";
 import * as Uglify from "uglify-js";
+import { getGlobalComponentsDir } from "./metastore.ts";
 
 @Controller()
 export class CsrController {
   @Get("/js/fullsoak.js")
-  serveClientJsEntryPoint(ctx: Context) {
+  serveClientJsEntryPoint(ctx: Context): string {
     ctx.response.headers.set("content-type", "text/javascript");
 
     // @TODO check if it's 100% safe to trust the 'system' on the caching mechanism here
@@ -37,33 +38,40 @@ export class CsrController {
   async serveComponentTsx(
     { compName }: { compName: string },
     ctx: Context,
-  ) {
+  ): Promise<string> {
+    const globalComponentsDir = getGlobalComponentsDir();
     ctx.response.headers.set("content-type", "text/javascript");
 
     let rawComp;
     try {
-      rawComp = await Deno.readTextFile(`${globalThis.FULLSOAK_APP_COMPONENTS_DIR}/${compName}/index.tsx`);
+      rawComp = await Deno.readTextFile(
+        `${globalComponentsDir}/${compName}/index.tsx`,
+      );
     } catch (e) {
-      console.warn(`unable to read raw component ${compName}: ${(e as Error).message}`);
+      console.warn(
+        `unable to read raw component ${compName}: ${(e as Error).message}`,
+      );
     }
 
-    const esm = await import(`${globalThis.FULLSOAK_APP_COMPONENTS_DIR}/${compName}/index.tsx`);
+    const esm = await import(`${globalComponentsDir}/${compName}/index.tsx`);
     const Comp = esm[compName] || esm; // prioritize named export, falling back to default export
 
     const rawCompImports = rawComp
-      ?.split('\n')
-      .filter(line => line.startsWith('import ') && !line.includes('type '))
+      ?.split("\n")
+      .filter((line) => line.startsWith("import ") && !line.includes("type "))
       // .map(line => line.replace('../', '/components/'))
-      .join('\n');
+      .join("\n");
 
     const reconstructedTsx = `
     ${rawCompImports}
     export const ${compName} = ${String(Comp)};
-    `
+    `;
 
-    const minifiedRetVal = Uglify.minify(reconstructedTsx)
+    const minifiedRetVal = Uglify.minify(reconstructedTsx);
     if (minifiedRetVal.error) {
-      console.error(`encounted an error while minifying for ${compName}: ${minifiedRetVal.error}`)
+      console.error(
+        `encounted an error while minifying for ${compName}: ${minifiedRetVal.error}`,
+      );
     }
 
     return minifiedRetVal.code;

@@ -1,3 +1,5 @@
+/** @jsxRuntime automatic */
+/** @jsxImportSource npm:preact@10.25.4 */
 import type { FunctionComponent, VNode } from "preact";
 
 type Props = {
@@ -54,13 +56,13 @@ type WithHtmlShellProps = {
   component: FunctionComponent | VNode;
   js?: string;
   css?: string;
-}
+};
 
 export const withHtmlShell = ({
   component,
   js,
-  css
-}: WithHtmlShellProps) => (
+  css,
+}: WithHtmlShellProps): VNode => (
   <HtmlShell
     js={js}
     css={css}
