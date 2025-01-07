@@ -33,7 +33,9 @@ export const ssr = async (component: FunctionComponent): Promise<string> => {
       }`,
     );
   }
+
   return byoHtml(withHtmlShell({
+    componentName,
     component: componentVNode,
     css: cleanCss(componentCss),
   }));

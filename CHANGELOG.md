@@ -1,3 +1,11 @@
+## [0.2.0] - 2025-01-07
+
+### Changed
+
+- components now requests for their own named client-side js files, e.g.
+  `/js/PageFoo/mount.js`, this also solves the potential "cache invalidation"
+  question by nature
+
 ## [0.1.2] - 2025-01-07
 
 ### Fixed

@@ -6,18 +6,16 @@ import { getGlobalComponentsDir } from "./metastore.ts";
 
 @Controller()
 export class CsrController {
-  @Get("/js/fullsoak.js")
-  serveClientJsEntryPoint(ctx: Context): string {
+  @Get("/js/:compName/mount.js")
+  @ControllerMethodArgs("param")
+  serveClientJsEntryPoint(
+    param: { compName: string },
+    ctx: Context,
+  ): string {
     ctx.response.headers.set("content-type", "text/javascript");
 
-    // @TODO check if it's 100% safe to trust the 'system' on the caching mechanism here
-    // ctx.response.headers.set("cache-control", "no-cache");
-
-    // which page is requesting `js/client.js` e.g. my.domain/my-page
-    const refererUrl = new URL(ctx.request.headers.get("referer") || "");
-
     return Uglify.minify(
-      getClientSideJsForRoute(refererUrl.pathname),
+      getClientSideJsForRoute(param.compName),
     ).code;
   }
 

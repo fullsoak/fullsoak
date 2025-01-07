@@ -3,6 +3,10 @@
 import type { FunctionComponent, VNode } from "preact";
 
 type Props = {
+  /**
+   * name of the TSX component that's going to be rendered as the `{children}` within the shell
+   */
+  componentName: string;
   pageTitle?: string;
   js?: string;
   css?: string;
@@ -20,6 +24,7 @@ const importMapJs = `
 `;
 
 export const HtmlShell: FunctionComponent<Props> = ({
+  componentName,
   children,
   pageTitle,
   js,
@@ -47,23 +52,26 @@ export const HtmlShell: FunctionComponent<Props> = ({
       <main id="main">
         {children}
       </main>
-      <script type="module" src="/js/fullsoak.js"></script>
+      <script type="module" src={`/js/${componentName}/mount.js`}></script>
     </body>
   </html>
 );
 
 type WithHtmlShellProps = {
+  componentName: string;
   component: FunctionComponent | VNode;
   js?: string;
   css?: string;
 };
 
 export const withHtmlShell = ({
+  componentName,
   component,
   js,
   css,
 }: WithHtmlShellProps): VNode => (
   <HtmlShell
+    componentName={componentName}
     js={js}
     css={css}
   >
