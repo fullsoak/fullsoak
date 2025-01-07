@@ -52,7 +52,8 @@ export class CsrController {
       );
     }
 
-    const relPath = relative(import.meta.dirname || Deno.cwd(), compFile);
+    let relPath = relative(import.meta.dirname || Deno.cwd(), compFile);
+    if (!relPath.startsWith(".")) relPath = `./${relPath}`;
     const esm = await import(relPath);
     const Comp = esm[compName] || esm; // prioritize named export, falling back to default export
 
