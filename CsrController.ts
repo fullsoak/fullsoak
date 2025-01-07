@@ -1,5 +1,6 @@
 import { Controller, ControllerMethodArgs, Get } from "@dklab/oak-routing-ctrl";
 import type { Context } from "@oak/oak/context";
+import { relative } from "@std/path";
 import { getClientSideJsForRoute } from "./getClientSideJsForRoute.ts";
 import * as Uglify from "uglify-js";
 import { getGlobalComponentsDir } from "./metastore.ts";
@@ -51,7 +52,8 @@ export class CsrController {
       );
     }
 
-    const esm = await import(`file://${compFile}`);
+    const relPath = relative(import.meta.dirname || Deno.cwd(), compFile);
+    const esm = await import(relPath);
     const Comp = esm[compName] || esm; // prioritize named export, falling back to default export
 
     const rawCompImports = rawComp
