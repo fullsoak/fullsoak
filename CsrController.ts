@@ -3,6 +3,7 @@ import type { Context } from "@oak/oak/context";
 import { getClientSideJsForRoute } from "./getClientSideJsForRoute.ts";
 import * as Uglify from "uglify-js";
 import { getGlobalComponentsDir } from "./metastore.ts";
+import Module from "node:module";
 
 @Controller()
 export class CsrController {
@@ -42,24 +43,13 @@ export class CsrController {
 
     const compFile = `${globalComponentsDir}/${compName}/index.tsx`;
 
-    let rawComp;
-    try {
-      rawComp = await Deno.readTextFile(compFile);
-    } catch (e) {
-      console.warn(
-        `unable to read raw component ${compName}: ${(e as Error).message}`,
-      );
-    }
+    // @TODO benchmark the performance of this 'createRequire' approach
+    const rawComp = await readRawTextFile(compFile);
+    const require = Module.createRequire(compFile);
 
-    const [_, relPath] = compFile.split("components/");
-
-    // this requires that the user declares `"@components/": "./src/components/"`
-    // in their own import map
-    // @TODO provide a tool to make this seamless / automated for the user
-    const esm = await import(`@components/${relPath}`);
-
+    const CompMod = require(compFile);
     // prioritize named export, falling back to default export
-    const Comp = esm[compName] || esm;
+    const Comp = CompMod[compName] || CompMod;
 
     const rawCompImports = rawComp
       ?.split("\n")
@@ -81,4 +71,15 @@ export class CsrController {
 
     return minifiedRetVal.code;
   }
+}
+
+async function readRawTextFile(path: string): Promise<string> {
+  try {
+    return await Deno.readTextFile(path);
+  } catch (e) {
+    console.warn(
+      `unable to read file ${path}: ${(e as Error).message}`,
+    );
+  }
+  return '';
 }

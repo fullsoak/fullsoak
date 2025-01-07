@@ -1,3 +1,9 @@
+## [Unreleased]
+
+### Fixing
+
+- ssr component 'dynamic import' to be replaced by Node.js 'require'
+
 ## [0.2.1] - 2025-01-07
 
 ### Fixed
