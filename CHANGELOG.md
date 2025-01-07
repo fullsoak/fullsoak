@@ -1,3 +1,9 @@
+## [Unreleased]
+
+### Fixing
+
+- ssr component import issue (file vs jsr)
+
 ## [0.2.0] - 2025-01-07
 
 ### Changed

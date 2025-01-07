@@ -40,18 +40,18 @@ export class CsrController {
     const globalComponentsDir = getGlobalComponentsDir();
     ctx.response.headers.set("content-type", "text/javascript");
 
+    const compFile = `${globalComponentsDir}/${compName}/index.tsx`;
+
     let rawComp;
     try {
-      rawComp = await Deno.readTextFile(
-        `${globalComponentsDir}/${compName}/index.tsx`,
-      );
+      rawComp = await Deno.readTextFile(compFile);
     } catch (e) {
       console.warn(
         `unable to read raw component ${compName}: ${(e as Error).message}`,
       );
     }
 
-    const esm = await import(`${globalComponentsDir}/${compName}/index.tsx`);
+    const esm = await import(`file://${compFile}`);
     const Comp = esm[compName] || esm; // prioritize named export, falling back to default export
 
     const rawCompImports = rawComp
