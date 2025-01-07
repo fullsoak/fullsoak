@@ -81,5 +81,5 @@ async function readRawTextFile(path: string): Promise<string> {
       `unable to read file ${path}: ${(e as Error).message}`,
     );
   }
-  return '';
+  return "";
 }
