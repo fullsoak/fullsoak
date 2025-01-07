@@ -39,7 +39,9 @@ Prerequisite:
 fullsoak-example
 |_ src
 |  |_ components
-|  |  |_ MyComponent.tsx
+|  |  |_ MyComponent
+|  |     |_ index.tsx
+|  |     |_ styles.css
 |  |_ main.ts
 |_ deno.jsonc
 ```
@@ -64,7 +66,7 @@ fullsoak-example
 ```ts
 // src/main.ts
 import { Controller, Get, ssr, useFullSoak } from "fullsoak";
-import { MyComponent } from "./components/MyComponent.tsx";
+import { MyComponent } from "./components/MyComponent/index.tsx";
 
 @Controller()
 class MyController {
@@ -80,7 +82,7 @@ useFullSoak({ port, controllers: [MyController], middlewares: [] });
 ```
 
 ```ts
-// src/components/MyComponent.tsx
+// src/components/MyComponent/index.tsx
 import { html } from "htm/preact";
 import type { FunctionComponent } from "preact";
 export const MyComponent: FunctionComponent = () =>

@@ -3,6 +3,7 @@
 ### Fixing
 
 - ssr component import issue (file vs jsr)
+- typox fix for example setup in README
 
 ## [0.2.0] - 2025-01-07
 
