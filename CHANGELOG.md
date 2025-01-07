@@ -1,8 +1,8 @@
-## [Unreleased]
+## [0.2.1] - 2025-01-07
 
-### Fixing
+### Fixed
 
-- ssr component import issue (file vs jsr)
+- ssr component import issue (file vs jsr.io)
 - typox fix for example setup in README
 
 ## [0.2.0] - 2025-01-07

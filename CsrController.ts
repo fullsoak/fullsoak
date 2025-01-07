@@ -1,6 +1,5 @@
 import { Controller, ControllerMethodArgs, Get } from "@dklab/oak-routing-ctrl";
 import type { Context } from "@oak/oak/context";
-import { relative } from "@std/path";
 import { getClientSideJsForRoute } from "./getClientSideJsForRoute.ts";
 import * as Uglify from "uglify-js";
 import { getGlobalComponentsDir } from "./metastore.ts";
@@ -52,10 +51,15 @@ export class CsrController {
       );
     }
 
-    let relPath = relative(import.meta.dirname || Deno.cwd(), compFile);
-    if (!relPath.startsWith(".")) relPath = `./${relPath}`;
-    const esm = await import(relPath);
-    const Comp = esm[compName] || esm; // prioritize named export, falling back to default export
+    const [_, relPath] = compFile.split("components/");
+
+    // this requires that the user declares `"@components/": "./src/components/"`
+    // in their own import map
+    // @TODO provide a tool to make this seamless / automated for the user
+    const esm = await import(`@components/${relPath}`);
+
+    // prioritize named export, falling back to default export
+    const Comp = esm[compName] || esm;
 
     const rawCompImports = rawComp
       ?.split("\n")
