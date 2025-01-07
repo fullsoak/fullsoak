@@ -1,6 +1,6 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "imports": {
     "@oak/oak": "jsr:@oak/oak@^17.1.3",
     "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.13.0-rc.1",
@@ -14,9 +14,26 @@
     ".": "./mod.ts",
     "./mod": "./mod.ts"
   },
+  // @TODO provide a script to help user populate the same `compilerOptions` config
   "compilerOptions": {
     "jsx": "precompile", // see https://docs.deno.com/runtime/reference/jsx/#jsx-precompile-transform
     "jsxImportSource": "preact",
     "jsxPrecompileSkipElements": ["a", "link"]
-  }
+  },
+  "fmt": {
+    "useTabs": false,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "proseWrap": "always"
+  },
+  "exclude": [
+    "./deno.lock",
+    "./docs",
+    "cov_profile",
+    "cov_profile.lcov",
+    "**/__snapshots__",
+    ".github",
+    ".vscode"
+  ]
 }

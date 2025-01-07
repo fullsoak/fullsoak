@@ -9,9 +9,10 @@ import { CsrController } from "./CsrController.ts";
 
 // deno-lint-ignore no-explicit-any
 type Abort = (reason?: any) => void;
-// deno-lint-ignore no-explicit-any
 export type FullSoakMiddleware = MiddlewareOrMiddlewareObject<
+  // deno-lint-ignore no-explicit-any
   Record<string, any>,
+  // deno-lint-ignore no-explicit-any
   Context<Record<string, any>>
 >;
 // deno-lint-ignore no-explicit-any
@@ -25,8 +26,8 @@ export type UseFullSoakOptions = {
 
 export function useFullSoak({
   port,
-  middlewares,
-  controllers,
+  middlewares = [],
+  controllers = [],
   componentsDir,
 }: UseFullSoakOptions): Abort {
   // memorize the user-provided path to the `components` directory,
