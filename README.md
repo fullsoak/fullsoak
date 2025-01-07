@@ -5,7 +5,7 @@ fullstack framework for building fast web applications with a shallow learning
 curve. At its core is the [Oak http server framework](https://oakserver.org)
 which is inspired by Koa (one of the popular http Node.js frameworks).
 
-# Key Differentiators
+## Key Differentiators
 
 1. FullSoak is **no-build**. Zero, zip, zilch, nada. That means: no `babel`, no
    `tsc`, no `webpack` (or any such equivalence).

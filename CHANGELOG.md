@@ -1,3 +1,11 @@
+## [0.1.2] - 2025-01-07
+
+### Fixed
+
+- bug: `styles.css` should be optional (the app must not crash if there's no css
+  file for any component)
+- README Markdown typo fix
+
 ## [0.1.1] - 2025-01-07
 
 ### Added
