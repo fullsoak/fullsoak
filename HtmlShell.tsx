@@ -7,6 +7,7 @@ type Props = {
    * name of the TSX component that's going to be rendered as the `{children}` within the shell
    */
   componentName: string;
+  componentProps?: Record<string, unknown>;
   pageTitle?: string;
   js?: string;
   css?: string;
@@ -25,6 +26,7 @@ const importMapJs = `
 
 export const HtmlShell: FunctionComponent<Props> = ({
   componentName,
+  componentProps,
   children,
   pageTitle,
   js,
@@ -52,6 +54,12 @@ export const HtmlShell: FunctionComponent<Props> = ({
       <main id="main">
         {children}
       </main>
+      <script
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          __html: `window.preloadedProps = ${JSON.stringify(componentProps)}`,
+        }}
+      />
       <script type="module" src={`/js/${componentName}/mount.js`}></script>
     </body>
   </html>
@@ -60,6 +68,7 @@ export const HtmlShell: FunctionComponent<Props> = ({
 type WithHtmlShellProps = {
   componentName: string;
   component: FunctionComponent | VNode;
+  componentProps?: Record<string, unknown>;
   js?: string;
   css?: string;
 };
@@ -67,11 +76,13 @@ type WithHtmlShellProps = {
 export const withHtmlShell = ({
   componentName,
   component,
+  componentProps,
   js,
   css,
 }: WithHtmlShellProps): VNode => (
   <HtmlShell
     componentName={componentName}
+    componentProps={componentProps}
     js={js}
     css={css}
   >

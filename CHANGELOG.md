@@ -1,8 +1,10 @@
-## [Unreleased]
+## [0.3.0] - 2025-01-13
 
-### Fixing
+### Changed
 
-- ssr component 'dynamic import' to be replaced by Node.js 'require'
+- using `@swc/core` as a workaround for dynamic import which doesn't work in the
+  context of local Deno project using a framework from jsr.io:
+  https://github.com/denoland/deno/discussions/26266
 
 ## [0.2.1] - 2025-01-07
 

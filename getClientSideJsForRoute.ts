@@ -7,6 +7,7 @@ export const getClientSideJsForRoute = (compName: string) => {
   import { hydrate } from "preact";
   import { html } from "htm/preact";
   ${importByRoute}
-  hydrate(html\`<\${View} />\`, document.getElementById("main"));
+  const componentProps = window.preloadedProps;
+  hydrate(html\`<\${View} ...\${componentProps} />\`, document.getElementById("main"));
   `;
 };
