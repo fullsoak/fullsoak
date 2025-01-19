@@ -1,3 +1,9 @@
+## [0.4.0] - 2025-01-19
+
+### Added
+
+- "native" support for JSX syntax (`htm` support remains the same)
+
 ## [0.3.0] - 2025-01-13
 
 ### Changed

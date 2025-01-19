@@ -1,0 +1,65 @@
+export const snapshot = {};
+
+snapshot[`ssr a TSX component 1`] = `
+'<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"><title></title><script type="importmap">
+{
+  "imports": {
+    "preact": "https://esm.sh/preact@10.25.4",
+    "preact/hooks": "https://esm.sh/preact@10.25.4/hooks",
+    "react": "https://esm.sh/preact@10.25.4",
+    "react/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
+    "react-dom": "https://esm.sh/preact@10.25.4/compat/",
+    "react-dom/*": "https://esm.sh/preact@10.25.4/compat/*",
+    "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+  }
+}
+</script><script type="text/javascript"></script><style></style></head><body><main id="main"><div>SimpleTsxComponent</div></main><script type="text/javascript">window.preloadedProps = {}</script><script type="module" src="/js/SimpleTsxComponent/mount.js"></script></body></html>'
+`;
+
+snapshot[`ssr a TSX component with props 1`] = `
+'<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"><title></title><script type="importmap">
+{
+  "imports": {
+    "preact": "https://esm.sh/preact@10.25.4",
+    "preact/hooks": "https://esm.sh/preact@10.25.4/hooks",
+    "react": "https://esm.sh/preact@10.25.4",
+    "react/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
+    "react-dom": "https://esm.sh/preact@10.25.4/compat/",
+    "react-dom/*": "https://esm.sh/preact@10.25.4/compat/*",
+    "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+  }
+}
+</script><script type="text/javascript"></script><style></style></head><body><main id="main"><div>SimpleTsxComponentWithProps=Alice</div></main><script type="text/javascript">window.preloadedProps = {"name":"Alice"}</script><script type="module" src="/js/SimpleTsxComponentWithProps/mount.js"></script></body></html>'
+`;
+
+snapshot[`ssr a VNode using HTM 1`] = `
+'<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"><title></title><script type="importmap">
+{
+  "imports": {
+    "preact": "https://esm.sh/preact@10.25.4",
+    "preact/hooks": "https://esm.sh/preact@10.25.4/hooks",
+    "react": "https://esm.sh/preact@10.25.4",
+    "react/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
+    "react-dom": "https://esm.sh/preact@10.25.4/compat/",
+    "react-dom/*": "https://esm.sh/preact@10.25.4/compat/*",
+    "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+  }
+}
+</script><script type="text/javascript"></script><style></style></head><body><main id="main"><div>SimpleTsxComponentWithProps=Bob</div></main><script type="text/javascript">window.preloadedProps = {"name":"Bob"}</script><script type="module" src="/js/SimpleTsxComponentWithProps/mount.js"></script></body></html>'
+`;
+
+snapshot[`ssr a StandardComponent 1`] = `
+'<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"><title></title><script type="importmap">
+{
+  "imports": {
+    "preact": "https://esm.sh/preact@10.25.4",
+    "preact/hooks": "https://esm.sh/preact@10.25.4/hooks",
+    "react": "https://esm.sh/preact@10.25.4",
+    "react/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
+    "react-dom": "https://esm.sh/preact@10.25.4/compat/",
+    "react-dom/*": "https://esm.sh/preact@10.25.4/compat/*",
+    "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+  }
+}
+</script><script type="text/javascript"></script><style>body,html{font-family:monospace}</style></head><body><main id="main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script type="module" src="/js/StandardComponent/mount.js"></script></body></html>'
+`;

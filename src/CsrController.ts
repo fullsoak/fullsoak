@@ -43,7 +43,29 @@ export class CsrController {
 
     const compFile = `${globalComponentsDir}/${compName}/index.tsx`;
 
-    const transformedComp = await transformFile(compFile);
+    const transformedComp = await transformFile(compFile, {
+      jsc: {
+        parser: {
+          syntax: "typescript",
+          tsx: true,
+        },
+        transform: {
+          react: {
+            runtime: "automatic",
+            pragma: "h",
+            pragmaFrag: "Fragment",
+            refresh: true,
+          },
+          // "optimizer": {
+          //   "globals": {
+          //     "vars": {
+          //       "__DEBUG__": "true",
+          //     },
+          //   },
+          // },
+        },
+      },
+    });
 
     return transformedComp.code;
   }
