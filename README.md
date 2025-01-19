@@ -83,8 +83,7 @@ useFullSoak({ port, controllers: [MyController] });
 ```ts
 // src/components/MyComponent/index.tsx
 import type { FunctionComponent } from "preact";
-export const MyComponent: FunctionComponent = () =>
-  html`<div> hello, world</div>`;
+export const MyComponent: FunctionComponent = () => <div>hello, world</div>;
 ```
 
 Then the app can be started up for local development:
