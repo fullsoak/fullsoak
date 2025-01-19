@@ -19,7 +19,7 @@ export type FullSoakMiddleware = MiddlewareOrMiddlewareObject<
 export type OakController = new () => any;
 export type UseFullSoakOptions = {
   port: number;
-  middlewares: FullSoakMiddleware[];
+  middlewares?: FullSoakMiddleware[];
   controllers: OakController[];
   componentsDir?: string; // abs path to `components` directory
 };

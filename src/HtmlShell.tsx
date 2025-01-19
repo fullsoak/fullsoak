@@ -1,17 +1,25 @@
 /** @jsxRuntime automatic */
-/** @jsxImportSource npm:preact@10.25.4 */
-import type { FunctionComponent, VNode } from "preact";
+/** @jsxImportSource preact */
+import type {
+  ComponentProps,
+  ComponentType,
+  FunctionComponent,
+  VNode,
+} from "preact";
+import type { html } from "htm/preact";
 
-type Props = {
+type HtmlShellProps<P> = {
   /**
    * name of the TSX component that's going to be rendered as the `{children}` within the shell
    */
   componentName: string;
-  componentProps?: Record<string, unknown>;
+  componentProps?: P | null;
   pageTitle?: string;
   js?: string;
   css?: string;
 };
+
+export type CP = ComponentProps<ComponentType>;
 
 // @TODO find a way to auto-sync preact version declared below AND that in deno.jsonc
 const importMapJs = `
@@ -19,14 +27,18 @@ const importMapJs = `
   "imports": {
     "preact": "https://esm.sh/preact@10.25.4",
     "preact/hooks": "https://esm.sh/preact@10.25.4/hooks",
+    "react": "https://esm.sh/preact@10.25.4",
+    "react/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
+    "react-dom": "https://esm.sh/preact@10.25.4/compat/",
+    "react-dom/*": "https://esm.sh/preact@10.25.4/compat/*",
     "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
   }
 }
 `;
 
-export const HtmlShell: FunctionComponent<Props> = ({
+export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
   componentName,
-  componentProps,
+  componentProps = null,
   children,
   pageTitle,
   js,
@@ -57,7 +69,9 @@ export const HtmlShell: FunctionComponent<Props> = ({
       <script
         type="text/javascript"
         dangerouslySetInnerHTML={{
-          __html: `window.preloadedProps = ${JSON.stringify(componentProps)}`,
+          __html: `window.preloadedProps = ${
+            JSON.stringify(componentProps || {})
+          }`,
         }}
       />
       <script type="module" src={`/js/${componentName}/mount.js`}></script>
@@ -65,21 +79,21 @@ export const HtmlShell: FunctionComponent<Props> = ({
   </html>
 );
 
-type WithHtmlShellProps = {
+type WithHtmlShellProps<CP> = {
   componentName: string;
-  component: FunctionComponent | VNode;
-  componentProps?: Record<string, unknown>;
+  component: ReturnType<typeof html>;
+  componentProps: CP | null;
   js?: string;
   css?: string;
 };
 
-export const withHtmlShell = ({
+export const withHtmlShell = <P extends CP>({
   componentName,
   component,
-  componentProps,
+  componentProps = null,
   js,
   css,
-}: WithHtmlShellProps): VNode => (
+}: WithHtmlShellProps<P>): VNode => (
   <HtmlShell
     componentName={componentName}
     componentProps={componentProps}

@@ -2,17 +2,17 @@
 
 FullS(tack)oak (FullSoak for short) is a modern (born 2025), no-build TypeScript
 fullstack framework for building fast web applications with a shallow learning
-curve. At its core is the [Oak http server framework](https://oakserver.org)
-which is inspired by Koa (one of the popular http Node.js frameworks).
+curve. At its core is the [Oak](https://oakserver.org) http server framework
+which is inspired by Koa (one of the popular Node.js http frameworks).
 
 ## Key Differentiators
 
 1. FullSoak is **no-build**. Zero, zip, zilch, nada. That means: no `babel`, no
    `tsc`, no `webpack` (or any such equivalence).
 
-2. FullSoak is HTM (Hyperscript Tagged Markup) which boasts
+2. FullSoak supports both JSX and HTM (Hyperscript Tagged Markup) which boasts
    [several enhancements over JSX](https://www.npmjs.com/package/htm#improvements-over-jsx) -
-   but most importantly: it requires no build (back to point 1).
+   but most importantly: both require no separate build step (back to point 1).
 
 3. FullSoak is [Preact](https://preactjs.com/). So: the familiarity of React,
    but as lean as we need it to be.
@@ -51,7 +51,6 @@ fullsoak-example
 {
   "imports": {
     "fullsoak": "jsr:@fullsoak/fullsoak@x.x.x",
-    "htm/preact": "npm:htm@3.1.1/preact",
     "preact": "npm:preact@10.25.4"
   },
   "compilerOptions": {
@@ -78,15 +77,13 @@ class MyController {
 
 const port = 3991;
 
-useFullSoak({ port, controllers: [MyController], middlewares: [] });
+useFullSoak({ port, controllers: [MyController] });
 ```
 
 ```ts
 // src/components/MyComponent/index.tsx
-import { html } from "htm/preact";
 import type { FunctionComponent } from "preact";
-export const MyComponent: FunctionComponent = () =>
-  html`<div> hello, world</div>`;
+export const MyComponent: FunctionComponent = () => <div>hello, world</div>;
 ```
 
 Then the app can be started up for local development:

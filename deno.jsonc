@@ -1,12 +1,28 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "nodeModulesDir": "auto",
+  "tasks": {
+    "test": "deno test -R=$PWD",
+    "cov:html": "deno coverage cov_profile --html --exclude=node_modules",
+    "cov:lcov": "deno coverage cov_profile --lcov --exclude=node_modules --output=cov_profile.lcov",
+    "test:cov": {
+      "description": "Run tests and generate coverage reports",
+      "dependencies": ["test", "cov:html", "cov:lcov"]
+    }
+  },
   "imports": {
+    // no `*` needed after folder name (it's also not supported)
+    "@mocks/": "./mocks/",
     "@oak/oak": "jsr:@oak/oak@^17.1.3",
     "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.13.0-rc.1",
+    "@std/testing": "jsr:@std/testing@^1.0.9",
     "preact": "npm:preact@10.25.4",
     "preact-render-to-string": "npm:preact-render-to-string@^6.5.12",
+    "react": "npm:preact@10.25.4/compat/",
+    "react/jsx-runtime": "npm:preact@10.25.4/jsx-runtime",
+    "react-dom": "npm:preact@10.25.4/compat/",
+    "react-dom/": "npm:preact@10.25.4/compat/",
     "htm/preact": "npm:htm@^3.1.1/preact",
     "@swc/core": "npm:@swc/core@^1.10.7",
     "uglify-js": "npm:uglify-js@^3.19.3",
@@ -30,12 +46,19 @@
     "proseWrap": "always"
   },
   "exclude": [
+    "node_modules",
     "./deno.lock",
     "./docs",
     "cov_profile",
     "cov_profile.lcov",
-    "**/__snapshots__",
-    ".github",
-    ".vscode"
-  ]
+    "**/__snapshots__"
+  ],
+  "publish": {
+    "exclude": [
+      ".github",
+      ".vscode",
+      "mocks",
+      "**/*test.ts"
+    ]
+  }
 }
