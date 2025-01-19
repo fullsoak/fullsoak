@@ -12,27 +12,6 @@ import { getGlobalComponentsDir } from "./metastore.ts";
 export const byoHtml = (component: VNode): string =>
   "<!doctype html>" + render(component);
 
-/**
- * takes a standard Preact function component and render it out as a string
- * @param component - a standard Preact function component
- * @returns - the rendered component as a string
- * @deprecated use `ssr` instead
- */
-const _ssrTsxComponentWithHtm = async (
-  component: FunctionComponent,
-): Promise<string> => {
-  const componentName = component.name;
-  const componentVNode = html`<${component} />`;
-  const componentCss = await getComponentCss(componentName);
-
-  return byoHtml(withHtmlShell({
-    componentName,
-    componentProps: component.defaultProps || null,
-    component: componentVNode,
-    css: cleanCss(componentCss),
-  }));
-};
-
 const ssrVNode = async (
   node: VNode,
 ): Promise<string> => {

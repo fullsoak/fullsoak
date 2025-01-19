@@ -54,7 +54,7 @@ export class CsrController {
             runtime: "automatic",
             pragma: "h",
             pragmaFrag: "Fragment",
-            refresh: true,
+            refresh: true, // @TODO disable for prod
           },
           // "optimizer": {
           //   "globals": {
