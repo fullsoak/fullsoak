@@ -1,9 +1,10 @@
 import type { FunctionComponent, VNode } from "preact";
+import type { CP } from "./types.ts";
+import { getComponentCss } from "./utils.ts";
 import { render } from "preact-render-to-string";
-import { type CP, withHtmlShell } from "./HtmlShell.tsx";
+import { withHtmlShell } from "./HtmlShell.tsx";
 import { cleanCss } from "./minifyCss.ts";
 import { html } from "htm/preact";
-import { getGlobalComponentsDir } from "./metastore.ts";
 
 /**
  * takes a component that starts from the 'root' <html> element
@@ -65,21 +66,3 @@ export const ssr = <P extends CP>(
   if (isVNode) return ssrVNode(renderTarget);
   return ssrTsxComponent(renderTarget, componentProps);
 };
-
-async function getComponentCss(componentName: string): Promise<string> {
-  try {
-    // @TODO use a framework smart fn that attempts to read all .css files in the `componentName` dir?
-    // @TODO also consider the possibility to combine a general 'main.css' and a component-specific css
-    return await Deno.readTextFile(
-      `${getGlobalComponentsDir()}/${componentName}/styles.css`,
-    );
-  } catch (e) {
-    console.warn(
-      `unable to load css for component \`${componentName}\`: ${
-        (e as Error).message
-      } - if you need it, make sure the styles.css file exists in the component's dir and is readable`,
-    );
-  }
-
-  return "";
-}

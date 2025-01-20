@@ -7,12 +7,15 @@ which is inspired by Koa (one of the popular Node.js http frameworks).
 
 ## Key Differentiators
 
-1. FullSoak is **no-build**. Zero, zip, zilch, nada. That means: no `babel`, no
-   `tsc`, no `webpack` (or any such equivalence).
+1. FullSoak is **no-build**. Zero, zip, zilch, nada. That means: no `tsc`, no
+   `webpack` (or any such equivalence). All files are served from where they
+   are. No surprises. Still, optimizations such as minification and mangling are
+   supported.
 
 2. FullSoak supports both JSX and HTM (Hyperscript Tagged Markup) which boasts
    [several enhancements over JSX](https://www.npmjs.com/package/htm#improvements-over-jsx) -
    but most importantly: both require no separate build step (back to point 1).
+   JSX transformation is automatically applied on a per-file basis.
 
 3. FullSoak is [Preact](https://preactjs.com/). So: the familiarity of React,
    but as lean as we need it to be.
@@ -39,6 +42,8 @@ Prerequisite:
 fullsoak-example
 |_ src
 |  |_ components
+|  |  |_ Shared
+|  |  |  |_ styles.css
 |  |  |_ MyComponent
 |  |     |_ index.tsx
 |  |     |_ styles.css
@@ -84,6 +89,11 @@ useFullSoak({ port, controllers: [MyController] });
 // src/components/MyComponent/index.tsx
 import type { FunctionComponent } from "preact";
 export const MyComponent: FunctionComponent = () => <div>hello, world</div>;
+```
+
+```css
+/* src/components/MyComponent/styles.css */
+@import "/components/Shared/styles.css";
 ```
 
 Then the app can be started up for local development:

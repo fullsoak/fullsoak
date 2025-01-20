@@ -4,4 +4,6 @@ export * from "./src/minifyCss.ts";
 export * from "./src/CsrController.ts";
 export * from "./src/HtmlShell.tsx";
 export * from "./src/ssr.ts";
+export * from "./src/types.ts";
 export * from "./src/useFullSoak.ts";
+export { setupDefaultFullsoakLogger } from "./src/utils.ts";

@@ -1,3 +1,13 @@
+## [0.5.0] - 2025-01-20
+
+### Added
+
+- debug mode (enabled via `DEBUG=*` env var)
+- support for `@std/log` - see 'custom logger' in
+  [docs](https://jsr.io/@std/log#examples)
+- handler for `/components/:compName/styles.css` that is simply a WYSIWYG
+  file-based serving mechanism
+
 ## [0.4.0] - 2025-01-19
 
 ### Added
