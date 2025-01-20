@@ -10,15 +10,19 @@
     "jsr:@std/crypto@1": "1.0.3",
     "jsr:@std/encoding@1": "1.0.6",
     "jsr:@std/encoding@^1.0.5": "1.0.6",
+    "jsr:@std/fmt@^1.0.4": "1.0.4",
     "jsr:@std/fs@^1.0.9": "1.0.9",
     "jsr:@std/http@1": "1.0.12",
     "jsr:@std/internal@^1.0.5": "1.0.5",
+    "jsr:@std/io@0.225": "0.225.0",
+    "jsr:@std/log@~0.224.13": "0.224.13",
     "jsr:@std/media-types@1": "1.1.0",
     "jsr:@std/path@1": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/testing@^1.0.9": "1.0.9",
     "npm:@asteasolutions/zod-to-openapi@^7.3.0": "7.3.0_zod@3.24.1",
     "npm:@swc/core@^1.10.7": "1.10.7",
+    "npm:@types/node@*": "22.5.4",
     "npm:clean-css@^5.3.3": "5.3.3",
     "npm:htm@^3.1.1": "3.1.1",
     "npm:path-to-regexp@^6.3.0": "6.3.0",
@@ -72,6 +76,9 @@
     "@std/encoding@1.0.6": {
       "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
     },
+    "@std/fmt@1.0.4": {
+      "integrity": "e14fe5bedee26f80877e6705a97a79c7eed599e81bb1669127ef9e8bc1e29a74"
+    },
     "@std/fs@1.0.9": {
       "integrity": "3eef7e3ed3d317b29432c7dcb3b20122820dbc574263f721cb0248ad91bad890",
       "dependencies": [
@@ -86,6 +93,17 @@
     },
     "@std/internal@1.0.5": {
       "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
+    },
+    "@std/io@0.225.0": {
+      "integrity": "c1db7c5e5a231629b32d64b9a53139445b2ca640d828c26bf23e1c55f8c079b3"
+    },
+    "@std/log@0.224.13": {
+      "integrity": "f04d82f676c9eb4306194ca166d296d9f1456fe4b7edf2a404a0d55c94d31df7",
+      "dependencies": [
+        "jsr:@std/fmt",
+        "jsr:@std/fs",
+        "jsr:@std/io"
+      ]
     },
     "@std/media-types@1.1.0": {
       "integrity": "c9d093f0c05c3512932b330e3cc1fe1d627b301db33a4c2c2185c02471d6eaa4"
@@ -167,6 +185,12 @@
         "@swc/counter"
       ]
     },
+    "@types/node@22.5.4": {
+      "integrity": "sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==",
+      "dependencies": [
+        "undici-types"
+      ]
+    },
     "clean-css@5.3.3": {
       "integrity": "sha512-D5J+kHaVb/wKSFcyyV75uCn8fiY4sV38XJoe4CUyGQ+mOU/fMVYUdH1hJC+CJQ5uY3EnW27SbJYS4X8BiLrAFg==",
       "dependencies": [
@@ -200,6 +224,9 @@
     "uglify-js@3.19.3": {
       "integrity": "sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ=="
     },
+    "undici-types@6.19.8": {
+      "integrity": "sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw=="
+    },
     "yaml@2.7.0": {
       "integrity": "sha512-+hSoy/QHluxmC9kCIJyL/uyFmLmc+e5CFR5Wa+bpIhIj85LVb9ZH2nVnqrHoSvKogwODv0ClqZkmiSSaIH5LTA=="
     },
@@ -211,6 +238,7 @@
     "dependencies": [
       "jsr:@dklab/oak-routing-ctrl@~0.13.0-rc.1",
       "jsr:@oak/oak@^17.1.3",
+      "jsr:@std/log@~0.224.13",
       "jsr:@std/testing@^1.0.9",
       "npm:@swc/core@^1.10.7",
       "npm:clean-css@^5.3.3",

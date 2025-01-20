@@ -1,3 +1,5 @@
-html, body {
-  font-family: monospace;
+@import "/components/Shared/styles.css";
+
+.foo {
+  background-color: #55c456;
 }

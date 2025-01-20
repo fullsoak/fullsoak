@@ -1,12 +1,8 @@
 /** @jsxRuntime automatic */
 /** @jsxImportSource preact */
-import type {
-  ComponentProps,
-  ComponentType,
-  FunctionComponent,
-  VNode,
-} from "preact";
+import type { FunctionComponent, VNode } from "preact";
 import type { html } from "htm/preact";
+import type { CP } from "./types.ts";
 
 type HtmlShellProps<P> = {
   /**
@@ -18,8 +14,6 @@ type HtmlShellProps<P> = {
   js?: string;
   css?: string;
 };
-
-export type CP = ComponentProps<ComponentType>;
 
 // @TODO find a way to auto-sync preact version declared below AND that in deno.jsonc
 const importMapJs = `

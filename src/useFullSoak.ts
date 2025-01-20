@@ -6,6 +6,7 @@ import {
 } from "@oak/oak";
 import { useOakServer, useOas } from "@dklab/oak-routing-ctrl";
 import { CsrController } from "./CsrController.ts";
+import { LogInfo } from "./utils.ts";
 
 // deno-lint-ignore no-explicit-any
 type Abort = (reason?: any) => void;
@@ -45,7 +46,9 @@ export function useFullSoak({
   useOas(app);
   app.addEventListener(
     "listen",
-    (l) => console.log(`FullSoak server listening on ${l.port}`),
+    (l) => {
+      LogInfo(`FullSoak server listening on ${l.port}`);
+    },
   );
   app.listen({ port, signal: abrtCtl.signal });
 

@@ -2,8 +2,10 @@ import { Controller, ControllerMethodArgs, Get } from "@dklab/oak-routing-ctrl";
 import type { Context } from "@oak/oak/context";
 import { getClientSideJsForRoute } from "./getClientSideJsForRoute.ts";
 import * as Uglify from "uglify-js";
+import { cleanCss } from "./minifyCss.ts";
 import { getGlobalComponentsDir } from "./metastore.ts";
-import { transformFile } from "@swc/core";
+import { type Output, transformFile } from "@swc/core";
+import { getComponentCss, IS_DEBUG, LogDebug, LogError } from "./utils.ts";
 
 @Controller()
 export class CsrController {
@@ -20,14 +22,16 @@ export class CsrController {
     ).code;
   }
 
-  // @Get("/css/main.css")
-  // async serveMainCss(ctx: Context) {
-  //   ctx.response.headers.set("content-type", "text/css");
-
-  //   const mainCss = await Deno.readTextFile(`${globalThis.FULLSOAK_APP_COMPONENTS_DIR}/main.css`);
-
-  //   return CleanCss.minify(mainCss).styles;
-  // }
+  @Get("/components/:compName/styles.css")
+  @ControllerMethodArgs("param")
+  async serveComponentCss(
+    { compName }: { compName: string },
+    ctx: Context,
+  ): Promise<string> {
+    ctx.response.headers.set("content-type", "text/css");
+    const css = await getComponentCss(compName);
+    return cleanCss(css);
+  }
 
   /**
    * serving our own component TSX as client-side esm, woo hoo!
@@ -41,32 +45,48 @@ export class CsrController {
     const globalComponentsDir = getGlobalComponentsDir();
     ctx.response.headers.set("content-type", "text/javascript");
 
-    const compFile = `${globalComponentsDir}/${compName}/index.tsx`;
+    const compFile = `${compName}/index.tsx`;
+    const fullCompFile = `${globalComponentsDir}/${compFile}`;
+    LogDebug("transforming component", fullCompFile);
 
-    const transformedComp = await transformFile(compFile, {
-      jsc: {
-        parser: {
-          syntax: "typescript",
-          tsx: true,
+    let transformedComp: Output;
+
+    try {
+      transformedComp = await transformFile(fullCompFile, {
+        env: {
+          debug: IS_DEBUG && true,
         },
-        transform: {
-          react: {
-            runtime: "automatic",
-            pragma: "h",
-            pragmaFrag: "Fragment",
-            refresh: true, // @TODO disable for prod
+        jsc: {
+          parser: {
+            syntax: "typescript",
+            tsx: true,
           },
-          // "optimizer": {
-          //   "globals": {
-          //     "vars": {
-          //       "__DEBUG__": "true",
-          //     },
-          //   },
-          // },
+          transform: {
+            react: {
+              runtime: "automatic",
+              pragma: "h",
+              pragmaFrag: "Fragment",
+              refresh: true, // @TODO disable for prod
+            },
+            // "optimizer": {
+            //   "globals": {
+            //     "vars": {
+            //       "__DEBUG__": "true",
+            //     },
+            //   },
+            // },
+          },
         },
-      },
-    });
+      });
+    } catch (e) {
+      LogError("error transforming component", {
+        path: fullCompFile,
+        error: e,
+      });
+      return `console.error("error loading component" '${compFile}');`;
+    }
 
+    // @TODO consider what to do with source map
     return transformedComp.code;
   }
 }

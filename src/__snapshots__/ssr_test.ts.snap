@@ -61,5 +61,5 @@ snapshot[`ssr a StandardComponent 1`] = `
     "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
   }
 }
-</script><script type="text/javascript"></script><style>body,html{font-family:monospace}</style></head><body><main id="main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script type="module" src="/js/StandardComponent/mount.js"></script></body></html>'
+</script><script type="text/javascript"></script><style>@import url(/components/Shared/styles.css);.foo{background-color:#55c456}</style></head><body><main id="main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script type="module" src="/js/StandardComponent/mount.js"></script></body></html>'
 `;
