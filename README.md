@@ -101,3 +101,11 @@ Then the app can be started up for local development:
 ```bash
 deno -A --watch src/main.ts
 ```
+
+## SSR examples
+
+Server-side rendering is supported via `preact-iso`. See examples:
+
+- SSR: https://github.com/fullsoak/examples/blob/v0.1.0/src/main.ts#L25-L44
+- Isomorphic FE component:
+  https://github.com/fullsoak/examples/blob/v0.1.0/src/components/MyRouteAwareComponent/index.tsx#L13-L26
