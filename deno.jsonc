@@ -3,7 +3,7 @@
   "version": "0.6.0",
   "nodeModulesDir": "auto",
   "tasks": {
-    "test": "deno test -R=$PWD -E=DEBUG,LOG_LEVEL",
+    "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-sys -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,DENO_DIR",
     "cov:html": "deno coverage cov_profile --html --exclude=node_modules",
     "cov:lcov": "deno coverage cov_profile --lcov --exclude=node_modules --output=cov_profile.lcov",
     "test:cov": {
@@ -20,13 +20,13 @@
     "@std/testing": "jsr:@std/testing@^1.0.9",
     "preact": "npm:preact@10.25.4",
     "preact-render-to-string": "npm:preact-render-to-string@^6.5.12",
-    "preact-iso": "npm:preact-iso@^2.8.1",
+    "preact-iso": "npm:preact-iso@^2.9.0",
     "react": "npm:preact@10.25.4/compat/",
     "react/jsx-runtime": "npm:preact@10.25.4/jsx-runtime",
     "react-dom": "npm:preact@10.25.4/compat/",
     "react-dom/": "npm:preact@10.25.4/compat/",
     "htm/preact": "npm:htm@^3.1.1/preact",
-    "@swc/core": "npm:@swc/core@^1.10.12",
+    "@swc/core": "npm:@swc/core@^1.10.14",
     "uglify-js": "npm:uglify-js@^3.19.3",
     "clean-css": "npm:clean-css@^5.3.3"
   },

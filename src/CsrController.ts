@@ -26,13 +26,17 @@ export class CsrController {
     return res.code;
   }
 
+  /**
+   * @deprecated in favour of letting the client import from https://esm.sh/preact-iso?external=preact
+   */
   @Get("/preact-iso")
   async servePreactIso(ctx: Context): Promise<string> {
     ctx.response.headers.set("content-type", "text/javascript");
 
     const NPM_DIR = `${DENO_DIR}/deno/npm/registry.npmjs.org`;
+
     // @TODO take care of preact-iso versioning below
-    const preactIso = `${NPM_DIR}/preact-iso/2.8.1/src/index.js`;
+    const preactIso = `${NPM_DIR}/preact-iso/2.9.0/src/index.js`;
 
     let output: Record<string, Output> = {};
     try {
@@ -50,13 +54,6 @@ export class CsrController {
     }
     return output["index.js"]?.code ||
       "throw new Error('failed to serve preact-iso')";
-    // const mod = await import("preact-iso");
-    // let retVal = "";
-    // for (const key of Object.keys(mod)) {
-    //   const func = mod[key as keyof typeof import("preact-iso")];
-    //   retVal += `export const ${key} = ${func};`;
-    // }
-    // return retVal;
   }
 
   @Get("/js/:compName/mount.js")
