@@ -1,7 +1,7 @@
 import type { FunctionComponent, VNode } from "preact";
 import type { CP } from "./types.ts";
 import { getComponentCss } from "./utils.ts";
-import { render } from "preact-render-to-string";
+import { renderToStringAsync } from "preact-render-to-string";
 import { withHtmlShell } from "./HtmlShell.tsx";
 import { cleanCss } from "./minifyCss.ts";
 import { html } from "htm/preact";
@@ -10,8 +10,10 @@ import { html } from "htm/preact";
  * takes a component that starts from the 'root' <html> element
  * and render it out as a string
  */
-export const byoHtml = (component: VNode): string =>
-  "<!doctype html>" + render(component);
+export const byoHtml = async (component: VNode): Promise<string> => {
+  globalThis.location = {} as Location;
+  return "<!doctype html>" + (await renderToStringAsync(component));
+};
 
 const ssrVNode = async (
   node: VNode,

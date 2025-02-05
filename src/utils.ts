@@ -1,5 +1,18 @@
 import { ConsoleHandler, getLogger, type LevelName, setup } from "@std/log";
 import { getGlobalComponentsDir } from "./metastore.ts";
+import { type Output, transformFile } from "@swc/core";
+
+const HOME = Deno.env.get("HOME");
+
+let DENO_DIR = Deno.env.get("DENO_DIR");
+
+if (!DENO_DIR) {
+  DENO_DIR = Deno.build.os === "darwin"
+    ? `${HOME}/Library/Caches`
+    : `${HOME}/.cache`; // @TODO add support for other systems?
+}
+
+export { DENO_DIR };
 
 function logger() {
   return getLogger("@fullsoak/fullsoak");
@@ -63,4 +76,54 @@ export async function getComponentCss(componentName: string): Promise<string> {
   }
 
   return "";
+}
+
+/**
+ * given a file path (ideally absolute path) to a component file (e.g. `.tsx`),
+ * return its browser-compatible JavaScript content (transformed via `swc`)
+ * @param filePath path to the file
+ * @returns corresponding transformed JavaScript
+ */
+export async function getComponentJs(filePath: string): Promise<string> {
+  LogDebug("transforming component", filePath);
+
+  let transformedComp: Output;
+
+  try {
+    transformedComp = await transformFile(filePath, {
+      env: {
+        debug: IS_DEBUG && true,
+      },
+      jsc: {
+        parser: {
+          syntax: "typescript",
+          tsx: true,
+        },
+        transform: {
+          react: {
+            runtime: "automatic",
+            pragma: "h",
+            pragmaFrag: "Fragment",
+            refresh: true, // @TODO disable for prod
+          },
+          // "optimizer": {
+          //   "globals": {
+          //     "vars": {
+          //       "__DEBUG__": "true",
+          //     },
+          //   },
+          // },
+        },
+      },
+    });
+  } catch (e) {
+    LogError("error transforming component", {
+      path: filePath,
+      error: JSON.stringify(e),
+    });
+    return `console.error("error loading component at '${filePath}'");`;
+  }
+
+  // @TODO consider what to do with source map
+  return transformedComp.code;
 }

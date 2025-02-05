@@ -1,9 +1,9 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "nodeModulesDir": "auto",
   "tasks": {
-    "test": "deno test -R=$PWD -E=DEBUG,LOG_LEVEL",
+    "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-sys -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,DENO_DIR",
     "cov:html": "deno coverage cov_profile --html --exclude=node_modules",
     "cov:lcov": "deno coverage cov_profile --lcov --exclude=node_modules --output=cov_profile.lcov",
     "test:cov": {
@@ -14,24 +14,26 @@
   "imports": {
     // no `*` needed after folder name (it's also not supported)
     "@mocks/": "./mocks/",
-    "@oak/oak": "jsr:@oak/oak@^17.1.3",
-    "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.13.0-rc.1",
+    "@oak/oak": "jsr:@oak/oak@^17.1.4",
+    "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.14.0",
     "@std/log": "jsr:@std/log@^0.224.13",
     "@std/testing": "jsr:@std/testing@^1.0.9",
     "preact": "npm:preact@10.25.4",
     "preact-render-to-string": "npm:preact-render-to-string@^6.5.12",
+    "preact-iso": "npm:preact-iso@^2.9.0",
     "react": "npm:preact@10.25.4/compat/",
     "react/jsx-runtime": "npm:preact@10.25.4/jsx-runtime",
     "react-dom": "npm:preact@10.25.4/compat/",
     "react-dom/": "npm:preact@10.25.4/compat/",
     "htm/preact": "npm:htm@^3.1.1/preact",
-    "@swc/core": "npm:@swc/core@^1.10.7",
+    "@swc/core": "npm:@swc/core@^1.10.14",
     "uglify-js": "npm:uglify-js@^3.19.3",
     "clean-css": "npm:clean-css@^5.3.3"
   },
   "exports": {
     ".": "./mod.ts",
-    "./mod": "./mod.ts"
+    "./mod": "./mod.ts",
+    "./preact-iso": "./mod-preact-iso.ts"
   },
   // @TODO provide a script to help user populate the same `compilerOptions` config
   "compilerOptions": {
