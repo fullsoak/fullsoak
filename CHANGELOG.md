@@ -1,3 +1,17 @@
+## [0.6.0] - 2025-02-05
+
+### Added
+
+- experimental support for `preact-iso` via module import
+  `@fullsoak/fullsoak/preact-iso` and via client-side import map
+- client-side support for using `@fullsoak/fullsoak` in import map
+- exposed utility function `getComponentJs`
+
+### Changed
+
+- dependency upgrades: `jsr:@oak/oak@17.1.4`,
+  `jsr:@dklab/oak-routing-ctrl@^0.14.0`
+
 ## [0.5.0] - 2025-01-20
 
 ### Added

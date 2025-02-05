@@ -1,18 +1,20 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@dklab/oak-routing-ctrl@~0.13.0-rc.1": "0.13.0-rc.1",
+    "jsr:@dklab/oak-routing-ctrl@0.14": "0.14.0",
     "jsr:@oak/commons@1": "1.0.0",
-    "jsr:@oak/oak@^17.1.3": "17.1.4",
+    "jsr:@oak/oak@^17.1.4": "17.1.4",
     "jsr:@std/assert@1": "1.0.10",
     "jsr:@std/assert@^1.0.10": "1.0.10",
-    "jsr:@std/bytes@1": "1.0.4",
-    "jsr:@std/crypto@1": "1.0.3",
-    "jsr:@std/encoding@1": "1.0.6",
-    "jsr:@std/encoding@^1.0.5": "1.0.6",
+    "jsr:@std/async@^1.0.9": "1.0.9",
+    "jsr:@std/bytes@1": "1.0.5",
+    "jsr:@std/crypto@1": "1.0.4",
+    "jsr:@std/data-structures@^1.0.6": "1.0.6",
+    "jsr:@std/encoding@1": "1.0.7",
+    "jsr:@std/encoding@^1.0.7": "1.0.7",
     "jsr:@std/fmt@^1.0.4": "1.0.4",
     "jsr:@std/fs@^1.0.9": "1.0.9",
-    "jsr:@std/http@1": "1.0.12",
+    "jsr:@std/http@1": "1.0.13",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@0.225": "0.225.0",
     "jsr:@std/log@~0.224.13": "0.224.13",
@@ -21,19 +23,20 @@
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/testing@^1.0.9": "1.0.9",
     "npm:@asteasolutions/zod-to-openapi@^7.3.0": "7.3.0_zod@3.24.1",
-    "npm:@swc/core@^1.10.7": "1.10.7",
+    "npm:@swc/core@^1.10.12": "1.10.12",
     "npm:@types/node@*": "22.5.4",
     "npm:clean-css@^5.3.3": "5.3.3",
     "npm:htm@^3.1.1": "3.1.1",
     "npm:path-to-regexp@^6.3.0": "6.3.0",
+    "npm:preact-iso@^2.8.1": "2.8.1_preact@10.25.4_preact-render-to-string@6.5.12__preact@10.25.4",
     "npm:preact-render-to-string@^6.5.12": "6.5.12_preact@10.25.4",
     "npm:preact@10.25.4": "10.25.4",
     "npm:uglify-js@^3.19.3": "3.19.3",
     "npm:zod@^3.24.1": "3.24.1"
   },
   "jsr": {
-    "@dklab/oak-routing-ctrl@0.13.0-rc.1": {
-      "integrity": "c98cf4b5c7d230f6418745cbc30c7e9dcc537f6c40cd90e87ed378a0bad94d4a",
+    "@dklab/oak-routing-ctrl@0.14.0": {
+      "integrity": "fc7de3b72abbb362705e6da7ac99690592ef432a58d04181bbcf705901dcc7be",
       "dependencies": [
         "jsr:@oak/oak",
         "jsr:@std/path@^1.0.8",
@@ -65,16 +68,25 @@
       ]
     },
     "@std/assert@1.0.10": {
-      "integrity": "59b5cbac5bd55459a19045d95cc7c2ff787b4f8527c0dd195078ff6f9481fbb3"
+      "integrity": "59b5cbac5bd55459a19045d95cc7c2ff787b4f8527c0dd195078ff6f9481fbb3",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
     },
-    "@std/bytes@1.0.4": {
-      "integrity": "11a0debe522707c95c7b7ef89b478c13fb1583a7cfb9a85674cd2cc2e3a28abc"
+    "@std/async@1.0.9": {
+      "integrity": "c6472fd0623b3f3daae023cdf7ca5535e1b721dfbf376562c0c12b3fb4867f91"
     },
-    "@std/crypto@1.0.3": {
-      "integrity": "a2a32f51ddef632d299e3879cd027c630dcd4d1d9a5285d6e6788072f4e51e7f"
+    "@std/bytes@1.0.5": {
+      "integrity": "4465dd739d7963d964c809202ebea6d5c6b8e3829ef25c6a224290fbb8a1021e"
     },
-    "@std/encoding@1.0.6": {
-      "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
+    "@std/crypto@1.0.4": {
+      "integrity": "cee245c453bd5366207f4d8aa25ea3e9c86cecad2be3fefcaa6cb17203d79340"
+    },
+    "@std/data-structures@1.0.6": {
+      "integrity": "76a7fd8080c66604c0496220a791860492ab21a04a63a969c0b9a0609bbbb760"
+    },
+    "@std/encoding@1.0.7": {
+      "integrity": "f631247c1698fef289f2de9e2a33d571e46133b38d042905e3eac3715030a82d"
     },
     "@std/fmt@1.0.4": {
       "integrity": "e14fe5bedee26f80877e6705a97a79c7eed599e81bb1669127ef9e8bc1e29a74"
@@ -85,10 +97,10 @@
         "jsr:@std/path@^1.0.8"
       ]
     },
-    "@std/http@1.0.12": {
-      "integrity": "85246d8bfe9c8e2538518725b158bdc31f616e0869255f4a8d9e3de919cab2aa",
+    "@std/http@1.0.13": {
+      "integrity": "d29618b982f7ae44380111f7e5b43da59b15db64101198bb5f77100d44eb1e1e",
       "dependencies": [
-        "jsr:@std/encoding@^1.0.5"
+        "jsr:@std/encoding@^1.0.7"
       ]
     },
     "@std/internal@1.0.5": {
@@ -115,6 +127,8 @@
       "integrity": "9bdd4ac07cb13e7594ac30e90f6ceef7254ac83a9aeaa089be0008f33aab5cd4",
       "dependencies": [
         "jsr:@std/assert@^1.0.10",
+        "jsr:@std/async",
+        "jsr:@std/data-structures",
         "jsr:@std/fs",
         "jsr:@std/internal",
         "jsr:@std/path@^1.0.8"
@@ -129,38 +143,38 @@
         "zod"
       ]
     },
-    "@swc/core-darwin-arm64@1.10.7": {
-      "integrity": "sha512-SI0OFg987P6hcyT0Dbng3YRISPS9uhLX1dzW4qRrfqQdb0i75lPJ2YWe9CN47HBazrIA5COuTzrD2Dc0TcVsSQ=="
+    "@swc/core-darwin-arm64@1.10.12": {
+      "integrity": "sha512-pOANQegUTAriW7jq3SSMZGM5l89yLVMs48R0F2UG6UZsH04SiViCnDctOGlA/Sa++25C+rL9MGMYM1jDLylBbg=="
     },
-    "@swc/core-darwin-x64@1.10.7": {
-      "integrity": "sha512-RFIAmWVicD/l3RzxgHW0R/G1ya/6nyMspE2cAeDcTbjHi0I5qgdhBWd6ieXOaqwEwiCd0Mot1g2VZrLGoBLsjQ=="
+    "@swc/core-darwin-x64@1.10.12": {
+      "integrity": "sha512-m4kbpIDDsN1FrwfNQMU+FTrss356xsXvatLbearwR+V0lqOkjLBP0VmRvQfHEg+uy13VPyrT9gj4HLoztlci7w=="
     },
-    "@swc/core-linux-arm-gnueabihf@1.10.7": {
-      "integrity": "sha512-QP8vz7yELWfop5mM5foN6KkLylVO7ZUgWSF2cA0owwIaziactB2hCPZY5QU690coJouk9KmdFsPWDnaCFUP8tg=="
+    "@swc/core-linux-arm-gnueabihf@1.10.12": {
+      "integrity": "sha512-OY9LcupgqEu8zVK+rJPes6LDJJwPDmwaShU96beTaxX2K6VrXbpwm5WbPS/8FfQTsmpnuA7dCcMPUKhNgmzTrQ=="
     },
-    "@swc/core-linux-arm64-gnu@1.10.7": {
-      "integrity": "sha512-NgUDBGQcOeLNR+EOpmUvSDIP/F7i/OVOKxst4wOvT5FTxhnkWrW+StJGKj+DcUVSK5eWOYboSXr1y+Hlywwokw=="
+    "@swc/core-linux-arm64-gnu@1.10.12": {
+      "integrity": "sha512-nJD587rO0N4y4VZszz3xzVr7JIiCzSMhEMWnPjuh+xmPxDBz0Qccpr8xCr1cSxpl1uY7ERkqAGlKr6CwoV5kVg=="
     },
-    "@swc/core-linux-arm64-musl@1.10.7": {
-      "integrity": "sha512-gp5Un3EbeSThBIh6oac5ZArV/CsSmTKj5jNuuUAuEsML3VF9vqPO+25VuxCvsRf/z3py+xOWRaN2HY/rjMeZog=="
+    "@swc/core-linux-arm64-musl@1.10.12": {
+      "integrity": "sha512-oqhSmV+XauSf0C//MoQnVErNUB/5OzmSiUzuazyLsD5pwqKNN+leC3JtRQ/QVzaCpr65jv9bKexT9+I2Tt3xDw=="
     },
-    "@swc/core-linux-x64-gnu@1.10.7": {
-      "integrity": "sha512-k/OxLLMl/edYqbZyUNg6/bqEHTXJT15l9WGqsl/2QaIGwWGvles8YjruQYQ9d4h/thSXLT9gd8bExU2D0N+bUA=="
+    "@swc/core-linux-x64-gnu@1.10.12": {
+      "integrity": "sha512-XldSIHyjD7m1Gh+/8rxV3Ok711ENLI420CU2EGEqSe3VSGZ7pHJvJn9ZFbYpWhsLxPqBYMFjp3Qw+J6OXCPXCA=="
     },
-    "@swc/core-linux-x64-musl@1.10.7": {
-      "integrity": "sha512-XeDoURdWt/ybYmXLCEE8aSiTOzEn0o3Dx5l9hgt0IZEmTts7HgHHVeRgzGXbR4yDo0MfRuX5nE1dYpTmCz0uyA=="
+    "@swc/core-linux-x64-musl@1.10.12": {
+      "integrity": "sha512-wvPXzJxzPgTqhyp1UskOx1hRTtdWxlyFD1cGWOxgLsMik0V9xKRgqKnMPv16Nk7L9xl6quQ6DuUHj9ID7L3oVw=="
     },
-    "@swc/core-win32-arm64-msvc@1.10.7": {
-      "integrity": "sha512-nYAbi/uLS+CU0wFtBx8TquJw2uIMKBnl04LBmiVoFrsIhqSl+0MklaA9FVMGA35NcxSJfcm92Prl2W2LfSnTqQ=="
+    "@swc/core-win32-arm64-msvc@1.10.12": {
+      "integrity": "sha512-TUYzWuu1O7uyIcRfxdm6Wh1u+gNnrW5M1DUgDOGZLsyQzgc2Zjwfh2llLhuAIilvCVg5QiGbJlpibRYJ/8QGsg=="
     },
-    "@swc/core-win32-ia32-msvc@1.10.7": {
-      "integrity": "sha512-+aGAbsDsIxeLxw0IzyQLtvtAcI1ctlXVvVcXZMNXIXtTURM876yNrufRo4ngoXB3jnb1MLjIIjgXfFs/eZTUSw=="
+    "@swc/core-win32-ia32-msvc@1.10.12": {
+      "integrity": "sha512-4Qrw+0Xt+Fe2rz4OJ/dEPMeUf/rtuFWWAj/e0vL7J5laUHirzxawLRE5DCJLQTarOiYR6mWnmadt9o3EKzV6Xg=="
     },
-    "@swc/core-win32-x64-msvc@1.10.7": {
-      "integrity": "sha512-TBf4clpDBjF/UUnkKrT0/th76/zwvudk5wwobiTFqDywMApHip5O0VpBgZ+4raY2TM8k5+ujoy7bfHb22zu17Q=="
+    "@swc/core-win32-x64-msvc@1.10.12": {
+      "integrity": "sha512-YiloZXLW7rUxJpALwHXaGjVaAEn+ChoblG7/3esque+Y7QCyheoBUJp2DVM1EeVA43jBfZ8tvYF0liWd9Tpz1A=="
     },
-    "@swc/core@1.10.7": {
-      "integrity": "sha512-py91kjI1jV5D5W/Q+PurBdGsdU5TFbrzamP7zSCqLdMcHkKi3rQEM5jkQcZr0MXXSJTaayLxS3MWYTBIkzPDrg==",
+    "@swc/core@1.10.12": {
+      "integrity": "sha512-+iUL0PYpPm6N9AdV1wvafakvCqFegQus1aoEDxgFsv3/uNVNIyRaupf/v/Zkp5hbep2EzhtoJR0aiJIzDbXWHg==",
       "dependencies": [
         "@swc/core-darwin-arm64",
         "@swc/core-darwin-x64",
@@ -209,6 +223,13 @@
     "path-to-regexp@6.3.0": {
       "integrity": "sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ=="
     },
+    "preact-iso@2.8.1_preact@10.25.4_preact-render-to-string@6.5.12__preact@10.25.4": {
+      "integrity": "sha512-RL0yDdJcSiB4Wnk4fBqq0OE9QCfTEW7B2ULf8GHPx72AtFE+j1NvabjBF6y3rBgrNWSuuPuuiN4L4KxYteQD2Q==",
+      "dependencies": [
+        "preact",
+        "preact-render-to-string"
+      ]
+    },
     "preact-render-to-string@6.5.12_preact@10.25.4": {
       "integrity": "sha512-FpU7/cRipZo4diSWQq7gZWVp+Px76CtVduJZNvQwVzynDsAIxKteMrjCCGPbM2oEasReoDffaeMCMlaur9ohIg==",
       "dependencies": [
@@ -236,13 +257,14 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@dklab/oak-routing-ctrl@~0.13.0-rc.1",
-      "jsr:@oak/oak@^17.1.3",
+      "jsr:@dklab/oak-routing-ctrl@0.14",
+      "jsr:@oak/oak@^17.1.4",
       "jsr:@std/log@~0.224.13",
       "jsr:@std/testing@^1.0.9",
-      "npm:@swc/core@^1.10.7",
+      "npm:@swc/core@^1.10.12",
       "npm:clean-css@^5.3.3",
       "npm:htm@^3.1.1",
+      "npm:preact-iso@^2.8.1",
       "npm:preact-render-to-string@^6.5.12",
       "npm:preact@10.25.4",
       "npm:uglify-js@^3.19.3"

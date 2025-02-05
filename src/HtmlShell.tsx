@@ -25,7 +25,12 @@ const importMapJs = `
     "react/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
     "react-dom": "https://esm.sh/preact@10.25.4/compat/",
     "react-dom/*": "https://esm.sh/preact@10.25.4/compat/*",
-    "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact"
+    "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
+    "preact-iso": "/preact-iso",
+    "fullsoak/preact-iso": "/preact-iso",
+    "@fullsoak/fullsoak/preact-iso": "/preact-iso",
+    "fullsoak": "/fullsoak",
+    "@fullsoak/fullsoak": "/fullsoak"
   }
 }
 `;

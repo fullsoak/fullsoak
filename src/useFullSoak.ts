@@ -1,4 +1,4 @@
-import { setGlobalComponentsDir } from "./metastore.ts";
+import { setAppListenObj, setGlobalComponentsDir } from "./metastore.ts";
 import {
   Application,
   type Context,
@@ -48,6 +48,7 @@ export function useFullSoak({
     "listen",
     (l) => {
       LogInfo(`FullSoak server listening on ${l.port}`);
+      setAppListenObj(l);
     },
   );
   app.listen({ port, signal: abrtCtl.signal });
