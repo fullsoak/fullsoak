@@ -1,6 +1,6 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "nodeModulesDir": "auto",
   "tasks": {
     "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-sys -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,DENO_DIR",
@@ -9,7 +9,9 @@
     "test:cov": {
       "description": "Run tests and generate coverage reports",
       "dependencies": ["test", "cov:html", "cov:lcov"]
-    }
+    },
+    "doc": "deno doc --html mod.ts",
+    "check-doc": "deno check --doc ."
   },
   "imports": {
     // no `*` needed after folder name (it's also not supported)

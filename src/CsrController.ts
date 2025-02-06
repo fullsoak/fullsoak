@@ -12,6 +12,9 @@ import {
   LogError,
 } from "./utils.ts";
 
+/**
+ * @ignore
+ */
 @Controller()
 export class CsrController {
   @Get("/fullsoak")

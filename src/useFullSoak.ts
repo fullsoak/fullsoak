@@ -12,14 +12,26 @@ const process = !globalThis.Deno ? await import("node:process") : undefined;
 
 // deno-lint-ignore no-explicit-any
 type Abort = (reason?: any) => void;
+
+/**
+ * standard middleware compatible with the oak server
+ */
 export type FullSoakMiddleware = MiddlewareOrMiddlewareObject<
   // deno-lint-ignore no-explicit-any
   Record<string, any>,
   // deno-lint-ignore no-explicit-any
   Context<Record<string, any>>
 >;
+
+/**
+ * @ignore
+ */
 // deno-lint-ignore no-explicit-any
 export type OakController = new () => any;
+
+/**
+ * the options to configure the framework upon initialization
+ */
 export type UseFullSoakOptions = {
   port: number;
   middlewares?: FullSoakMiddleware[];
@@ -27,6 +39,11 @@ export type UseFullSoakOptions = {
   componentsDir?: string; // abs path to `components` directory
 };
 
+/**
+ * the "entry function" to initialize the FullSoak framework
+ *
+ * example usage: https://github.com/fullsoak/examples/blob/v0.1.0/src/main.ts#L48-L52
+ */
 export function useFullSoak({
   port,
   middlewares = [],
