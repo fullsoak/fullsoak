@@ -86,6 +86,9 @@ type WithHtmlShellProps<CP> = {
   css?: string;
 };
 
+/**
+ * @ignore
+ */
 export const withHtmlShell = <P extends CP>({
   componentName,
   component,

@@ -1,3 +1,13 @@
+## [0.6.2] - 2025-02-06
+
+### Added
+
+- JSR docs
+
+### Fixed
+
+- errors while minifying css are stringified in the log output
+
 ## [0.6.1] - 2025-02-06
 
 ### Fixed

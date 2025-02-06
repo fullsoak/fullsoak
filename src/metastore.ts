@@ -19,7 +19,12 @@ export const setAppListenObj = (obj: ApplicationListenEvent) =>
 const getAppListenObj = (): ApplicationListenEvent => store.get(APP_LISTEN_OBJ);
 
 /**
- * server-side only
+ * a helper function to retrieve the `location.origin` value
+ * relative to the server process itself; for example if you
+ * start the framework on port 3000, this function may return
+ * the value `localhost:3000`
+ *
+ * @NOTE mostly for use in SSR contexts
  */
 export const getOrigin = (): string => {
   const obj = getAppListenObj();
