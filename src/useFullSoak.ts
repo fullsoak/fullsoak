@@ -6,7 +6,9 @@ import {
 } from "@oak/oak";
 import { useOakServer, useOas } from "@dklab/oak-routing-ctrl";
 import { CsrController } from "./CsrController.ts";
-import { LogInfo } from "./utils.ts";
+import { CWD, LogInfo } from "./utils.ts";
+
+const process = !globalThis.Deno ? await import("node:process") : undefined;
 
 // deno-lint-ignore no-explicit-any
 type Abort = (reason?: any) => void;
@@ -33,7 +35,7 @@ export function useFullSoak({
 }: UseFullSoakOptions): Abort {
   // memorize the user-provided path to the `components` directory,
   // falling back to a default framework-appointed "magic" location
-  setGlobalComponentsDir(componentsDir || Deno.cwd() + "/src/components");
+  setGlobalComponentsDir(componentsDir || CWD + "/src/components");
 
   const app = new Application();
 
@@ -55,7 +57,14 @@ export function useFullSoak({
 
   // @TODO handle 'uncaught application error' nicely
 
-  Deno.addSignalListener("SIGTERM", () => abrtCtl.abort("SIGTERM"));
+  if (process) {
+    process.addListener("SIGTERM", () => abrtCtl.abort("SIGTERM"));
+  } else {
+    globalThis.Deno.addSignalListener(
+      "SIGTERM",
+      () => abrtCtl.abort("SIGTERM"),
+    );
+  }
 
   return abrtCtl.abort;
 }

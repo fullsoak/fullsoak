@@ -1,3 +1,11 @@
+## [0.6.1] - 2025-02-06
+
+### Fixed
+
+- avoided APIs that only work on Deno runtime
+- error message re. failure while loading a component file should be correctly
+  parsed
+
 ## [0.6.0] - 2025-02-05
 
 ### Added

@@ -2,15 +2,37 @@ import { ConsoleHandler, getLogger, type LevelName, setup } from "@std/log";
 import { getGlobalComponentsDir } from "./metastore.ts";
 import { type Output, transformFile } from "@swc/core";
 
-const HOME = Deno.env.get("HOME");
+const process = !globalThis.Deno ? await import("node:process") : undefined;
 
-let DENO_DIR = Deno.env.get("DENO_DIR");
+const getEnv = (env: string): string | undefined => {
+  return process?.env[env] || globalThis.Deno?.env.get(env);
+};
+
+export const CWD = process?.cwd() || globalThis.Deno.cwd();
+
+const OS = globalThis.Deno
+  ? globalThis.Deno.build.os
+  : (await import("node:os")).platform;
+
+const HOME = getEnv("HOME");
+
+let DENO_DIR = getEnv("DENO_DIR");
 
 if (!DENO_DIR) {
-  DENO_DIR = Deno.build.os === "darwin"
-    ? `${HOME}/Library/Caches`
-    : `${HOME}/.cache`; // @TODO add support for other systems?
+  DENO_DIR = OS === "darwin" ? `${HOME}/Library/Caches` : `${HOME}/.cache`; // @TODO add support for other systems?
 }
+
+const readFileToString = async (path: string): Promise<string> => {
+  if (globalThis.Deno) return globalThis.Deno.readTextFile(path);
+  const fs = await import("node:fs");
+  const prom = new Promise<string>((resolve, reject) => {
+    fs.readFile(path, "utf8", (err, data) => {
+      if (err) return reject(err);
+      return resolve(data);
+    });
+  });
+  return prom;
+};
 
 export { DENO_DIR };
 
@@ -18,9 +40,8 @@ function logger() {
   return getLogger("@fullsoak/fullsoak");
 }
 
-export const IS_DEBUG = Deno.env.get("DEBUG")
-  ? Deno.env.get("DEBUG") !== "false"
-  : false;
+const DEBUG = getEnv("DEBUG");
+export const IS_DEBUG = DEBUG ? DEBUG !== "false" : false;
 
 export const LogDebug = (msg: string, ...args: unknown[]) =>
   logger().debug(msg, ...args);
@@ -64,7 +85,7 @@ export async function getComponentCss(componentName: string): Promise<string> {
   try {
     // @TODO use a framework smart fn that attempts to read all .css files in the `componentName` dir?
     // @TODO also consider the possibility to combine a general 'main.css' and a component-specific css
-    return await Deno.readTextFile(
+    return await readFileToString(
       `${getGlobalComponentsDir()}/${componentName}/styles.css`,
     );
   } catch (e) {
@@ -117,10 +138,11 @@ export async function getComponentJs(filePath: string): Promise<string> {
       },
     });
   } catch (e) {
-    LogError("error transforming component", {
-      path: filePath,
-      error: JSON.stringify(e),
-    });
+    LogError(
+      "error transforming component",
+      filePath,
+      JSON.stringify(e),
+    );
     return `console.error("error loading component at '${filePath}'");`;
   }
 
