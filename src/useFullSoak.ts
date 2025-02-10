@@ -1,4 +1,8 @@
-import { setAppListenObj, setGlobalComponentsDir } from "./metastore.ts";
+import {
+  getGlobalComponentsParentDir,
+  setAppListenObj,
+  setGlobalComponentsDir,
+} from "./metastore.ts";
 import {
   Application,
   type Context,
@@ -6,7 +10,7 @@ import {
 } from "@oak/oak";
 import { useOakServer, useOas } from "@dklab/oak-routing-ctrl";
 import { CsrController } from "./CsrController.ts";
-import { CWD, LogInfo } from "./utils.ts";
+import { CWD, getComponentJs, LogDebug, LogInfo } from "./utils.ts";
 
 const process = !globalThis.Deno ? await import("node:process") : undefined;
 
@@ -27,7 +31,7 @@ export type FullSoakMiddleware = MiddlewareOrMiddlewareObject<
  * @ignore
  */
 // deno-lint-ignore no-explicit-any
-export type OakController = new () => any;
+export type OakRoutingControllerClass = new () => any;
 
 /**
  * the options to configure the framework upon initialization
@@ -35,7 +39,7 @@ export type OakController = new () => any;
 export type UseFullSoakOptions = {
   port: number;
   middlewares?: FullSoakMiddleware[];
-  controllers: OakController[];
+  controllers: OakRoutingControllerClass[];
   componentsDir?: string; // abs path to `components` directory
 };
 
@@ -57,6 +61,22 @@ export function useFullSoak({
   const app = new Application();
 
   const abrtCtl = new AbortController();
+
+  /**
+   * serving tsx / jsx components as client-side ESM
+   */
+  middlewares.unshift(async (ctx, next) => {
+    const p = ctx.request.url.pathname;
+    LogDebug("wildcard middleware attempting to handle path", p);
+    if (p.endsWith(".tsx") || p.endsWith(".jsx")) {
+      ctx.response.headers.set("content-type", "text/javascript");
+      ctx.response.body = await getComponentJs(
+        `${getGlobalComponentsParentDir()}${p}`,
+      );
+      return next();
+    }
+    return next();
+  });
 
   for (const mw of middlewares) {
     app.use(mw);

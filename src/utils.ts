@@ -1,5 +1,8 @@
 import { ConsoleHandler, getLogger, type LevelName, setup } from "@std/log";
-import { getGlobalComponentsDir } from "./metastore.ts";
+import {
+  getGlobalComponentsDirName,
+  getGlobalComponentsParentDir,
+} from "./metastore.ts";
 import { type Output, transformFile } from "@swc/core";
 
 const process = !globalThis.Deno ? await import("node:process") : undefined;
@@ -86,7 +89,7 @@ export async function getComponentCss(componentName: string): Promise<string> {
     // @TODO use a framework smart fn that attempts to read all .css files in the `componentName` dir?
     // @TODO also consider the possibility to combine a general 'main.css' and a component-specific css
     return await readFileToString(
-      `${getGlobalComponentsDir()}/${componentName}/styles.css`,
+      `${getGlobalComponentsParentDir()}/${getGlobalComponentsDirName()}/${componentName}/styles.css`,
     );
   } catch (e) {
     LogWarn(
@@ -115,8 +118,10 @@ export async function getComponentJs(filePath: string): Promise<string> {
       env: {
         debug: IS_DEBUG && true,
       },
+      minify: true, // @TODO disable for dev
       jsc: {
         parser: {
+          // @TODO consider supporting .jsx
           syntax: "typescript",
           tsx: true,
         },
@@ -134,6 +139,14 @@ export async function getComponentJs(filePath: string): Promise<string> {
           //     },
           //   },
           // },
+        },
+        minify: {
+          compress: true,
+          mangle: true,
+          format: {
+            comments: false,
+            indent_level: 0,
+          },
         },
       },
     });

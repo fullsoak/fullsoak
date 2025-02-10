@@ -1,3 +1,16 @@
+## [0.7.0] - 2025-02-10
+
+### Changed
+
+- the framework now supports serving `.tsx` files out of the box, without
+  declaring a dedicated GET endpoint
+- component (text/javascript) content is served minified
+- dep upgrades: `npm:preact-render-to-string@^6.5.13`, `npm:@swc/core@^1.10.15`
+
+### Removed
+
+- removed unused exports from `mod.ts`
+
 ## [0.6.2] - 2025-02-06
 
 ### Added

@@ -1,17 +1,50 @@
+import { basename, join } from "@std/path";
 import type { ApplicationListenEvent } from "@oak/oak/application";
 import { LogDebug } from "./utils.ts";
 
 const store = new Map();
 
-const FULLSOAK_APP_COMPONENTS_DIR = "FULLSOAK_APP_COMPONENTS_DIR";
+const KEY_FULLSOAK_APP_COMPONENTS_PARENT_DIR_ABS_PATH =
+  "KEY_FULLSOAK_APP_COMPONENTS_PARENT_DIR_ABS_PATH";
+
+const KEY_FULLSOAK_APP_COMPONENTS_DIR_NAME =
+  "KEY_FULLSOAK_APP_COMPONENTS_DIR_NAME";
+
 const APP_LISTEN_OBJ = "APP_LISTEN_OBJ";
-export const setGlobalComponentsDir = (dir: string) => {
-  store.set(FULLSOAK_APP_COMPONENTS_DIR, dir);
-  LogDebug("set global components dir", dir);
+
+/**
+ * record the absolute path to the parent directory of the `components` dir
+ * and the standalone name of the `components` dir itself
+ */
+export const setGlobalComponentsDir = (pathToComponentsDir: string) => {
+  const compDirName = basename(pathToComponentsDir);
+  const componentsParentDirAbsPath = join(pathToComponentsDir, "..");
+  store.set(
+    KEY_FULLSOAK_APP_COMPONENTS_DIR_NAME,
+    compDirName,
+  );
+  store.set(
+    KEY_FULLSOAK_APP_COMPONENTS_PARENT_DIR_ABS_PATH,
+    componentsParentDirAbsPath,
+  );
+  LogDebug("set component dirname to", compDirName);
+  LogDebug(
+    "set global components parent dir abs path to",
+    componentsParentDirAbsPath,
+  );
 };
 
-export const getGlobalComponentsDir = (): string =>
-  store.get(FULLSOAK_APP_COMPONENTS_DIR);
+/**
+ * retrieve the absolute path to the parent directory of the `components` dir
+ */
+export const getGlobalComponentsParentDir = (): string =>
+  store.get(KEY_FULLSOAK_APP_COMPONENTS_PARENT_DIR_ABS_PATH);
+
+/**
+ * retrieve the standalone name of the `components` dir
+ */
+export const getGlobalComponentsDirName = (): string =>
+  store.get(KEY_FULLSOAK_APP_COMPONENTS_DIR_NAME);
 
 export const setAppListenObj = (obj: ApplicationListenEvent) =>
   store.set(APP_LISTEN_OBJ, obj);

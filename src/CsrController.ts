@@ -3,18 +3,9 @@ import type { Context } from "@oak/oak/context";
 import { getClientSideJsForRoute } from "./getClientSideJsForRoute.ts";
 import * as Uglify from "uglify-js";
 import { cleanCss } from "./minifyCss.ts";
-import { getGlobalComponentsDir } from "./metastore.ts";
 import { bundle, type Output, transform } from "@swc/core";
-import {
-  DENO_DIR,
-  getComponentCss,
-  getComponentJs,
-  LogError,
-} from "./utils.ts";
+import { DENO_DIR, getComponentCss, LogError } from "./utils.ts";
 
-/**
- * @ignore
- */
 @Controller()
 export class CsrController {
   @Get("/fullsoak")
@@ -81,23 +72,5 @@ export class CsrController {
     ctx.response.headers.set("content-type", "text/css");
     const css = await getComponentCss(compName);
     return cleanCss(css);
-  }
-
-  /**
-   * serving our own component TSX as client-side esm, woo hoo!
-   */
-  @Get("/components/:compName/index.tsx")
-  @ControllerMethodArgs("param")
-  async serveComponentTsx(
-    { compName }: { compName: string },
-    ctx: Context,
-  ): Promise<string> {
-    const globalComponentsDir = getGlobalComponentsDir();
-    ctx.response.headers.set("content-type", "text/javascript");
-
-    const compFile = `${compName}/index.tsx`;
-    const fullCompFile = `${globalComponentsDir}/${compFile}`;
-
-    return await getComponentJs(fullCompFile);
   }
 }
