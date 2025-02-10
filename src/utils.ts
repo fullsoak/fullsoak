@@ -145,7 +145,6 @@ export async function getComponentJs(filePath: string): Promise<string> {
           mangle: true,
           format: {
             comments: false,
-            indent_level: 0,
           },
         },
       },
