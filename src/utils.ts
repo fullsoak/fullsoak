@@ -143,9 +143,6 @@ export async function getComponentJs(filePath: string): Promise<string> {
         minify: {
           compress: true,
           mangle: true,
-          format: {
-            comments: false,
-          },
         },
       },
     });
