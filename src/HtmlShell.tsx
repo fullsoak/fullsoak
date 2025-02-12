@@ -1,5 +1,10 @@
-/** @jsxRuntime automatic */
-/** @jsxImportSource preact */
+/**
+ * @HEADSUP please do NOT import anything other than types from "preact"
+ * in this file. That works for Deno, but fails for Bun where the `@jsxImportSource`
+ * pragma doesn't work (either here or in compilerOptions): Bun does not resolve
+ * `npm:preact@x.x.x/jsx-runtime` properly
+ */
+
 import type { FunctionComponent, VNode } from "preact";
 import type { html } from "htm/preact";
 import type { CP } from "./types.ts";
@@ -35,7 +40,7 @@ const importMapJs = `
 }
 `;
 
-export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
+const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
   componentName,
   componentProps = null,
   children,
