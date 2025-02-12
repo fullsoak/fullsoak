@@ -1,3 +1,10 @@
+## [0.7.1] - 2025-02-12
+
+### Changed
+
+- `@jsxImportSource` pragma is removed from `HtmlShell.tsx` file, resulting in
+  compatibility with Bun runtime
+
 ## [0.7.0] - 2025-02-10
 
 ### Changed
