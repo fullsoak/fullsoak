@@ -106,6 +106,6 @@ deno -A --watch src/main.ts
 
 Server-side rendering is supported via `preact-iso`. See examples:
 
-- SSR: https://github.com/fullsoak/examples/blob/v0.1.0/src/main.ts#L25-L44
+- SSR: https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L23-L28
 - Isomorphic FE component:
-  https://github.com/fullsoak/examples/blob/v0.1.0/src/components/MyRouteAwareComponent/index.tsx#L13-L26
+  https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/components/MyRouteAwareComponent/index.tsx#L23-L39
