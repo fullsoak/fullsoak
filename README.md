@@ -12,10 +12,10 @@ which is inspired by Koa (one of the popular Node.js http frameworks).
 
 ## Key Differentiators
 
-1. FullSoak is **no-build**. Zero, zip, zilch, nada. That means: no `tsc`, no
-   `webpack` (or any such equivalence). All files are served from where they
-   are. No surprises. Still, optimizations such as minification and mangling are
-   supported.
+1. FullSoak is **no-build** [[1]](#nobundle). Zero, zip, zilch, nada. That
+   means: no `tsc`, no `webpack` (or any such equivalence). All files are served
+   from where they are. No surprises. Still, optimizations such as minification
+   and mangling are supported.
 
 2. FullSoak supports both JSX and HTM (Hyperscript Tagged Markup) which boasts
    [several enhancements over JSX](https://www.npmjs.com/package/htm#improvements-over-jsx) -
@@ -119,9 +119,8 @@ deno src/main.ts
 
 Server-side rendering is supported via `preact-iso`. See examples:
 
-- SSR: https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L23-L28
-- Isomorphic FE component:
-  https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/components/MyRouteAwareComponent/index.tsx#L23-L39
+- [SSR](https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L23-L28)
+- [Isomorphic FE component](https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/components/MyRouteAwareComponent/index.tsx#L23-L39)
 
 ## Live Demo / Projects using FullSoak
 
@@ -130,3 +129,5 @@ Server-side rendering is supported via `preact-iso`. See examples:
 ## Further Reading
 
 - Project Wiki: https://github.com/fullsoak/fullsoak/wiki
+- <a name="nobundle">[1]</a>
+  [no bundle](https://github.com/fullsoak/fullsoak/wiki/Concepts-&-Example-Deployment#no-build)
