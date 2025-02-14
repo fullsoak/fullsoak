@@ -102,6 +102,14 @@ Then the app can be started up for local development:
 deno -A --watch src/main.ts
 ```
 
+or simply served directly on production and/or inside a Docker container:
+
+```bash
+# please supply the Deno security permissions flags to your desire
+# https://docs.deno.com/runtime/fundamentals/security/#permissions
+deno src/main.ts
+```
+
 ## SSR examples
 
 Server-side rendering is supported via `preact-iso`. See examples:
@@ -109,3 +117,11 @@ Server-side rendering is supported via `preact-iso`. See examples:
 - SSR: https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L23-L28
 - Isomorphic FE component:
   https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/components/MyRouteAwareComponent/index.tsx#L23-L39
+
+## Live Demo / Projects using FullSoak
+
+- https://fullsoak.onrender.com
+
+## Further Reading
+
+- Project Wiki: https://github.com/fullsoak/fullsoak/wiki

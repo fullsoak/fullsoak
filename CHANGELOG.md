@@ -1,3 +1,11 @@
+## Unreleased
+
+### Changed
+
+- `useFullSoak` now returns a tuple: the `Application` instance and the
+  `abort()` function
+- dep upgrades: `npm:@swc/core@^1.10.16`, `jsr:@std/log@^0.224.14`
+
 ## [0.7.1] - 2025-02-12
 
 ### Changed

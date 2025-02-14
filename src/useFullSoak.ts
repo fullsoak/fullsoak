@@ -46,14 +46,14 @@ export type UseFullSoakOptions = {
 /**
  * the "entry function" to initialize the FullSoak framework
  *
- * example usage: https://github.com/fullsoak/examples/blob/v0.1.0/src/main.ts#L48-L52
+ * example usage: https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L33-L37
  */
 export function useFullSoak({
   port,
   middlewares = [],
   controllers = [],
   componentsDir,
-}: UseFullSoakOptions): Abort {
+}: UseFullSoakOptions): [Application, Abort] {
   // memorize the user-provided path to the `components` directory,
   // falling back to a default framework-appointed "magic" location
   setGlobalComponentsDir(componentsDir || CWD + "/src/components");
@@ -103,5 +103,5 @@ export function useFullSoak({
     );
   }
 
-  return abrtCtl.abort;
+  return [app, abrtCtl.abort];
 }
