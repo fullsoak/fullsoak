@@ -1,5 +1,10 @@
 # FullSoak
 
+[![JSR](https://jsr.io/badges/@fullsoak/fullsoak)](https://jsr.io/@fullsoak/fullsoak)
+[![JSR Score](https://jsr.io/badges/@fullsoak/fullsoak/score)](https://jsr.io/@fullsoak/fullsoak)
+[![Built with the Deno Standard Library](https://raw.githubusercontent.com/denoland/deno_std/main/badge.svg)](https://jsr.io/@std)
+[![codecov](https://codecov.io/gh/fullsoak/fullsoak/graph/badge.svg?token=P84VP42BYB)](https://codecov.io/gh/fullsoak/fullsoak)
+
 FullS(tack)oak (FullSoak for short) is a modern (born 2025), no-build TypeScript
 fullstack framework for building fast web applications with a shallow learning
 curve. At its core is the [Oak](https://oakserver.org) http server framework
