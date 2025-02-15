@@ -29,11 +29,14 @@ which is inspired by Koa (one of the popular Node.js http frameworks).
    [JSX precompile](https://docs.deno.com/runtime/reference/jsx/#jsx-precompile-transform)
    for more details.
 
-5. FullSoak is (mostly) WYSIWYG. There're no "special functions" to remember.
-   Compared to sophisticated frameworks such as Next.js or Remix, FullSoak is
-   also very "feature-poor": 1) you start with a "Controller" file (as in good
-   old "MVC") which 2) renders your TSX component as `text/html` content (i.e. a
-   plain string), and then 3) the content hydrates itself on the client side.
+5. FullSoak is (mostly) WYSIWYG. Compared to sophisticated frameworks such as
+   Next.js, or Remix, or Deno's Fresh, FullSoak is intended to be quite
+   "feature-poor": 1) you start with a "Controller" file (as in good old "MVC")
+   which 2) renders your TSX component as `text/html` content (i.e. a plain
+   string), and then 3) the content hydrates itself on the client side. For
+   isomorphic use cases, there're no "special-purpose functions" to remember:
+   where & how to write data fetching logic is left entirely at the disposal of
+   the developer.
 
 ## Example usage
 
@@ -147,5 +150,10 @@ approach is, and for which scenarios.
 - Project Wiki: https://github.com/fullsoak/fullsoak/wiki
 - examples using FullSoak with Bun runtime:
   https://github.com/fullsoak/bun-examples
-- <a name="nobundle">[1]</a>
-  [no bundle](https://github.com/fullsoak/fullsoak/wiki/Concepts-&-Example-Deployment#no-build)
+- Preact's take on
+  [No-build Workflows](https://preactjs.com/guide/v10/no-build-workflows/)
+
+---
+
+<a name="nobundle">[1]</a>
+[no bundle](https://github.com/fullsoak/fullsoak/wiki/Concepts-&-Example-Deployment#no-build)
