@@ -41,7 +41,9 @@ export const getGlobalComponentsParentDir = (): string =>
   store.get(KEY_FULLSOAK_APP_COMPONENTS_PARENT_DIR_ABS_PATH);
 
 /**
- * retrieve the standalone name of the `components` dir
+ * retrieve the standalone name of the `components` dir,
+ * which is `components` by convention, but is otherwise
+ * configurable using {@link setGlobalComponentsDir}
  */
 export const getGlobalComponentsDirName = (): string =>
   store.get(KEY_FULLSOAK_APP_COMPONENTS_DIR_NAME);
@@ -57,7 +59,7 @@ const getAppListenObj = (): ApplicationListenEvent => store.get(APP_LISTEN_OBJ);
  * start the framework on port 3000, this function may return
  * the value `localhost:3000`
  *
- * @NOTE mostly for use in SSR contexts
+ * @NOTE mainly for use in Server-side contexts
  */
 export const getOrigin = (): string => {
   const obj = getAppListenObj();

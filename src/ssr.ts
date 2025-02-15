@@ -16,7 +16,7 @@ import { getComponentCss } from "./getComponentCss.ts";
  * import { byoHtml, HtmlShell } from "@fullsoak/fullsoak";
  * byoHtml(
  *   <HtmlShell
- *     componentName="MyComponent"
+ *     componentName="MyApp"
  *     js="some vanilla javascript"
  *     css="some raw css"
  *   />

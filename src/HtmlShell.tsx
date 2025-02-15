@@ -11,6 +11,7 @@
 import type { FunctionComponent, VNode } from "preact";
 import type { html } from "htm/preact";
 import type { CP } from "./types.ts";
+import { FULLSOAK_HTMLSHELL_MAINID } from "./constants.ts";
 
 type HtmlShellProps<P> = {
   /**
@@ -57,7 +58,7 @@ const importMapJs = `
  * import { byoHtml, HtmlShell } from "@fullsoak/fullsoak";
  * byoHtml(
  *   <HtmlShell
- *     componentName="MyComponent"
+ *     componentName="MyApp"
  *     js="some vanilla javascript"
  *     css="some raw css"
  *   />
@@ -91,7 +92,7 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
       <style dangerouslySetInnerHTML={{ __html: css || "" }} />
     </head>
     <body>
-      <main id="main">
+      <main id={FULLSOAK_HTMLSHELL_MAINID}>
         {children}
       </main>
       <script

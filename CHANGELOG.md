@@ -1,9 +1,15 @@
-## Unreleased
+## [0.8.1] - 2025-02-15
 
 ### Added
 
-- `HtmlShell` is now exported to be used together with `byoHtml` for the most
-  basic use cases
+- `HtmlShell` is now exported to be used together with `byoHtml` for an
+  unconventional use case (intentionally undocumented)
+
+### Changed
+
+- for the battery-included HTML document template, the top-level `main` element
+  has its `id` attribute changed from `main` to `fullsoak-htmlshell-main` in
+  order to reduce risks of clashing with other HTML elements in "userland"
 
 ## [0.8.0] - 2025-02-15
 

@@ -18,7 +18,7 @@ snapshot[`ssr a TSX component 1`] = `
     "@fullsoak/fullsoak": "/fullsoak"
   }
 }
-</script><script type="text/javascript"></script><style></style></head><body><main id="main"><div>SimpleTsxComponent</div></main><script type="text/javascript">window.preloadedProps = {}</script><script type="module" src="/js/SimpleTsxComponent/mount.js"></script></body></html>'
+</script><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponent</div></main><script type="text/javascript">window.preloadedProps = {}</script><script type="module" src="/js/SimpleTsxComponent/mount.js"></script></body></html>'
 `;
 
 snapshot[`ssr a TSX component with props 1`] = `
@@ -39,7 +39,7 @@ snapshot[`ssr a TSX component with props 1`] = `
     "@fullsoak/fullsoak": "/fullsoak"
   }
 }
-</script><script type="text/javascript"></script><style></style></head><body><main id="main"><div>SimpleTsxComponentWithProps=Alice</div></main><script type="text/javascript">window.preloadedProps = {"name":"Alice"}</script><script type="module" src="/js/SimpleTsxComponentWithProps/mount.js"></script></body></html>'
+</script><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponentWithProps=Alice</div></main><script type="text/javascript">window.preloadedProps = {"name":"Alice"}</script><script type="module" src="/js/SimpleTsxComponentWithProps/mount.js"></script></body></html>'
 `;
 
 snapshot[`ssr a VNode using HTM 1`] = `
@@ -60,7 +60,7 @@ snapshot[`ssr a VNode using HTM 1`] = `
     "@fullsoak/fullsoak": "/fullsoak"
   }
 }
-</script><script type="text/javascript"></script><style></style></head><body><main id="main"><div>SimpleTsxComponentWithProps=Bob</div></main><script type="text/javascript">window.preloadedProps = {"name":"Bob"}</script><script type="module" src="/js/SimpleTsxComponentWithProps/mount.js"></script></body></html>'
+</script><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponentWithProps=Bob</div></main><script type="text/javascript">window.preloadedProps = {"name":"Bob"}</script><script type="module" src="/js/SimpleTsxComponentWithProps/mount.js"></script></body></html>'
 `;
 
 snapshot[`ssr a StandardComponent 1`] = `
@@ -81,5 +81,5 @@ snapshot[`ssr a StandardComponent 1`] = `
     "@fullsoak/fullsoak": "/fullsoak"
   }
 }
-</script><script type="text/javascript"></script><style>@import url(/components/Shared/styles.css);.foo{background-color:#55c456}</style></head><body><main id="main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script type="module" src="/js/StandardComponent/mount.js"></script></body></html>'
+</script><script type="text/javascript"></script><style>@import url(/components/Shared/styles.css);.foo{background-color:#55c456}</style></head><body><main id="fullsoak-htmlshell-main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script type="module" src="/js/StandardComponent/mount.js"></script></body></html>'
 `;
