@@ -7,8 +7,21 @@ import { html } from "htm/preact";
 import { getComponentCss } from "./getComponentCss.ts";
 
 /**
- * takes a component that starts from the 'root' <html> element
- * and render it out as a string
+ * takes a component that starts from the root `<html>` element
+ * and renders it out as a string; the input component is usually
+ * constructed by using the {@link HtmlShell} tsx component (included battery)
+ *
+ * @example
+ * ```tsx
+ * import { byoHtml, HtmlShell } from "@fullsoak/fullsoak";
+ * byoHtml(
+ *   <HtmlShell
+ *     componentName="MyComponent"
+ *     js="some vanilla javascript"
+ *     css="some raw css"
+ *   />
+ * );
+ * ```
  */
 export const byoHtml = async (component: VNode): Promise<string> => {
   globalThis.location = {} as Location;
@@ -52,8 +65,8 @@ const ssrTsxComponent = async <P extends CP>(
 };
 
 /**
- * takes a Preact `VNode` or a TSX component and wrap it around an <html> element
- * and render it out as a string
+ * takes a Preact `VNode` or a TSX component and wraps it around an `<html>` element
+ * then renders everything out as a string
  * @param renderTarget - a Preact VNode or a TSX component
  * @param componentProps - the props to pass to the component (only applicable when passing a TSX component as `renderTarget`)
  * @returns - the rendered HTML as a string

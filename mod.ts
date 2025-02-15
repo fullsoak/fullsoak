@@ -6,3 +6,4 @@ export * from "./src/types.ts";
 export * from "./src/useFullSoak.ts";
 export { getOrigin } from "./src/metastore.ts";
 export { setupDefaultFullsoakLogger } from "./src/utils.ts";
+export { HtmlShell } from "./src/HtmlShell.tsx";

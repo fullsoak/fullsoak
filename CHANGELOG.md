@@ -1,3 +1,10 @@
+## Unreleased
+
+### Added
+
+- `HtmlShell` is now exported to be used together with `byoHtml` for the most
+  basic use cases
+
 ## [0.8.0] - 2025-02-15
 
 ### Added
