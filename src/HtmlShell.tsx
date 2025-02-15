@@ -11,6 +11,7 @@
 import type { FunctionComponent, VNode } from "preact";
 import type { html } from "htm/preact";
 import type { CP } from "./types.ts";
+import { FULLSOAK_HTMLSHELL_MAINID } from "./constants.ts";
 
 type HtmlShellProps<P> = {
   /**
@@ -43,7 +44,28 @@ const importMapJs = `
 }
 `;
 
-const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
+/**
+ * a battery-included component that should be used together with
+ * {@link byoHtml} so that the final output can be returned to (and
+ * rendered by) any standard web browser
+ *
+ * @NOTE the developer is responsible for injecting their own
+ * desirable vanilla javascript and css - so this is either a basic
+ * or advanced use case, depending on which perspective we look at it
+ *
+ * @example
+ * ```tsx
+ * import { byoHtml, HtmlShell } from "@fullsoak/fullsoak";
+ * byoHtml(
+ *   <HtmlShell
+ *     componentName="MyApp"
+ *     js="some vanilla javascript"
+ *     css="some raw css"
+ *   />
+ * );
+ * ```
+ */
+export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
   componentName,
   componentProps = null,
   children,
@@ -70,7 +92,7 @@ const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
       <style dangerouslySetInnerHTML={{ __html: css || "" }} />
     </head>
     <body>
-      <main id="main">
+      <main id={FULLSOAK_HTMLSHELL_MAINID}>
         {children}
       </main>
       <script
