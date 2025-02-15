@@ -94,8 +94,8 @@ let fetchMode = false;
  * initialize the FullSoak framework for use with environments such as Cloudflare Workers
  * @example
  * ```ts
- * const app = _unstable_useFetchMode({})
- * export default { fetch: app.fetch }
+ * const app = _unstable_useFetchMode({ controllers: [] });
+ * // `app` can now be used in Cloudflare Workers e.g. `export default { fetch: app.fetch }`
  * ```
  * @NOTE this feature is experimental, can be unstable, and might not even work at all
  */
