@@ -1,5 +1,10 @@
 # FullSoak
 
+[![JSR](https://jsr.io/badges/@fullsoak/fullsoak)](https://jsr.io/@fullsoak/fullsoak)
+[![JSR Score](https://jsr.io/badges/@fullsoak/fullsoak/score)](https://jsr.io/@fullsoak/fullsoak)
+[![Built with the Deno Standard Library](https://raw.githubusercontent.com/denoland/deno_std/main/badge.svg)](https://jsr.io/@std)
+[![codecov](https://codecov.io/gh/fullsoak/fullsoak/graph/badge.svg?token=P84VP42BYB)](https://codecov.io/gh/fullsoak/fullsoak)
+
 FullS(tack)oak (FullSoak for short) is a modern (born 2025), no-build TypeScript
 fullstack framework for building fast web applications with a shallow learning
 curve. At its core is the [Oak](https://oakserver.org) http server framework
@@ -7,9 +12,9 @@ which is inspired by Koa (one of the popular Node.js http frameworks).
 
 ## Key Differentiators
 
-1. FullSoak is **no-build**. Zero, zip, zilch, nada. That means: no `tsc`, no
-   `webpack` (or any such equivalence). All files are served from where they
-   are. No surprises. Still, optimizations such as minification and mangling are
+1. FullSoak is **no-build** [[1]](#nobundle). Zero, zip, zilch, nada. That
+   means: no `tsc` nor `webpack`. All files are served from where they are. No
+   surprises. Still, optimizations such as minification and mangling are
    supported.
 
 2. FullSoak supports both JSX and HTM (Hyperscript Tagged Markup) which boasts
@@ -25,10 +30,13 @@ which is inspired by Koa (one of the popular Node.js http frameworks).
    for more details.
 
 5. FullSoak is (mostly) WYSIWYG. Compared to sophisticated frameworks such as
-   Next.js or Remix, FullSoak is actually very "stupid looking": 1) you start
-   with a "Controller" file (as in good old "MVC") which 2) renders your TSX
-   component as `text/html` content (i.e. a plain string), and then 3) the
-   content hydrates itself on the client side.
+   Next.js, or Remix, or Deno's Fresh, FullSoak is intended to be quite
+   "feature-poor": 1) you start with a "Controller" file (as in good old "MVC")
+   which 2) renders your TSX component as `text/html` content (i.e. a plain
+   string), and then 3) the content hydrates itself on the client side. For
+   isomorphic use cases, there're no "special-purpose functions" to remember:
+   where & how to write data fetching logic is left entirely at the disposal of
+   the developer.
 
 ## Example usage
 
@@ -102,10 +110,50 @@ Then the app can be started up for local development:
 deno -A --watch src/main.ts
 ```
 
+or simply served directly on production and/or inside a Docker container:
+
+```bash
+# please supply the Deno security permissions flags to your desire
+# https://docs.deno.com/runtime/fundamentals/security/#permissions
+deno src/main.ts
+```
+
 ## SSR examples
 
 Server-side rendering is supported via `preact-iso`. See examples:
 
-- SSR: https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L23-L28
-- Isomorphic FE component:
-  https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/components/MyRouteAwareComponent/index.tsx#L23-L39
+- [SSR](https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L23-L28)
+- [Isomorphic FE component](https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/components/MyRouteAwareComponent/index.tsx#L23-L39)
+
+## Live Demo / Projects using FullSoak
+
+- https://fullsoak.onrender.com
+
+## Trade-offs
+
+**Build step**, while imposing additional cognitive loads & occasionally
+hindering a good Developer Experience, has its own benefits. Without build
+(bundling) step, the optimizations (e.g. resource loaders in build-time or
+run-time) have to be provisioned in other manners. The high-level wish is to use
+as much standard web specs as possible (think
+[preload](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload),
+[prefetch](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/prefetch),
+etc.) to make up for what's sacrified by dropping the build step.
+
+Besides, more benchmarks are needed on small & large scale codebases across
+different use cases (e.g. MPA blog site vs rich-interactive SPA vs even large
+E-Commerce site) to get an understanding of how feasible / scalable this
+approach is, and for which scenarios.
+
+## Further Reading
+
+- Project Wiki: https://github.com/fullsoak/fullsoak/wiki
+- examples using FullSoak with Bun runtime:
+  https://github.com/fullsoak/bun-examples
+- Preact's take on
+  [No-build Workflows](https://preactjs.com/guide/v10/no-build-workflows/)
+
+---
+
+<a name="nobundle">[1]</a>
+[no bundle](https://github.com/fullsoak/fullsoak/wiki/Concepts-&-Example-Deployment#no-build)

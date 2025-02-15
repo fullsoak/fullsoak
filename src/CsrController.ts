@@ -1,10 +1,11 @@
 import { Controller, ControllerMethodArgs, Get } from "@dklab/oak-routing-ctrl";
 import type { Context } from "@oak/oak/context";
 import { getClientSideJsForRoute } from "./getClientSideJsForRoute.ts";
-import * as Uglify from "uglify-js";
 import { cleanCss } from "./minifyCss.ts";
-import { bundle, type Output, transform } from "@swc/core";
-import { DENO_DIR, getComponentCss, LogError } from "./utils.ts";
+import type { Output } from "@swc/core";
+import { DENO_DIR, LogError } from "./utils.ts";
+import { minify } from "./jsxTransformer.ts";
+import { getComponentCss } from "./getComponentCss.ts";
 
 @Controller()
 export class CsrController {
@@ -14,7 +15,7 @@ export class CsrController {
     // @NOTE we can export other things as well; this is super helpful
     // for isomorphic code imported via the same handler on both
     // server and client sides, each requiring different a implementation
-    const res = await transform(
+    const res = await minify(
       `export const getOrigin = () => window.location.origin;`,
     );
     return res.code;
@@ -34,6 +35,7 @@ export class CsrController {
 
     let output: Record<string, Output> = {};
     try {
+      const bundle = (await import("@swc/core")).bundle;
       output = await bundle({
         entry: preactIso,
         target: "browser",
@@ -52,15 +54,26 @@ export class CsrController {
 
   @Get("/js/:compName/mount.js")
   @ControllerMethodArgs("param")
-  serveClientJsEntryPoint(
+  async serveClientJsEntryPoint(
     param: { compName: string },
     ctx: Context,
-  ): string {
+  ): Promise<string> {
     ctx.response.headers.set("content-type", "text/javascript");
 
-    return Uglify.minify(
-      getClientSideJsForRoute(param.compName),
-    ).code;
+    let retVal = "";
+    try {
+      retVal = (await minify(
+        getClientSideJsForRoute(param.compName),
+        { module: true },
+      )).code;
+    } catch (e) {
+      LogError(
+        "failed to serve mount.js for component",
+        param.compName,
+        (e as Error).stack,
+      );
+    }
+    return retVal;
   }
 
   @Get("/components/:compName/styles.css")

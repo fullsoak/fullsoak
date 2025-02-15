@@ -1,10 +1,10 @@
 import type { FunctionComponent, VNode } from "preact";
 import type { CP } from "./types.ts";
-import { getComponentCss } from "./utils.ts";
 import { renderToStringAsync } from "preact-render-to-string";
 import { withHtmlShell } from "./HtmlShell.tsx";
 import { cleanCss } from "./minifyCss.ts";
 import { html } from "htm/preact";
+import { getComponentCss } from "./getComponentCss.ts";
 
 /**
  * takes a component that starts from the 'root' <html> element
