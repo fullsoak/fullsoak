@@ -10,7 +10,8 @@ import {
 } from "@oak/oak";
 import { useOakServer, useOas } from "@dklab/oak-routing-ctrl";
 import { CsrController } from "./CsrController.ts";
-import { CWD, getComponentJs, LogDebug, LogInfo } from "./utils.ts";
+import { CWD, LogDebug, LogInfo } from "./utils.ts";
+import { getComponentJs } from "./getComponentJs.ts";
 
 const process = !globalThis.Deno ? await import("node:process") : undefined;
 
@@ -43,24 +44,18 @@ export type UseFullSoakOptions = {
   componentsDir?: string; // abs path to `components` directory
 };
 
-/**
- * the "entry function" to initialize the FullSoak framework
- *
- * example usage: https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L33-L37
- */
-export function useFullSoak({
-  port,
+type UseFetchModeOptions = Omit<UseFullSoakOptions, "port">;
+
+function setupApp({
   middlewares = [],
   controllers = [],
   componentsDir,
-}: UseFullSoakOptions): [Application, Abort] {
+}: UseFetchModeOptions): Application {
   // memorize the user-provided path to the `components` directory,
   // falling back to a default framework-appointed "magic" location
   setGlobalComponentsDir(componentsDir || CWD + "/src/components");
 
   const app = new Application();
-
-  const abrtCtl = new AbortController();
 
   /**
    * serving tsx / jsx components as client-side ESM
@@ -83,6 +78,50 @@ export function useFullSoak({
   }
   useOakServer(app, [CsrController, ...controllers]);
   useOas(app);
+
+  // @TODO handle 'uncaught application error' nicely
+
+  return app;
+}
+
+/**
+ * if/when using the "fetch mode" (for compatibility with e.g. Cloudflare Workers)
+ * this is set to true, so we cannot accidentally start the app in "normal" mode
+ */
+let fetchMode = false;
+
+/**
+ * initialize the FullSoak framework for use with environments such as Cloudflare Workers
+ * @example
+ * ```ts
+ * const app = _unstable_useFetchMode({})
+ * export default { fetch: app.fetch }
+ * ```
+ * @NOTE this feature is experimental, can be unstable, and might not even work at all
+ */
+export function _unstable_useFetchMode(opts: UseFetchModeOptions): Application {
+  fetchMode = true;
+  return setupApp(opts);
+}
+
+/**
+ * the "entry function" to initialize the FullSoak framework and start it up
+ *
+ * example usage: https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L33-L37
+ */
+export function useFullSoak({
+  port, // @TODO add support for unix socket path
+  middlewares = [],
+  controllers = [],
+  componentsDir,
+}: UseFullSoakOptions): Abort {
+  if (fetchMode) {
+    throw new Error("FullSoak app already initialized for fetch mode");
+  }
+
+  const app = setupApp({ middlewares, controllers, componentsDir });
+  const abrtCtl = new AbortController();
+
   app.addEventListener(
     "listen",
     (l) => {
@@ -91,8 +130,6 @@ export function useFullSoak({
     },
   );
   app.listen({ port, signal: abrtCtl.signal });
-
-  // @TODO handle 'uncaught application error' nicely
 
   if (process) {
     process.addListener("SIGTERM", () => abrtCtl.abort("SIGTERM"));
@@ -103,5 +140,5 @@ export function useFullSoak({
     );
   }
 
-  return [app, abrtCtl.abort];
+  return abrtCtl.abort;
 }

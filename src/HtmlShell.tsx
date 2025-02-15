@@ -1,3 +1,6 @@
+/** @jsxRuntime automatic */
+/** @jsxImportSource preact */
+
 /**
  * @HEADSUP please do NOT import anything other than types from "preact"
  * in this file. That works for Deno, but fails for Bun where the `@jsxImportSource`

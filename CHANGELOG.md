@@ -1,10 +1,19 @@
-## Unreleased
+## [0.8.0] - 2025-02-15
+
+### Added
+
+- `_unstable_useFetchMode()` is provided as an experimental support for using
+  FullSoak in environments such as Cloudflare Workers
+- fallback mechanism when `@swc/core` fails to load in unsupported environments
 
 ### Changed
 
-- `useFullSoak` now returns a tuple: the `Application` instance and the
-  `abort()` function
 - dep upgrades: `npm:@swc/core@^1.10.16`, `jsr:@std/log@^0.224.14`
+- reusing SWC's `minify` in favour of `ugligy-js`
+
+### Removed
+
+- `getComponentJs()` is removed from the module export list
 
 ## [0.7.1] - 2025-02-12
 

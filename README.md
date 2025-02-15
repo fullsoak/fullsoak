@@ -13,9 +13,9 @@ which is inspired by Koa (one of the popular Node.js http frameworks).
 ## Key Differentiators
 
 1. FullSoak is **no-build** [[1]](#nobundle). Zero, zip, zilch, nada. That
-   means: no `tsc`, no `webpack` (or any such equivalence). All files are served
-   from where they are. No surprises. Still, optimizations such as minification
-   and mangling are supported.
+   means: no `tsc` nor `webpack`. All files are served from where they are. No
+   surprises. Still, optimizations such as minification and mangling are
+   supported.
 
 2. FullSoak supports both JSX and HTM (Hyperscript Tagged Markup) which boasts
    [several enhancements over JSX](https://www.npmjs.com/package/htm#improvements-over-jsx) -
@@ -29,11 +29,11 @@ which is inspired by Koa (one of the popular Node.js http frameworks).
    [JSX precompile](https://docs.deno.com/runtime/reference/jsx/#jsx-precompile-transform)
    for more details.
 
-5. FullSoak is (mostly) WYSIWYG. Compared to sophisticated frameworks such as
-   Next.js or Remix, FullSoak is actually very "stupid looking": 1) you start
-   with a "Controller" file (as in good old "MVC") which 2) renders your TSX
-   component as `text/html` content (i.e. a plain string), and then 3) the
-   content hydrates itself on the client side.
+5. FullSoak is (mostly) WYSIWYG. There're no "special functions" to remember.
+   Compared to sophisticated frameworks such as Next.js or Remix, FullSoak is
+   also very "feature-poor": 1) you start with a "Controller" file (as in good
+   old "MVC") which 2) renders your TSX component as `text/html` content (i.e. a
+   plain string), and then 3) the content hydrates itself on the client side.
 
 ## Example usage
 
@@ -126,8 +126,26 @@ Server-side rendering is supported via `preact-iso`. See examples:
 
 - https://fullsoak.onrender.com
 
+## Trade-offs
+
+**Build step**, while imposing additional cognitive loads & occasionally
+hindering a good Developer Experience, has its own benefits. Without build
+(bundling) step, the optimizations (e.g. resource loaders in build-time or
+run-time) have to be provisioned in other manners. The high-level wish is to use
+as much standard web specs as possible (think
+[preload](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload),
+[prefetch](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/prefetch),
+etc.) to make up for what's sacrified by dropping the build step.
+
+Besides, more benchmarks are needed on small & large scale codebases across
+different use cases (e.g. MPA blog site vs rich-interactive SPA vs even large
+E-Commerce site) to get an understanding of how feasible / scalable this
+approach is, and for which scenarios.
+
 ## Further Reading
 
 - Project Wiki: https://github.com/fullsoak/fullsoak/wiki
+- examples using FullSoak with Bun runtime:
+  https://github.com/fullsoak/bun-examples
 - <a name="nobundle">[1]</a>
   [no bundle](https://github.com/fullsoak/fullsoak/wiki/Concepts-&-Example-Deployment#no-build)
