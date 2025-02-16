@@ -1,3 +1,10 @@
+## [0.9.0] - 2025-02-16
+
+### Changed
+
+- experimental support for Cloudflare Workers is improved, utilizing Cloudflare
+  Workers Static Assets serving
+
 ## [0.8.2] - 2025-02-16
 
 ### Changed

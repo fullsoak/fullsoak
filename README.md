@@ -118,16 +118,20 @@ or simply served directly on production and/or inside a Docker container:
 deno src/main.ts
 ```
 
-## SSR examples
+## Isomorphic Components
 
-Server-side rendering is supported via `preact-iso`. See examples:
+Rendering isomorphic components is supported via `preact-iso`. See examples:
 
 - [SSR](https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L23-L28)
-- [Isomorphic FE component](https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/components/MyRouteAwareComponent/index.tsx#L23-L39)
+- [Isomorphic FE components](https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/components/MyRouteAwareComponent/index.tsx#L23-L39)
 
 ## Live Demo / Projects using FullSoak
 
-- https://fullsoak.onrender.com
+- https://fullsoak-examples.deno.dev (example on Deno runtime)
+- https://fullsoak.onrender.com (example on Bun runtime)
+- https://fullsoak-cloudflare-workers-examples.dklab.workers.dev/ (example on
+  Cloudflare Workers)
+- wanna list yours? please feel free to open a PR
 
 ## Trade-offs
 
@@ -148,8 +152,10 @@ approach is, and for which scenarios.
 ## Further Reading
 
 - Project Wiki: https://github.com/fullsoak/fullsoak/wiki
-- examples using FullSoak with Bun runtime:
-  https://github.com/fullsoak/bun-examples
+- Code examples with Deno runtime: https://github.com/fullsoak/deno-examples
+- Code examples with Bun runtime: https://github.com/fullsoak/bun-examples
+- Code examples with Cloudflare Workers:
+  https://github.com/fullsoak/cloudflare-workers-examples
 - Preact's take on
   [No-build Workflows](https://preactjs.com/guide/v10/no-build-workflows/)
 
