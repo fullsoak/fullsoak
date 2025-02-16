@@ -32,6 +32,7 @@ const importMapJs = `
     "preact/hooks": "https://esm.sh/preact@10.25.4/hooks",
     "react": "https://esm.sh/preact@10.25.4",
     "react/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
+    "preact/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
     "react-dom": "https://esm.sh/preact@10.25.4/compat/",
     "react-dom/*": "https://esm.sh/preact@10.25.4/compat/*",
     "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",

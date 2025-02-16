@@ -4,7 +4,7 @@ import { getClientSideJsForRoute } from "./getClientSideJsForRoute.ts";
 import { cleanCss } from "./minifyCss.ts";
 import type { Output } from "@swc/core";
 import { DENO_DIR, LogError } from "./utils.ts";
-import { minify } from "./jsxTransformer.ts";
+import { getJsTransformFns } from "./jsxTransformer.ts";
 import { getComponentCss } from "./getComponentCss.ts";
 
 @Controller()
@@ -15,8 +15,10 @@ export class CsrController {
     // @NOTE we can export other things as well; this is super helpful
     // for isomorphic code imported via the same handler on both
     // server and client sides, each requiring different a implementation
+    const { minify } = await getJsTransformFns();
     const res = await minify(
       `export const getOrigin = () => window.location.origin;`,
+      { module: true },
     );
     return res.code;
   }
@@ -62,6 +64,7 @@ export class CsrController {
 
     let retVal = "";
     try {
+      const { minify } = await getJsTransformFns();
       retVal = (await minify(
         getClientSideJsForRoute(param.compName),
         { module: true },

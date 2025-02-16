@@ -1,3 +1,13 @@
+## [0.8.2] - 2025-02-16
+
+### Changed
+
+- fallback mechanism for `@swc/core` (introduced in v0.8.0) is changed to
+  `typescript` so that it works in environments that don't support native
+  bindings (such as Deno Deploy); this results in potentially longer transpiling
+  (and so, loading) time for the TSX components, but it's acceptable as a
+  fallback
+
 ## [0.8.1] - 2025-02-15
 
 ### Added
