@@ -12,6 +12,7 @@ import { useOakServer, useOas } from "@dklab/oak-routing-ctrl";
 import { CsrController } from "./CsrController.ts";
 import { CWD, LogDebug, LogInfo } from "./utils.ts";
 import { getComponentJs } from "./getComponentJs.ts";
+import { getJsTransformFns } from "./jsxTransformer.ts";
 
 const process = !globalThis.Deno ? await import("node:process") : undefined;
 
@@ -41,10 +42,22 @@ export type UseFullSoakOptions = {
   port: number;
   middlewares?: FullSoakMiddleware[];
   controllers: OakRoutingControllerClass[];
-  componentsDir?: string; // abs path to `components` directory
+  /**
+   * abs path to `components` directory
+   * no-op when using with Cloudflare Workers
+   */
+  componentsDir?: string;
 };
 
-type UseFetchModeOptions = Omit<UseFullSoakOptions, "port">;
+type UseFetchModeOptions = Omit<UseFullSoakOptions, "port"> & {
+  /**
+   * on Cloudflare Workers where reading from file system isn't
+   * supported, setting this value will allow loading from
+   * Cloudflare Workers Static Assets:
+   * https://developers.cloudflare.com/workers/static-assets
+   */
+  cloudflareStaticAssetsBinding?: string;
+};
 
 function setupApp({
   middlewares = [],
@@ -94,14 +107,57 @@ let fetchMode = false;
  * initialize the FullSoak framework for use with environments such as Cloudflare Workers
  * @example
  * ```ts
- * const app = _unstable_useFetchMode({ controllers: [] });
+ * const app = _unstable_useFetchMode({
+ *   controllers: [],
+ *   cloudflareStaticAssetsBinding: 'ASSETS',
+ * });
  * // `app` can now be used in Cloudflare Workers e.g. `export default { fetch: app.fetch }`
  * ```
  * @NOTE this feature is experimental, can be unstable, and might not even work at all
  */
 export function _unstable_useFetchMode(opts: UseFetchModeOptions): Application {
   fetchMode = true;
-  return setupApp(opts);
+  const app = setupApp(opts);
+  const { cloudflareStaticAssetsBinding } = opts;
+
+  if (!cloudflareStaticAssetsBinding) return app;
+
+  // we don't need __filename and __dirname when on Cloudflare Workers
+  // but the fallback JSX transformer might need these to be defined, so
+  // we mock some values
+  if (!globalThis.__filename) globalThis.__filename = "";
+  if (!globalThis.__dirname) globalThis.__dirname = "";
+
+  const defaultFetch = app.fetch;
+  Object.defineProperty(app, "fetch", {
+    // deno-lint-ignore no-explicit-any
+    value: async (request: Request, env: Record<string, any>, ctx: any) => {
+      const url = new URL(request.url);
+
+      // if serving tsx files, fetch the raw content with Cloudflare Workers Static Assets
+      // serving, then return the transformed javascript
+      if (/\.(t|j)sx/.test(url.pathname)) {
+        let res = await env[cloudflareStaticAssetsBinding].fetch(request);
+        if (res.status === 304) return res; // short-circuit => browser cache is used
+        const { transform } = await getJsTransformFns();
+        const rawContent = await res.text();
+        const transformedJsx = await transform(rawContent, {});
+        res = new Response(transformedJsx.code, res);
+        res.headers.set("Content-Type", "text/javascript");
+        return res;
+      }
+
+      // if serving css files, fetch & return the raw content with Cloudflare Workers Static Assets serving
+      // @TODO support minification the same way FullSoak does internally
+      if (/\.css/.test(url.pathname)) {
+        return env[cloudflareStaticAssetsBinding].fetch(request);
+      }
+
+      // for anything else, relay to FullSoak app route handling logic
+      return defaultFetch(request, env, ctx);
+    },
+  });
+  return app;
 }
 
 /**
