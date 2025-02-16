@@ -152,10 +152,10 @@ approach is, and for which scenarios.
 ## Further Reading
 
 - Project Wiki: https://github.com/fullsoak/fullsoak/wiki
-- Demo on Deno runtime: https://github.com/fullsoak/deno-examples
-- Demo on Bun runtime: https://github.com/fullsoak/bun-examples
-- Demo on Cloudflare Workers:
-  https://fullsoak-cloudflare-workers-examples.dklab.workers.dev
+- Code examples with Deno runtime: https://github.com/fullsoak/deno-examples
+- Code examples with Bun runtime: https://github.com/fullsoak/bun-examples
+- Code examples with Cloudflare Workers:
+  https://github.com/fullsoak/cloudflare-workers-examples
 - Preact's take on
   [No-build Workflows](https://preactjs.com/guide/v10/no-build-workflows/)
 
