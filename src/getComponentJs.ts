@@ -1,6 +1,6 @@
 import type { Output } from "@swc/core";
 import { IS_DEBUG, LogDebug, LogError } from "./utils.ts";
-import { transformFile } from "./jsxTransformer.ts";
+import { getJsTransformFns } from "./jsxTransformer.ts";
 
 /**
  * given a file path (ideally absolute path) to a component file (e.g. `.tsx`),
@@ -14,6 +14,7 @@ export async function getComponentJs(filePath: string): Promise<string> {
   let transformedComp: Output;
 
   try {
+    const { transformFile } = await getJsTransformFns();
     transformedComp = await transformFile(filePath, {
       env: {
         debug: IS_DEBUG && true,
