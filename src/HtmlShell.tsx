@@ -28,15 +28,16 @@ type HtmlShellProps<P> = {
 const importMapJs = `
 {
   "imports": {
-    "preact": "https://esm.sh/preact@10.25.4",
-    "preact/hooks": "https://esm.sh/preact@10.25.4/hooks",
-    "react": "https://esm.sh/preact@10.25.4",
-    "react/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
-    "preact/jsx-runtime": "https://esm.sh/preact@10.25.4/jsx-runtime",
-    "react-dom": "https://esm.sh/preact@10.25.4/compat/",
-    "react-dom/*": "https://esm.sh/preact@10.25.4/compat/*",
+    "preact": "https://esm.sh/preact@10.26.2",
+    "preact/hooks": "https://esm.sh/preact@10.26.2/hooks",
+    "react": "https://esm.sh/preact@10.26.2",
+    "react/jsx-runtime": "https://esm.sh/preact@10.26.2/jsx-runtime",
+    "preact/jsx-runtime": "https://esm.sh/preact@10.26.2/jsx-runtime",
+    "react-dom": "https://esm.sh/preact@10.26.2/compat/",
+    "react-dom/*": "https://esm.sh/preact@10.26.2/compat/*",
     "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
     "preact-iso": "https://esm.sh/preact-iso?external=preact",
+    "preact-iso/prerender": "/fullsoak",
     "fullsoak/preact-iso": "https://esm.sh/preact-iso?external=preact",
     "@fullsoak/fullsoak/preact-iso": "https://esm.sh/preact-iso?external=preact",
     "fullsoak": "/fullsoak",

@@ -17,7 +17,10 @@ export class CsrController {
     // server and client sides, each requiring different a implementation
     const { minify } = await getJsTransformFns();
     const res = await minify(
-      `export const getOrigin = () => window.location.origin;`,
+      `
+      export const getOrigin = () => window.location.origin;
+      export const locationStub = () => {};
+      `,
       { module: true },
     );
     return res.code;
