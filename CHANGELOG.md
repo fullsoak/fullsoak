@@ -1,3 +1,16 @@
+## [0.10.0] - 2025-02-21
+
+### Added
+
+- the path `/fullsoak` now also exports the function `locationStub` so that we
+  can use it in isomorphic React Components. On client-side it's a no-op, on
+  server-side it's the util function provided by `preact-iso`:
+  https://github.com/preactjs/preact-iso/pull/28
+
+### Changed
+
+- dep upgrades: `npm:@swc/core@^1.10.18`, `npm:preact@10.26.2`
+
 ## [0.9.0] - 2025-02-16
 
 ### Changed
