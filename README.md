@@ -123,8 +123,8 @@ deno src/main.ts
 
 Rendering isomorphic components is supported via `preact-iso`. See examples:
 
-- [SSR](https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L23-L28)
-- [Isomorphic FE components](https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/components/MyRouteAwareComponent/index.tsx#L23-L39)
+- [SSR](https://github.com/fullsoak/deno-examples/blob/v0.3.0/src/main.ts#L23-L29)
+- [Isomorphic components](https://github.com/fullsoak/deno-examples/blob/v0.3.0/src/components/MyRouteAwareComponent/index.tsx#L24-L47)
 
 ## Live Demo / Projects using FullSoak
 
