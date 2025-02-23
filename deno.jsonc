@@ -1,6 +1,6 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "nodeModulesDir": "auto",
   "tasks": {
     "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-sys -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,DENO_DIR",
@@ -18,7 +18,7 @@
     // no `*` needed after folder name (it's also not supported)
     "@mocks/": "./mocks/",
     "@oak/oak": "jsr:@oak/oak@^17.1.4",
-    "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.14.0",
+    "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.14.1",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@std/log": "jsr:@std/log@^0.224.14",
     "@std/testing": "jsr:@std/testing@^1.0.9",

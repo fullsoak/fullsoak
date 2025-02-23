@@ -1,3 +1,10 @@
+## [0.10.1] - 2025-02-23
+
+### Changed
+
+- upgraded dependencies: `jsr:oak-routing-ctrl@^0.14.1`
+- updated README example for SSR and Isomorphic Components
+
 ## [0.10.0] - 2025-02-21
 
 ### Added
