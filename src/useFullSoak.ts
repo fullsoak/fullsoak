@@ -71,12 +71,12 @@ function setupApp({
   const app = new Application();
 
   /**
-   * serving tsx / jsx components as client-side ESM
+   * serving tsx/jsx components and ts/js files as client-side ESM
    */
   middlewares.unshift(async (ctx, next) => {
     const p = ctx.request.url.pathname;
     LogDebug("wildcard middleware attempting to handle path", p);
-    if (p.endsWith(".tsx") || p.endsWith(".jsx")) {
+    if (/\.(?:t|j)sx?$/.test(p)) {
       ctx.response.headers.set("content-type", "text/javascript");
       ctx.response.body = await getComponentJs(
         `${getGlobalComponentsParentDir()}${p}`,

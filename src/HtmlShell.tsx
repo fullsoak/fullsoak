@@ -105,7 +105,7 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
           }`,
         }}
       />
-      <script type="module" src={`/js/${componentName}/mount.js`}></script>
+      <script type="module" src={`/components/${componentName}/mount`}></script>
     </body>
   </html>
 );

@@ -64,9 +64,10 @@ fullsoak-example
 // deno.jsonc
 {
   "imports": {
-    "fullsoak": "jsr:@fullsoak/fullsoak@x.x.x",
-    "preact": "npm:preact@10.25.4"
+    "fullsoak": "jsr:@fullsoak/fullsoak@^0.11.0",
+    "preact": "npm:preact@^10.26.2"
   },
+  "nodeModulesDir": "auto",
   "compilerOptions": {
     // see https://docs.deno.com/runtime/reference/jsx/#jsx-precompile-transform
     "jsx": "precompile",

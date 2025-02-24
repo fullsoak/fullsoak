@@ -57,7 +57,14 @@ export class CsrController {
       "throw new Error('failed to serve preact-iso')";
   }
 
-  @Get("/js/:compName/mount.js")
+  /**
+   * serving the 'entry file' per isomorphic component;
+   * the javascript content returned by this endpoint is
+   * to be loaded directly into the raw (SSR'ed) HTML content
+   * of the same isomorphic component, so that hydration can
+   * then take place on the client side
+   */
+  @Get("/components/:compName/mount")
   @ControllerMethodArgs("param")
   async serveClientJsEntryPoint(
     param: { compName: string },
@@ -74,7 +81,7 @@ export class CsrController {
       )).code;
     } catch (e) {
       LogError(
-        "failed to serve mount.js for component",
+        "failed to serve entry js mount-point for component",
         param.compName,
         (e as Error).stack,
       );
