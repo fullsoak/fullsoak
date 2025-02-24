@@ -1,3 +1,9 @@
+## [0.11.0] - 2025-02-24
+
+### Fixed
+
+- importing `.ts` and `.js` files in tsx components is now supported
+
 ## [0.10.1] - 2025-02-23
 
 ### Changed
