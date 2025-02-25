@@ -1,3 +1,15 @@
+## [0.13.0] - 2025-02-25
+
+### Added
+
+- we can now `import { useFullSoak } from "jsr:@fullsoak/fullsoak/manual"` for
+  e.g. writing tests
+
+### Fixed
+
+- `abort` (returned by `useFullSoak()`) should now be callable without "Illegal
+  invocation" error
+
 ## [0.12.1] - 2025-02-25
 
 ### Changed
