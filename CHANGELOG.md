@@ -1,3 +1,10 @@
+## [0.12.0] - 2025-02-25
+
+### Changed
+
+- `useFullSoak()` now returns a tuple of [`Application`, `Abort`]
+- `_unstable_useFetchMode()` renamed to `_unstable_useCloudflareWorkersMode()`
+
 ## [0.11.0] - 2025-02-24
 
 ### Fixed

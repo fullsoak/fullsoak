@@ -49,7 +49,9 @@ export type UseFullSoakOptions = {
   componentsDir?: string;
 };
 
-type UseFetchModeOptions = Omit<UseFullSoakOptions, "port"> & {
+type AppSetupOptions = Omit<UseFullSoakOptions, "port">;
+
+type UseCloudflareWorkersModeOptions = AppSetupOptions & {
   /**
    * on Cloudflare Workers where reading from file system isn't
    * supported, setting this value will allow loading from
@@ -63,7 +65,7 @@ function setupApp({
   middlewares = [],
   controllers = [],
   componentsDir,
-}: UseFetchModeOptions): Application {
+}: AppSetupOptions): Application {
   // memorize the user-provided path to the `components` directory,
   // falling back to a default framework-appointed "magic" location
   setGlobalComponentsDir(componentsDir || CWD + "/src/components");
@@ -107,7 +109,7 @@ let fetchMode = false;
  * initialize the FullSoak framework for use with environments such as Cloudflare Workers
  * @example
  * ```ts
- * const app = _unstable_useFetchMode({
+ * const app = _unstable_useCloudflareWorkersMode({
  *   controllers: [],
  *   cloudflareStaticAssetsBinding: 'ASSETS',
  * });
@@ -115,7 +117,9 @@ let fetchMode = false;
  * ```
  * @NOTE this feature is experimental, can be unstable, and might not even work at all
  */
-export function _unstable_useFetchMode(opts: UseFetchModeOptions): Application {
+export function _unstable_useCloudflareWorkersMode(
+  opts: UseCloudflareWorkersModeOptions,
+): Application {
   fetchMode = true;
   const app = setupApp(opts);
   const { cloudflareStaticAssetsBinding } = opts;
@@ -161,16 +165,25 @@ export function _unstable_useFetchMode(opts: UseFetchModeOptions): Application {
 }
 
 /**
- * the "entry function" to initialize the FullSoak framework and start it up
+ * the _entry function_ to initialize the FullSoak framework and start it up
  *
- * example usage: https://github.com/fullsoak/deno-examples/blob/v0.2.0/src/main.ts#L33-L37
+ * @example
+ * ```ts
+ * class MyController {}
+ *
+ * useFullSoak({
+ *   port: 3991,
+ *   controllers: [MyController],
+ *   componentsDir: Deno.cwd() + "/src/components",
+ * });
+ * ```
  */
 export function useFullSoak({
   port, // @TODO add support for unix socket path
   middlewares = [],
   controllers = [],
   componentsDir,
-}: UseFullSoakOptions): Abort {
+}: UseFullSoakOptions): [Application, Abort] {
   if (fetchMode) {
     throw new Error("FullSoak app already initialized for fetch mode");
   }
@@ -196,5 +209,5 @@ export function useFullSoak({
     );
   }
 
-  return abrtCtl.abort;
+  return [app, abrtCtl.abort];
 }
