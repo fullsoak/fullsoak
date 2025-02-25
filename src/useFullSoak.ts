@@ -242,18 +242,19 @@ export const useFullSoak: (opts: UseFullSoakOptions) => Abort = (opts) =>
  *
  * @example
  * ```ts
- * import { superoak } from "superoak";
- * import { useFullSoak } from "fullsoak/testing";
- * import { ApiController } from "../src/controllers/ApiController.ts";
+ * import { superoak } from "https://deno.land/x/superoak@4.8.1/mod.ts";
+ * import { useFullSoak } from "jsr:@fullsoak/fullsoak/manual";
+ *
+ * class TestTargetController {} // in real code, import from your controller file
  *
  * Deno.test("it should serve [POST] /api/login", async () => {
- *   const app = useFullSoak({ controllers: [ApiController] });
+ *   const app = useFullSoak({ controllers: [TestTargetController] });
  *
  *   const req1 = await superoak(app);
  *   await req1.post("/api/login")
  *     .send(JSON.stringify({username: "foo", password: "bar"}))
  *     .expect(401);
- * }
+ * });
  * ```
  */
 export const useFullSoakManual: (opts: UseFullSoakOptions) => Application = (
