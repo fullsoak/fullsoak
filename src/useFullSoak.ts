@@ -49,6 +49,19 @@ export type UseFullSoakOptions = {
   componentsDir?: string;
 };
 
+type UseFullSoakOptionsInternal = UseFullSoakOptions & {
+  /**
+   * defaults to `true`, but if explicitly set to `false`
+   * then the user will have to call `app.listen()` themselves
+   * and assign their own abort signal (if they need it)
+   * @NOTE setting this to `false` only makes sense when
+   * writing test with e.g. [superoak](https://deno.land/x/superoak@4.8.1),
+   * or in customized use cases. It's generally okay to just leave
+   * this `undefined` or set to `true` as per default
+   */
+  autoStart?: boolean;
+};
+
 type AppSetupOptions = Omit<UseFullSoakOptions, "port">;
 
 type UseCloudflareWorkersModeOptions = AppSetupOptions & {
@@ -164,8 +177,46 @@ export function _unstable_useCloudflareWorkersMode(
   return app;
 }
 
+function useFullSoakInternal({
+  port, // @TODO add support for unix socket path
+  middlewares = [],
+  controllers = [],
+  componentsDir,
+  autoStart = true,
+}: UseFullSoakOptionsInternal): Abort | Application {
+  if (fetchMode) {
+    throw new Error("FullSoak app already initialized for fetch mode");
+  }
+
+  const app = setupApp({ middlewares, controllers, componentsDir });
+  const abrtCtl = new AbortController();
+
+  app.addEventListener(
+    "listen",
+    (l) => {
+      LogInfo(`FullSoak server listening on ${l.port}`);
+      setAppListenObj(l);
+    },
+  );
+
+  if (autoStart) {
+    if (process) {
+      process.addListener("SIGTERM", () => abrtCtl.abort("SIGTERM"));
+    } else {
+      globalThis.Deno.addSignalListener(
+        "SIGTERM",
+        () => abrtCtl.abort("SIGTERM"),
+      );
+    }
+
+    app.listen({ port, signal: abrtCtl.signal });
+  }
+
+  return autoStart ? abrtCtl.abort.bind(abrtCtl) : app;
+}
+
 /**
- * the _entry function_ to initialize the FullSoak framework and start it up
+ * _entry function_ to initialize FullSoak framework and start it up
  *
  * @example
  * ```ts
@@ -178,41 +229,38 @@ export function _unstable_useCloudflareWorkersMode(
  * });
  * ```
  */
-export function useFullSoak({
-  port, // @TODO add support for unix socket path
-  middlewares = [],
-  controllers = [],
-  componentsDir,
-}: UseFullSoakOptions): [Promise<Application>, Abort] {
-  if (fetchMode) {
-    throw new Error("FullSoak app already initialized for fetch mode");
-  }
+export const useFullSoak: (opts: UseFullSoakOptions) => Abort = (opts) =>
+  useFullSoakInternal({
+    ...opts,
+    autoStart: true,
+  }) as Abort;
 
-  const app = setupApp({ middlewares, controllers, componentsDir });
-  const abrtCtl = new AbortController();
-
-  let appReady: boolean = false;
-  const appResolver = (): Application | undefined => appReady ? app : undefined;
-  const appProm = new Promise<Application>(appResolver);
-
-  app.addEventListener(
-    "listen",
-    (l) => {
-      LogInfo(`FullSoak server listening on ${l.port}`);
-      setAppListenObj(l);
-      appReady = true;
-    },
-  );
-  app.listen({ port, signal: abrtCtl.signal });
-
-  if (process) {
-    process.addListener("SIGTERM", () => abrtCtl.abort("SIGTERM"));
-  } else {
-    globalThis.Deno.addSignalListener(
-      "SIGTERM",
-      () => abrtCtl.abort("SIGTERM"),
-    );
-  }
-
-  return [appProm, abrtCtl.abort];
-}
+/**
+ * _entry function_ to initialize FullSoak framework in manual mode (for writing tests or customized use-cases).
+ * For example when writing tests: the app instance won't be auto-started so that it can be handled by a test
+ * framework such as `superoak`: https://deno.land/x/superoak@4.8.1
+ *
+ * @example
+ * ```ts
+ * import { superoak } from "https://deno.land/x/superoak@4.8.1/mod.ts";
+ * import { useFullSoak } from "jsr:@fullsoak/fullsoak/manual";
+ *
+ * class TestTargetController {} // in real code, import from your controller file
+ *
+ * Deno.test("it should serve [POST] /api/login", async () => {
+ *   const app = useFullSoak({ controllers: [TestTargetController] });
+ *
+ *   const req1 = await superoak(app);
+ *   await req1.post("/api/login")
+ *     .send(JSON.stringify({username: "foo", password: "bar"}))
+ *     .expect(401);
+ * });
+ * ```
+ */
+export const useFullSoakManual: (opts: UseFullSoakOptions) => Application = (
+  opts,
+) =>
+  useFullSoakInternal({
+    ...opts,
+    autoStart: false,
+  }) as Application;
