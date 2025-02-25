@@ -1,3 +1,14 @@
+## [0.13.1] - 2025-02-25
+
+### Added
+
+- we can now `import { useFullSoak } from "jsr:@fullsoak/fullsoak/testing"` as
+  an alias for `import { useFullSoak } from "jsr:@fullsoak/fullsoak/manual"`
+
+### Removed
+
+- unintended export(s) from `v0.13.0` now removed
+
 ## [0.13.0] - 2025-02-25
 
 ### Added
