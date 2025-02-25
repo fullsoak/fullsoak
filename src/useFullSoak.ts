@@ -39,7 +39,7 @@ export type OakRoutingControllerClass = new () => any;
  * the options to configure the framework upon initialization
  */
 export type UseFullSoakOptions = {
-  port: number;
+  port?: number;
   middlewares?: FullSoakMiddleware[];
   controllers: OakRoutingControllerClass[];
   /**
@@ -183,7 +183,7 @@ export function useFullSoak({
   middlewares = [],
   controllers = [],
   componentsDir,
-}: UseFullSoakOptions): [Application, Abort] {
+}: UseFullSoakOptions): [Promise<Application>, Abort] {
   if (fetchMode) {
     throw new Error("FullSoak app already initialized for fetch mode");
   }
@@ -191,11 +191,16 @@ export function useFullSoak({
   const app = setupApp({ middlewares, controllers, componentsDir });
   const abrtCtl = new AbortController();
 
+  let appReady: boolean = false;
+  const appResolver = (): Application | undefined => appReady ? app : undefined;
+  const appProm = new Promise<Application>(appResolver);
+
   app.addEventListener(
     "listen",
     (l) => {
       LogInfo(`FullSoak server listening on ${l.port}`);
       setAppListenObj(l);
+      appReady = true;
     },
   );
   app.listen({ port, signal: abrtCtl.signal });
@@ -209,5 +214,5 @@ export function useFullSoak({
     );
   }
 
-  return [app, abrtCtl.abort];
+  return [appProm, abrtCtl.abort];
 }

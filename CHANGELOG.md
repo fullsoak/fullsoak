@@ -1,3 +1,11 @@
+## [0.12.1] - 2025-02-25
+
+### Changed
+
+- `useFullSoak()` now returns a tuple of [`Promise<Application>`, `Abort`]
+- `port` argument is now optional during framework init (defaulting to `0`
+  underneath)
+
 ## [0.12.0] - 2025-02-25
 
 ### Changed
