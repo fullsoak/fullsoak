@@ -1,6 +1,6 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "nodeModulesDir": "auto",
   "tasks": {
     "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-sys -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,DENO_DIR",
@@ -39,6 +39,7 @@
     ".": "./mod.ts",
     "./mod": "./mod.ts",
     "./manual": "./mod-manual.ts",
+    "./testing": "./mod-testing.ts",
     "./preact-iso": "./mod-preact-iso.ts"
   },
   // @TODO provide a script to help user populate the same `compilerOptions` config

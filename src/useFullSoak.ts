@@ -243,7 +243,7 @@ export const useFullSoak: (opts: UseFullSoakOptions) => Abort = (opts) =>
  * @example
  * ```ts
  * import { superoak } from "https://deno.land/x/superoak@4.8.1/mod.ts";
- * import { useFullSoak } from "jsr:@fullsoak/fullsoak/manual";
+ * import { useFullSoak } from "jsr:@fullsoak/fullsoak/testing";
  *
  * class TestTargetController {} // in real code, import from your controller file
  *
