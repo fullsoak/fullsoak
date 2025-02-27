@@ -1,9 +1,12 @@
 import { ConsoleHandler, getLogger, type LevelName, setup } from "@std/log";
 
-const process = !globalThis.Deno ? await import("node:process") : undefined;
+// @TODO find a way to do top-level `await import()` these
+// without breaking support for Node.js paltform
+import * as process from "node:process";
+import * as os from "node:os";
 
 const getEnv = (env: string): string | undefined => {
-  return process?.env[env] || globalThis.Deno?.env.get(env);
+  return globalThis.Deno?.env.get(env) || process.env[env];
 };
 
 function logger() {
@@ -25,25 +28,34 @@ export const LogError = (msg: string, ...args: unknown[]) =>
 export const LogWarn = (msg: string, ...args: unknown[]) =>
   logger().warn(msg, ...args);
 
-export const CWD = process?.cwd() || globalThis.Deno.cwd();
+export const CWD = globalThis.Deno?.cwd() || process.cwd();
 
-const OS = globalThis.Deno
-  ? globalThis.Deno.build.os
-  : (await import("node:os")).platform;
+const OS = globalThis.Deno?.build.os || os.platform;
 
 const HOME = getEnv("HOME");
 
 let DENO_DIR = getEnv("DENO_DIR");
 
 if (!DENO_DIR) {
-  DENO_DIR = OS === "darwin" ? `${HOME}/Library/Caches` : `${HOME}/.cache`; // @TODO add support for other systems?
+  DENO_DIR = OS === "darwin"
+    ? `${HOME}/Library/Caches`
+    : OS === "windows"
+    ? `${HOME}\\AppData\\Local`
+    : `${HOME}/.cache`; // @TODO consider adding support for other systems?
 }
 
 export { DENO_DIR };
 
+/**
+ * read a file to string, supporting both file system path and network path
+ */
 export const readFileToString = async (path: string): Promise<string> => {
+  if (path.startsWith("http")) {
+    const resp = await fetch(path);
+    return await resp.text();
+  }
   if (globalThis.Deno) return globalThis.Deno.readTextFile(path);
-  const fs = await import("node:fs");
+  const fs: typeof import("node:fs") = await import("node:fs");
   const prom = new Promise<string>((resolve, reject) => {
     fs.readFile(path, "utf8", (err, data) => {
       if (err) return reject(err);

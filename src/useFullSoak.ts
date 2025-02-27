@@ -13,8 +13,8 @@ import { CsrController } from "./CsrController.ts";
 import { CWD, LogDebug, LogInfo } from "./utils.ts";
 import { getComponentJs } from "./getComponentJs.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
-
-const process = !globalThis.Deno ? await import("node:process") : undefined;
+import process from "node:process";
+import { SEPARATOR } from "@std/path";
 
 // deno-lint-ignore no-explicit-any
 type Abort = (reason?: any) => void;
@@ -39,6 +39,7 @@ export type OakRoutingControllerClass = new () => any;
  * the options to configure the framework upon initialization
  */
 export type UseFullSoakOptions = {
+  hostname?: string;
   port?: number;
   middlewares?: FullSoakMiddleware[];
   controllers: OakRoutingControllerClass[];
@@ -81,7 +82,9 @@ function setupApp({
 }: AppSetupOptions): Application {
   // memorize the user-provided path to the `components` directory,
   // falling back to a default framework-appointed "magic" location
-  setGlobalComponentsDir(componentsDir || CWD + "/src/components");
+  setGlobalComponentsDir(
+    componentsDir || CWD + `${SEPARATOR}src${SEPARATOR}components`,
+  );
 
   const app = new Application();
 
@@ -178,7 +181,9 @@ export function _unstable_useCloudflareWorkersMode(
 }
 
 function useFullSoakInternal({
-  port, // @TODO add support for unix socket path
+  // @TODO consider adding support for unix socket path
+  hostname,
+  port,
   middlewares = [],
   controllers = [],
   componentsDir,
@@ -200,16 +205,16 @@ function useFullSoakInternal({
   );
 
   if (autoStart) {
-    if (process) {
-      process.addListener("SIGTERM", () => abrtCtl.abort("SIGTERM"));
-    } else {
+    if (globalThis.Deno) {
       globalThis.Deno.addSignalListener(
         "SIGTERM",
         () => abrtCtl.abort("SIGTERM"),
       );
+    } else {
+      process.on("SIGTERM", () => abrtCtl.abort("SIGTERM"));
     }
 
-    app.listen({ port, signal: abrtCtl.signal });
+    app.listen({ hostname, port, signal: abrtCtl.signal });
   }
 
   return autoStart ? abrtCtl.abort.bind(abrtCtl) : app;
@@ -264,3 +269,29 @@ export const useFullSoakManual: (opts: UseFullSoakOptions) => Application = (
     ...opts,
     autoStart: false,
   }) as Application;
+
+/**
+ * _entry function_ to initialize FullSoak framework in "fetch" mode
+ * (similar to [Cloudflare Workers fetch](https://developers.cloudflare.com/workers/runtime-apis/handlers/fetch/))
+ *
+ * @example
+ * ```ts
+ * import { useFetchMode } from "jsr:@fullsoak/fullsoak";
+ *
+ * const fetch = useFetchMode({ controllers: [] });
+ * export default { fetch }
+ * ```
+ */
+export const useFetchMode: (
+  opts: Pick<
+    UseFullSoakOptions,
+    "middlewares" | "controllers" | "componentsDir"
+  >,
+  // deno-lint-ignore no-explicit-any
+) => (req: Request, ...args: any[]) => Promise<Response> = (
+  opts,
+) => {
+  const { middlewares, controllers, componentsDir } = opts;
+  const app = setupApp({ middlewares, controllers, componentsDir });
+  return app.fetch;
+};

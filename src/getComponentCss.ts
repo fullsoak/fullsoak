@@ -1,3 +1,4 @@
+import { SEPARATOR, SEPARATOR_PATTERN } from "@std/path";
 import {
   getGlobalComponentsDirName,
   getGlobalComponentsParentDir,
@@ -9,7 +10,7 @@ export async function getComponentCss(componentName: string): Promise<string> {
     // @TODO use a framework smart fn that attempts to read all .css files in the `componentName` dir?
     // @TODO also consider the possibility to combine a general 'main.css' and a component-specific css
     return await readFileToString(
-      `${getGlobalComponentsParentDir()}/${getGlobalComponentsDirName()}/${componentName}/styles.css`,
+      `${getGlobalComponentsParentDir()}${SEPARATOR}${getGlobalComponentsDirName()}${SEPARATOR_PATTERN}${componentName}${SEPARATOR}styles.css`,
     );
   } catch (e) {
     LogWarn(

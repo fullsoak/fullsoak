@@ -64,7 +64,7 @@ fullsoak-example
 // deno.jsonc
 {
   "imports": {
-    "fullsoak": "jsr:@fullsoak/fullsoak@0.13.1",
+    "fullsoak": "jsr:@fullsoak/fullsoak@0.14.0",
     "preact": "npm:preact@10.26.2"
   },
   "nodeModulesDir": "auto",
@@ -155,6 +155,8 @@ approach is, and for which scenarios.
 
 - Project Wiki: https://github.com/fullsoak/fullsoak/wiki
 - Code examples with Deno runtime: https://github.com/fullsoak/deno-examples
+- Code examples with Node.js runtime:
+  https://github.com/fullsoak/nodejs-examples
 - Code examples with Bun runtime: https://github.com/fullsoak/bun-examples
 - Code examples with Cloudflare Workers:
   https://github.com/fullsoak/cloudflare-workers-examples
