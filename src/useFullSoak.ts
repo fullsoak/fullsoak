@@ -13,7 +13,7 @@ import { CsrController } from "./CsrController.ts";
 import { CWD, LogDebug, LogInfo } from "./utils.ts";
 import { getComponentJs } from "./getComponentJs.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
-import process from "node:process";
+import { process } from "./utils.ts";
 import { SEPARATOR } from "@std/path";
 
 // deno-lint-ignore no-explicit-any
@@ -238,7 +238,7 @@ function useFullSoakInternal({
         () => abrtCtl.abort("SIGTERM"),
       );
     } else {
-      process.on("SIGTERM", () => abrtCtl.abort("SIGTERM"));
+      process?.on("SIGTERM", () => abrtCtl.abort("SIGTERM"));
     }
 
     app.listen({ hostname, port, signal: abrtCtl.signal });

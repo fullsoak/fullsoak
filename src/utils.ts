@@ -1,6 +1,8 @@
 import { ConsoleHandler, getLogger, type LevelName, setup } from "@std/log";
 
-const process = !globalThis.Deno ? await import("node:process") : undefined;
+export const process = !globalThis.Deno
+  ? (await import("node:process")).default
+  : undefined;
 
 const getEnv = (env: string): string | undefined => {
   return globalThis.Deno?.env.get(env) || process?.env[env];
