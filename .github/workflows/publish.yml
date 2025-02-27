@@ -27,7 +27,7 @@ jobs:
         run: deno lint --ignore=\*\*\/\*_test.ts
 
       - name: Check doc
-        run: deno task check-doc --allow-import
+        run: deno task check-doc
 
       - name: Run tests
         run: deno task test
