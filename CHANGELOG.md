@@ -1,3 +1,23 @@
+## [0.14.0] - 2025-02-27
+
+### Added
+
+- support for Node.js runtime (with [tsx](https://tsx.is/))
+- generic support for `fetch` mode (similar to support for Cloudflare Workers)
+  via `import { useFetchMode } from "jsr:@fullsoak/fullsoak"`
+- `useFullOak()` accepts a new (optional) init parameter: `hostname`
+- wider support for different file/folder structures:
+  - before: only `/components/ComponentName/index.tsx` is supported
+  - now: `/components/ComponentName.tsx` is also supported
+- best-effort (untested) support for Windows systems
+
+### Changed
+
+- shipped import map now has `preact` and `preact-iso` versions always pinned to
+  their corresponding values in `deno.jsonc`
+- more secured support for Cloudflare Workers runtime (limited to CSR-ing
+  resources within ASSETS binding directory only)
+
 ## [0.13.1] - 2025-02-25
 
 ### Added

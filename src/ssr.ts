@@ -1,7 +1,7 @@
 import type { FunctionComponent, VNode } from "preact";
 import type { CP } from "./types.ts";
 import { renderToStringAsync } from "preact-render-to-string";
-import { withHtmlShell } from "./HtmlShell.tsx";
+import { withHtmlShell } from "./HtmlShell.ts";
 import { cleanCss } from "./minifyCss.ts";
 import { html } from "htm/preact";
 import { getComponentCss } from "./getComponentCss.ts";

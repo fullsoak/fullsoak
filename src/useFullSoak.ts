@@ -13,8 +13,8 @@ import { CsrController } from "./CsrController.ts";
 import { CWD, LogDebug, LogInfo } from "./utils.ts";
 import { getComponentJs } from "./getComponentJs.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
-
-const process = !globalThis.Deno ? await import("node:process") : undefined;
+import { process } from "./utils.ts";
+import { SEPARATOR } from "@std/path";
 
 // deno-lint-ignore no-explicit-any
 type Abort = (reason?: any) => void;
@@ -39,12 +39,17 @@ export type OakRoutingControllerClass = new () => any;
  * the options to configure the framework upon initialization
  */
 export type UseFullSoakOptions = {
+  hostname?: string;
   port?: number;
   middlewares?: FullSoakMiddleware[];
   controllers: OakRoutingControllerClass[];
   /**
-   * abs path to `components` directory
-   * no-op when using with Cloudflare Workers
+   * abs path to `components` directory;
+   *
+   * @NOTE when on Cloudflare Workers, use this
+   * in combination with ASSETS binding to perform
+   * path rewriting on resources, so that we don't
+   * serve more files than we want to
    */
   componentsDir?: string;
 };
@@ -81,7 +86,9 @@ function setupApp({
 }: AppSetupOptions): Application {
   // memorize the user-provided path to the `components` directory,
   // falling back to a default framework-appointed "magic" location
-  setGlobalComponentsDir(componentsDir || CWD + "/src/components");
+  setGlobalComponentsDir(
+    componentsDir || CWD + `${SEPARATOR}src${SEPARATOR}components`,
+  );
 
   const app = new Application();
 
@@ -145,16 +152,35 @@ export function _unstable_useCloudflareWorkersMode(
   if (!globalThis.__filename) globalThis.__filename = "";
   if (!globalThis.__dirname) globalThis.__dirname = "";
 
+  const compDir = opts.componentsDir || "";
+  const parts = compDir.split(SEPARATOR);
+  const compDirLastPart = SEPARATOR + (parts.findLast((p) => p != null) || ""); // e.g. /components
+
+  // prevent serving files outside the designated dir
+  const getResourceSafeUrl = (url: URL): URL | null => {
+    if (!url.pathname.startsWith(compDirLastPart)) return null;
+
+    const retVal = new URL(url); // e.g. /components/foo
+    const safePath = retVal.pathname.slice(compDirLastPart.length); // e.g. /foo
+    retVal.pathname = safePath;
+    return retVal;
+  };
+
   const defaultFetch = app.fetch;
   Object.defineProperty(app, "fetch", {
     // deno-lint-ignore no-explicit-any
     value: async (request: Request, env: Record<string, any>, ctx: any) => {
       const url = new URL(request.url);
 
-      // if serving tsx files, fetch the raw content with Cloudflare Workers Static Assets
-      // serving, then return the transformed javascript
-      if (/\.(t|j)sx/.test(url.pathname)) {
-        let res = await env[cloudflareStaticAssetsBinding].fetch(request);
+      // if serving js files for CSR (e.g. tsx components), fetch the raw content
+      // with Cloudflare Workers Static Assets serving, then return the transformed javascript
+      if (/\.(t|j)sx?/.test(url.pathname)) {
+        const safeUrl = getResourceSafeUrl(url);
+        if (!safeUrl) return new Response(null, { status: 403 });
+
+        let res = await env[cloudflareStaticAssetsBinding].fetch(
+          new Request(safeUrl, request),
+        );
         if (res.status === 304) return res; // short-circuit => browser cache is used
         const { transform } = await getJsTransformFns();
         const rawContent = await res.text();
@@ -167,7 +193,11 @@ export function _unstable_useCloudflareWorkersMode(
       // if serving css files, fetch & return the raw content with Cloudflare Workers Static Assets serving
       // @TODO support minification the same way FullSoak does internally
       if (/\.css/.test(url.pathname)) {
-        return env[cloudflareStaticAssetsBinding].fetch(request);
+        const safeUrl = getResourceSafeUrl(url);
+        if (!safeUrl) return new Response(null, { status: 403 });
+        return env[cloudflareStaticAssetsBinding].fetch(
+          new Request(safeUrl, request),
+        );
       }
 
       // for anything else, relay to FullSoak app route handling logic
@@ -178,7 +208,9 @@ export function _unstable_useCloudflareWorkersMode(
 }
 
 function useFullSoakInternal({
-  port, // @TODO add support for unix socket path
+  // @TODO consider adding support for unix socket path
+  hostname,
+  port,
   middlewares = [],
   controllers = [],
   componentsDir,
@@ -200,16 +232,16 @@ function useFullSoakInternal({
   );
 
   if (autoStart) {
-    if (process) {
-      process.addListener("SIGTERM", () => abrtCtl.abort("SIGTERM"));
-    } else {
+    if (globalThis.Deno) {
       globalThis.Deno.addSignalListener(
         "SIGTERM",
         () => abrtCtl.abort("SIGTERM"),
       );
+    } else {
+      process?.on("SIGTERM", () => abrtCtl.abort("SIGTERM"));
     }
 
-    app.listen({ port, signal: abrtCtl.signal });
+    app.listen({ hostname, port, signal: abrtCtl.signal });
   }
 
   return autoStart ? abrtCtl.abort.bind(abrtCtl) : app;
@@ -264,3 +296,29 @@ export const useFullSoakManual: (opts: UseFullSoakOptions) => Application = (
     ...opts,
     autoStart: false,
   }) as Application;
+
+/**
+ * _entry function_ to initialize FullSoak framework in "fetch" mode
+ * (similar to [Cloudflare Workers fetch](https://developers.cloudflare.com/workers/runtime-apis/handlers/fetch/))
+ *
+ * @example
+ * ```ts
+ * import { useFetchMode } from "jsr:@fullsoak/fullsoak";
+ * const fetch = useFetchMode({ controllers: [] });
+ *
+ * // then we can use it like so: `export default { fetch }`
+ * ```
+ */
+export const useFetchMode: (
+  opts: Pick<
+    UseFullSoakOptions,
+    "middlewares" | "controllers" | "componentsDir"
+  >,
+  // deno-lint-ignore no-explicit-any
+) => (req: Request, ...args: any[]) => Promise<Response> = (
+  opts,
+) => {
+  const { middlewares, controllers, componentsDir } = opts;
+  const app = setupApp({ middlewares, controllers, componentsDir });
+  return app.fetch;
+};
