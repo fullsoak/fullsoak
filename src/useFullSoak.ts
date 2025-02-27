@@ -304,9 +304,9 @@ export const useFullSoakManual: (opts: UseFullSoakOptions) => Application = (
  * @example
  * ```ts
  * import { useFetchMode } from "jsr:@fullsoak/fullsoak";
- *
  * const fetch = useFetchMode({ controllers: [] });
- * export default { fetch };
+ *
+ * // then we can use it like so: `export default { fetch }`
  * ```
  */
 export const useFetchMode: (
