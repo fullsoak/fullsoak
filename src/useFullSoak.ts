@@ -154,14 +154,14 @@ export function _unstable_useCloudflareWorkersMode(
 
   const compDir = opts.componentsDir || "";
   const parts = compDir.split(SEPARATOR);
-  const compDirLastPart = "/" + (parts.findLast((p) => p != null) || "");
+  const compDirLastPart = SEPARATOR + (parts.findLast((p) => p != null) || ""); // e.g. /components
 
   // prevent serving files outside the designated dir
   const getResourceSafeUrl = (url: URL): URL | null => {
     if (!url.pathname.startsWith(compDirLastPart)) return null;
 
-    const retVal = new URL(url);
-    const safePath = retVal.pathname.replace(compDirLastPart, "");
+    const retVal = new URL(url); // e.g. /components/foo
+    const safePath = retVal.pathname.slice(compDirLastPart.length); // e.g. /foo
     retVal.pathname = safePath;
     return retVal;
   };
