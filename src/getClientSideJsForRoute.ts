@@ -8,7 +8,7 @@ import { getGlobalComponentsDirName } from "./metastore.ts";
  * human or bot users (we'll lose any interactivity that's `hydrated` by this javascript though)
  */
 export const getClientSideJsForRoute = (compName: string): string => {
-  // @TODO contemplate if we can/should support cases for `${compName}.tsx`
+  // @NOTE importing from `${compName}.tsx` is also supported as a fallback mechanism
   const importByRoute = `
   import { ${compName} as View } from "/${getGlobalComponentsDirName()}/${compName}/index.tsx";
   `;

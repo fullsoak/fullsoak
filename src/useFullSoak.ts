@@ -44,8 +44,12 @@ export type UseFullSoakOptions = {
   middlewares?: FullSoakMiddleware[];
   controllers: OakRoutingControllerClass[];
   /**
-   * abs path to `components` directory
-   * no-op when using with Cloudflare Workers
+   * abs path to `components` directory;
+   *
+   * @NOTE when on Cloudflare Workers, use this
+   * in combination with ASSETS binding to perform
+   * path rewriting on resources, so that we don't
+   * serve more files than we want to
    */
   componentsDir?: string;
 };
@@ -148,16 +152,35 @@ export function _unstable_useCloudflareWorkersMode(
   if (!globalThis.__filename) globalThis.__filename = "";
   if (!globalThis.__dirname) globalThis.__dirname = "";
 
+  const compDir = opts.componentsDir || "";
+  const parts = compDir.split(SEPARATOR);
+  const compDirLastPart = "/" + (parts.findLast((p) => p != null) || "");
+
+  // prevent serving files outside the designated dir
+  const getResourceSafeUrl = (url: URL): URL | null => {
+    if (!url.pathname.startsWith(compDirLastPart)) return null;
+
+    const retVal = new URL(url);
+    const safePath = retVal.pathname.replace(compDirLastPart, "");
+    retVal.pathname = safePath;
+    return retVal;
+  };
+
   const defaultFetch = app.fetch;
   Object.defineProperty(app, "fetch", {
     // deno-lint-ignore no-explicit-any
     value: async (request: Request, env: Record<string, any>, ctx: any) => {
       const url = new URL(request.url);
 
-      // if serving tsx files, fetch the raw content with Cloudflare Workers Static Assets
-      // serving, then return the transformed javascript
-      if (/\.(t|j)sx/.test(url.pathname)) {
-        let res = await env[cloudflareStaticAssetsBinding].fetch(request);
+      // if serving js files for CSR (e.g. tsx components), fetch the raw content
+      // with Cloudflare Workers Static Assets serving, then return the transformed javascript
+      if (/\.(t|j)sx?/.test(url.pathname)) {
+        const safeUrl = getResourceSafeUrl(url);
+        if (!safeUrl) return new Response(null, { status: 403 });
+
+        let res = await env[cloudflareStaticAssetsBinding].fetch(
+          new Request(safeUrl, request),
+        );
         if (res.status === 304) return res; // short-circuit => browser cache is used
         const { transform } = await getJsTransformFns();
         const rawContent = await res.text();
@@ -170,7 +193,11 @@ export function _unstable_useCloudflareWorkersMode(
       // if serving css files, fetch & return the raw content with Cloudflare Workers Static Assets serving
       // @TODO support minification the same way FullSoak does internally
       if (/\.css/.test(url.pathname)) {
-        return env[cloudflareStaticAssetsBinding].fetch(request);
+        const safeUrl = getResourceSafeUrl(url);
+        if (!safeUrl) return new Response(null, { status: 403 });
+        return env[cloudflareStaticAssetsBinding].fetch(
+          new Request(safeUrl, request),
+        );
       }
 
       // for anything else, relay to FullSoak app route handling logic
@@ -279,7 +306,7 @@ export const useFullSoakManual: (opts: UseFullSoakOptions) => Application = (
  * import { useFetchMode } from "jsr:@fullsoak/fullsoak";
  *
  * const fetch = useFetchMode({ controllers: [] });
- * export default { fetch }
+ * export default { fetch };
  * ```
  */
 export const useFetchMode: (

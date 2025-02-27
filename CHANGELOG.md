@@ -13,8 +13,10 @@
 
 ### Changed
 
-- shipped import map now has `preact` and `preact-iso` version always pinned to
+- shipped import map now has `preact` and `preact-iso` versions always pinned to
   their corresponding values in `deno.jsonc`
+- more secured support for Cloudflare Workers runtime (limited to CSR-ing
+  resources within ASSETS binding directory only)
 
 ## [0.13.1] - 2025-02-25
 

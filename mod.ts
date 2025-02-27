@@ -7,6 +7,7 @@ export {
   _unstable_useCloudflareWorkersMode,
   type FullSoakMiddleware,
   type OakRoutingControllerClass,
+  useFetchMode,
   useFullSoak,
   type UseFullSoakOptions,
 } from "./src/useFullSoak.ts";

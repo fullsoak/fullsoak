@@ -1,12 +1,9 @@
 import { ConsoleHandler, getLogger, type LevelName, setup } from "@std/log";
 
-// @TODO find a way to do top-level `await import()` these
-// without breaking support for Node.js paltform
-import * as process from "node:process";
-import * as os from "node:os";
+const process = !globalThis.Deno ? await import("node:process") : undefined;
 
 const getEnv = (env: string): string | undefined => {
-  return globalThis.Deno?.env.get(env) || process.env[env];
+  return globalThis.Deno?.env.get(env) || process?.env[env];
 };
 
 function logger() {
@@ -28,9 +25,11 @@ export const LogError = (msg: string, ...args: unknown[]) =>
 export const LogWarn = (msg: string, ...args: unknown[]) =>
   logger().warn(msg, ...args);
 
-export const CWD = globalThis.Deno?.cwd() || process.cwd();
+export const CWD = globalThis.Deno?.cwd() || process?.cwd();
 
-const OS = globalThis.Deno?.build.os || os.platform;
+const OS = globalThis.Deno
+  ? globalThis.Deno.build.os
+  : (await import("node:os")).platform;
 
 const HOME = getEnv("HOME");
 
