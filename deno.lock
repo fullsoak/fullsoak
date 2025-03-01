@@ -30,7 +30,7 @@
     "npm:preact-iso@^2.9.0": "2.9.0_preact@10.26.4_preact-render-to-string@6.5.13__preact@10.26.4",
     "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.4",
     "npm:preact@10.26.4": "10.26.4",
-    "npm:typescript@^5.7.3": "5.8.2",
+    "npm:typescript@^5.8.2": "5.8.2",
     "npm:uglify-js@^3.19.3": "3.19.3",
     "npm:zod@^3.24.2": "3.24.2"
   },
@@ -356,7 +356,7 @@
       "npm:preact-iso@^2.9.0",
       "npm:preact-render-to-string@^6.5.13",
       "npm:preact@10.26.4",
-      "npm:typescript@^5.7.3",
+      "npm:typescript@^5.8.2",
       "npm:uglify-js@^3.19.3"
     ]
   }

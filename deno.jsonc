@@ -31,7 +31,7 @@
     "react-dom/": "npm:preact@10.26.4/compat/",
     "htm/preact": "npm:htm@^3.1.1/preact",
     "@swc/core": "npm:@swc/core@^1.11.5",
-    "typescript": "npm:typescript@^5.7.3",
+    "typescript": "npm:typescript@^5.8.2",
     "uglify-js": "npm:uglify-js@^3.19.3",
     "clean-css": "npm:clean-css@^5.3.3"
   },

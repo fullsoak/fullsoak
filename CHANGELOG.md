@@ -6,7 +6,8 @@
 
 ### Changed
 
-- upgraded dependencies: `npm:preact@10.26.4`, `npm:@swc/core@^1.11.5`
+- upgraded dependencies: `npm:preact@10.26.4`, `npm:@swc/core@^1.11.5`,
+  `npm:typescript@^5.8.2`
 
 ### Added
 
