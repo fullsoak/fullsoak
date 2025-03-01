@@ -34,6 +34,8 @@ const buildImportMapJs = async (): Promise<string> => {
     "imports": {
       "preact": "https://esm.sh/preact${preactVersion}",
       "preact/hooks": "https://esm.sh/preact${preactVersion}/hooks",
+      "preact/debug": "https://esm.sh/preact${preactVersion}/debug",
+      "preact/devtools": "https://esm.sh/preact${preactVersion}/devtools",
       "react": "https://esm.sh/preact${preactVersion}",
       "react/jsx-runtime": "https://esm.sh/preact${preactVersion}/jsx-runtime",
       "preact/jsx-runtime": "https://esm.sh/preact${preactVersion}/jsx-runtime",
@@ -42,6 +44,7 @@ const buildImportMapJs = async (): Promise<string> => {
       "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
       "preact-iso": "https://esm.sh/preact-iso${preactIsoVersion}?external=preact",
       "preact-iso/prerender": "/fullsoak",
+      "@preact/signals": "https://esm.sh/@preact/signals",
       "fullsoak/preact-iso": "https://esm.sh/preact-iso${preactIsoVersion}?external=preact",
       "@fullsoak/fullsoak/preact-iso": "https://esm.sh/preact-iso${preactIsoVersion}?external=preact",
       "fullsoak": "/fullsoak",

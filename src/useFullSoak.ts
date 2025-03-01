@@ -13,7 +13,7 @@ import { CsrController } from "./CsrController.ts";
 import { CWD, LogDebug, LogInfo } from "./utils.ts";
 import { getComponentJs } from "./getComponentJs.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
-import { process } from "./utils.ts";
+import { process } from "./getProcess.ts";
 import { SEPARATOR } from "@std/path";
 
 // deno-lint-ignore no-explicit-any
@@ -133,9 +133,11 @@ let fetchMode = false;
  *   controllers: [],
  *   cloudflareStaticAssetsBinding: 'ASSETS',
  * });
- * // `app` can now be used in Cloudflare Workers e.g. `export default { fetch: app.fetch }`
+ *
+ * // `app` can now be used in Cloudflare Workers
+ * // e.g. `export default { fetch: app.fetch }`
  * ```
- * @NOTE this feature is experimental, can be unstable, and might not even work at all
+ * @experimental this feature is experimental, can be unstable, and might not even work at all
  */
 export function _unstable_useCloudflareWorkersMode(
   opts: UseCloudflareWorkersModeOptions,
@@ -304,6 +306,7 @@ export const useFullSoakManual: (opts: UseFullSoakOptions) => Application = (
  * @example
  * ```ts
  * import { useFetchMode } from "jsr:@fullsoak/fullsoak";
+ *
  * const fetch = useFetchMode({ controllers: [] });
  *
  * // then we can use it like so: `export default { fetch }`
