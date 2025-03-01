@@ -2,7 +2,6 @@
   "version": "4",
   "specifiers": {
     "jsr:@dklab/oak-routing-ctrl@~0.14.1": "0.14.1",
-    "jsr:@fullsoak/fullsoak@*": "0.14.0",
     "jsr:@oak/commons@1": "1.0.0",
     "jsr:@oak/oak@^17.1.4": "17.1.4",
     "jsr:@std/assert@1": "1.0.11",
@@ -23,7 +22,6 @@
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/testing@^1.0.9": "1.0.9",
     "npm:@asteasolutions/zod-to-openapi@^7.3.0": "7.3.0_zod@3.24.2",
-    "npm:@swc/core@^1.10.18": "1.11.5",
     "npm:@swc/core@^1.11.5": "1.11.5",
     "npm:@types/node@*": "22.12.0",
     "npm:clean-css@^5.3.3": "5.3.3",
@@ -31,7 +29,6 @@
     "npm:path-to-regexp@^6.3.0": "6.3.0",
     "npm:preact-iso@^2.9.0": "2.9.0_preact@10.26.4_preact-render-to-string@6.5.13__preact@10.26.4",
     "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.4",
-    "npm:preact@10.26.2": "10.26.2",
     "npm:preact@10.26.4": "10.26.4",
     "npm:typescript@^5.7.3": "5.8.2",
     "npm:uglify-js@^3.19.3": "3.19.3",
@@ -45,22 +42,6 @@
         "jsr:@std/path@^1.0.8",
         "npm:@asteasolutions/zod-to-openapi",
         "npm:zod"
-      ]
-    },
-    "@fullsoak/fullsoak@0.14.0": {
-      "integrity": "f9423ea59558e40fd370e1ffece4d9c6260536f121ff51f6384eb545ebbffb99",
-      "dependencies": [
-        "jsr:@dklab/oak-routing-ctrl",
-        "jsr:@oak/oak",
-        "jsr:@std/log",
-        "jsr:@std/path@^1.0.8",
-        "npm:@swc/core@^1.10.18",
-        "npm:clean-css",
-        "npm:htm",
-        "npm:preact-render-to-string",
-        "npm:preact@10.26.2",
-        "npm:typescript",
-        "npm:uglify-js"
       ]
     },
     "@oak/commons@1.0.0": {
@@ -234,18 +215,15 @@
     "preact-iso@2.9.0_preact@10.26.4_preact-render-to-string@6.5.13__preact@10.26.4": {
       "integrity": "sha512-pJ3j4Aeqoe5MTGM96wB5JXaHbW3HB9PF5WxYJb//+pySc3hP1FoDIKwxi2OlLZtMW59gG8LvPwE8lUo1Ndk9ZA==",
       "dependencies": [
-        "preact@10.26.4",
+        "preact",
         "preact-render-to-string"
       ]
     },
     "preact-render-to-string@6.5.13_preact@10.26.4": {
       "integrity": "sha512-iGPd+hKPMFKsfpR2vL4kJ6ZPcFIoWZEcBf0Dpm3zOpdVvj77aY8RlLiQji5OMrngEyaxGogeakTb54uS2FvA6w==",
       "dependencies": [
-        "preact@10.26.4"
+        "preact"
       ]
-    },
-    "preact@10.26.2": {
-      "integrity": "sha512-0gNmv4qpS9HaN3+40CLBAnKe0ZfyE4ZWo5xKlC1rVrr0ckkEvJvAQqKaHANdFKsGstoxrY4AItZ7kZSGVoVjgg=="
     },
     "preact@10.26.4": {
       "integrity": "sha512-KJhO7LBFTjP71d83trW+Ilnjbo+ySsaAgCfXOXUlmGzJ4ygYPWmysm77yg4emwfmoz3b22yvH5IsVFHbhUaH5w=="
