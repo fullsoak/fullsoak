@@ -120,7 +120,7 @@ or simply served directly on production and/or inside a Docker container:
 deno src/main.ts
 ```
 
-## Route-awate Isomorphic Components
+## Route-aware Isomorphic Components
 
 Rendering route-aware isomorphic components is supported via `preact-iso`. See
 examples:
