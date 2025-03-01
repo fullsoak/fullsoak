@@ -1,19 +1,10 @@
 import { ConsoleHandler, getLogger, type LevelName, setup } from "@std/log";
-
-export const process = !globalThis.Deno
-  ? (await import("node:process")).default
-  : undefined;
-
-const getEnv = (env: string): string | undefined => {
-  return globalThis.Deno?.env.get(env) || process?.env[env];
-};
+import { getEnv } from "./getEnv.ts";
+import { process } from "./getProcess.ts";
 
 function logger() {
   return getLogger("@fullsoak/fullsoak");
 }
-
-const DEBUG = getEnv("DEBUG");
-export const IS_DEBUG = DEBUG ? DEBUG !== "false" : false;
 
 export const LogDebug = (msg: string, ...args: unknown[]) =>
   logger().debug(msg, ...args);

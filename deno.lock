@@ -2,6 +2,7 @@
   "version": "4",
   "specifiers": {
     "jsr:@dklab/oak-routing-ctrl@~0.14.1": "0.14.1",
+    "jsr:@fullsoak/fullsoak@*": "0.14.0",
     "jsr:@oak/commons@1": "1.0.0",
     "jsr:@oak/oak@^17.1.4": "17.1.4",
     "jsr:@std/assert@1": "1.0.11",
@@ -22,15 +23,17 @@
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/testing@^1.0.9": "1.0.9",
     "npm:@asteasolutions/zod-to-openapi@^7.3.0": "7.3.0_zod@3.24.2",
-    "npm:@swc/core@^1.10.18": "1.10.18",
+    "npm:@swc/core@^1.10.18": "1.11.5",
+    "npm:@swc/core@^1.11.5": "1.11.5",
     "npm:@types/node@*": "22.12.0",
     "npm:clean-css@^5.3.3": "5.3.3",
     "npm:htm@^3.1.1": "3.1.1",
     "npm:path-to-regexp@^6.3.0": "6.3.0",
-    "npm:preact-iso@^2.9.0": "2.9.0_preact@10.26.2_preact-render-to-string@6.5.13__preact@10.26.2",
-    "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.2",
+    "npm:preact-iso@^2.9.0": "2.9.0_preact@10.26.4_preact-render-to-string@6.5.13__preact@10.26.4",
+    "npm:preact-render-to-string@^6.5.13": "6.5.13_preact@10.26.4",
     "npm:preact@10.26.2": "10.26.2",
-    "npm:typescript@^5.7.3": "5.7.3",
+    "npm:preact@10.26.4": "10.26.4",
+    "npm:typescript@^5.7.3": "5.8.2",
     "npm:uglify-js@^3.19.3": "3.19.3",
     "npm:zod@^3.24.2": "3.24.2"
   },
@@ -42,6 +45,22 @@
         "jsr:@std/path@^1.0.8",
         "npm:@asteasolutions/zod-to-openapi",
         "npm:zod"
+      ]
+    },
+    "@fullsoak/fullsoak@0.14.0": {
+      "integrity": "f9423ea59558e40fd370e1ffece4d9c6260536f121ff51f6384eb545ebbffb99",
+      "dependencies": [
+        "jsr:@dklab/oak-routing-ctrl",
+        "jsr:@oak/oak",
+        "jsr:@std/log",
+        "jsr:@std/path@^1.0.8",
+        "npm:@swc/core@^1.10.18",
+        "npm:clean-css",
+        "npm:htm",
+        "npm:preact-render-to-string",
+        "npm:preact@10.26.2",
+        "npm:typescript",
+        "npm:uglify-js"
       ]
     },
     "@oak/commons@1.0.0": {
@@ -132,38 +151,38 @@
         "zod"
       ]
     },
-    "@swc/core-darwin-arm64@1.10.18": {
-      "integrity": "sha512-FdGqzAIKVQJu8ROlnHElP59XAUsUzCFSNsou+tY/9ba+lhu8R9v0OI5wXiPErrKGZpQFMmx/BPqqhx3X4SuGNg=="
+    "@swc/core-darwin-arm64@1.11.5": {
+      "integrity": "sha512-GEd1hzEx0mSGkJYMFMGLnrGgjL2rOsOsuYWyjyiA3WLmhD7o+n/EWBDo6mzD/9aeF8dzSPC0TnW216gJbvrNzA=="
     },
-    "@swc/core-darwin-x64@1.10.18": {
-      "integrity": "sha512-RZ73gZRituL/ZVLgrW6BYnQ5g8tuStG4cLUiPGJsUZpUm0ullSH6lHFvZTCBNFTfpQChG6eEhi2IdG6DwFp1lw=="
+    "@swc/core-darwin-x64@1.11.5": {
+      "integrity": "sha512-toz04z9wAClVvQSEY3xzrgyyeWBAfMWcKG4K0ugNvO56h/wczi2ZHRlnAXZW1tghKBk3z6MXqa/srfXgNhffKw=="
     },
-    "@swc/core-linux-arm-gnueabihf@1.10.18": {
-      "integrity": "sha512-8iJqI3EkxJuuq21UHoen1VS+QlS23RvynRuk95K+Q2HBjygetztCGGEc+Xelx9a0uPkDaaAtFvds4JMDqb9SAA=="
+    "@swc/core-linux-arm-gnueabihf@1.11.5": {
+      "integrity": "sha512-5SjmKxXdwbBpsYGTpgeXOXMIjS563/ntRGn8Zc12H/c4VfPrRLGhgbJ/48z2XVFyBLcw7BCHZyFuVX1+ZI3W0Q=="
     },
-    "@swc/core-linux-arm64-gnu@1.10.18": {
-      "integrity": "sha512-8f1kSktWzMB6PG+r8lOlCfXz5E8Qhsmfwonn77T/OfjvGwQaWrcoASh2cdjpk3dydbf8jsKGPQE1lSc7GyjXRQ=="
+    "@swc/core-linux-arm64-gnu@1.11.5": {
+      "integrity": "sha512-pydIlInHRzRIwB0NHblz3Dx58H/bsi0I5F2deLf9iOmwPNuOGcEEZF1Qatc7YIjP5DFbXK+Dcz+pMUZb2cc2MQ=="
     },
-    "@swc/core-linux-arm64-musl@1.10.18": {
-      "integrity": "sha512-4rv+E4VLdgQw6zjbTAauCAEExxChvxMpBUMCiZweTNPKbJJ2dY6BX2WGJ1ea8+RcgqR/Xysj3AFbOz1LBz6dGA=="
+    "@swc/core-linux-arm64-musl@1.11.5": {
+      "integrity": "sha512-LhBHKjkZq5tJF1Lh0NJFpx7ROnCWLckrlIAIdSt9XfOV+zuEXJQOj+NFcM1eNk17GFfFyUMOZyGZxzYq5dveEQ=="
     },
-    "@swc/core-linux-x64-gnu@1.10.18": {
-      "integrity": "sha512-vTNmyRBVP+sZca+vtwygYPGTNudTU6Gl6XhaZZ7cEUTBr8xvSTgEmYXoK/2uzyXpaTUI4Bmtp1x81cGN0mMoLQ=="
+    "@swc/core-linux-x64-gnu@1.11.5": {
+      "integrity": "sha512-dCi4xkxXlsk5sQYb3i413Cfh7+wMJeBYTvBZTD5xh+/DgRtIcIJLYJ2tNjWC4/C2i5fj+Ze9bKNSdd8weRWZ3A=="
     },
-    "@swc/core-linux-x64-musl@1.10.18": {
-      "integrity": "sha512-1TZPReKhFCeX776XaT6wegknfg+g3zODve+r4oslFHI+g7cInfWlxoGNDS3niPKyuafgCdOjme2g3OF+zzxfsQ=="
+    "@swc/core-linux-x64-musl@1.11.5": {
+      "integrity": "sha512-K0AC4TreM5Oo/tXNXnE/Gf5+5y/HwUdd7xvUjOpZddcX/RlsbYOKWLgOtA3fdFIuta7XC+vrGKmIhm5l70DSVQ=="
     },
-    "@swc/core-win32-arm64-msvc@1.10.18": {
-      "integrity": "sha512-o/2CsaWSN3bkzVQ6DA+BiFKSVEYvhWGA1h+wnL2zWmIDs2Knag54sOEXZkCaf8YQyZesGeXJtPEy9hh/vjJgkA=="
+    "@swc/core-win32-arm64-msvc@1.11.5": {
+      "integrity": "sha512-wzum8sYUsvPY7kgUfuqVYTgIPYmBC8KPksoNM1fz5UfhudU0ciQuYvUBD47GIGOevaoxhLkjPH4CB95vh1mJ9w=="
     },
-    "@swc/core-win32-ia32-msvc@1.10.18": {
-      "integrity": "sha512-eTPASeJtk4mJDfWiYEiOC6OYUi/N7meHbNHcU8e+aKABonhXrIo/FmnTE8vsUtC6+jakT1TQBdiQ8fzJ1kJVwA=="
+    "@swc/core-win32-ia32-msvc@1.11.5": {
+      "integrity": "sha512-lco7mw0TPRTpVPR6NwggJpjdUkAboGRkLrDHjIsUaR+Y5+0m5FMMkHOMxWXAbrBS5c4ph7QErp4Lma4r9Mn5og=="
     },
-    "@swc/core-win32-x64-msvc@1.10.18": {
-      "integrity": "sha512-1Dud8CDBnc34wkBOboFBQud9YlV1bcIQtKSg7zC8LtwR3h+XAaCayZPkpGmmAlCv1DLQPvkF+s0JcaVC9mfffQ=="
+    "@swc/core-win32-x64-msvc@1.11.5": {
+      "integrity": "sha512-E+DApLSC6JRK8VkDa4bNsBdD7Qoomx1HvKVZpOXl9v94hUZI5GMExl4vU5isvb+hPWL7rZ0NeI7ITnVLgLJRbA=="
     },
-    "@swc/core@1.10.18": {
-      "integrity": "sha512-IUWKD6uQYGRy8w2X9EZrtYg1O3SCijlHbCXzMaHQYc1X7yjijQh4H3IVL9ssZZyVp2ZDfQZu4bD5DWxxvpyjvg==",
+    "@swc/core@1.11.5": {
+      "integrity": "sha512-EVY7zfpehxhTZXOfy508gb3D78ihoGGmvyiTWtlBPjgIaidP1Xw0naHMD78CWiFlZmeDjKXJufGtsEGOnZdmNA==",
       "dependencies": [
         "@swc/core-darwin-arm64",
         "@swc/core-darwin-x64",
@@ -182,8 +201,8 @@
     "@swc/counter@0.1.3": {
       "integrity": "sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ=="
     },
-    "@swc/types@0.1.17": {
-      "integrity": "sha512-V5gRru+aD8YVyCOMAjMpWR1Ui577DD5KSJsHP8RAxopAH22jFz6GZd/qxqjO6MJHQhcsjvjOFXyDhyLQUnMveQ==",
+    "@swc/types@0.1.19": {
+      "integrity": "sha512-WkAZaAfj44kh/UFdAQcrMP1I0nwRqpt27u+08LMBYMqmQfwwMofYoMh/48NGkMMRfC4ynpfwRbJuu8ErfNloeA==",
       "dependencies": [
         "@swc/counter"
       ]
@@ -212,27 +231,30 @@
     "path-to-regexp@6.3.0": {
       "integrity": "sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ=="
     },
-    "preact-iso@2.9.0_preact@10.26.2_preact-render-to-string@6.5.13__preact@10.26.2": {
+    "preact-iso@2.9.0_preact@10.26.4_preact-render-to-string@6.5.13__preact@10.26.4": {
       "integrity": "sha512-pJ3j4Aeqoe5MTGM96wB5JXaHbW3HB9PF5WxYJb//+pySc3hP1FoDIKwxi2OlLZtMW59gG8LvPwE8lUo1Ndk9ZA==",
       "dependencies": [
-        "preact",
+        "preact@10.26.4",
         "preact-render-to-string"
       ]
     },
-    "preact-render-to-string@6.5.13_preact@10.26.2": {
+    "preact-render-to-string@6.5.13_preact@10.26.4": {
       "integrity": "sha512-iGPd+hKPMFKsfpR2vL4kJ6ZPcFIoWZEcBf0Dpm3zOpdVvj77aY8RlLiQji5OMrngEyaxGogeakTb54uS2FvA6w==",
       "dependencies": [
-        "preact"
+        "preact@10.26.4"
       ]
     },
     "preact@10.26.2": {
       "integrity": "sha512-0gNmv4qpS9HaN3+40CLBAnKe0ZfyE4ZWo5xKlC1rVrr0ckkEvJvAQqKaHANdFKsGstoxrY4AItZ7kZSGVoVjgg=="
     },
+    "preact@10.26.4": {
+      "integrity": "sha512-KJhO7LBFTjP71d83trW+Ilnjbo+ySsaAgCfXOXUlmGzJ4ygYPWmysm77yg4emwfmoz3b22yvH5IsVFHbhUaH5w=="
+    },
     "source-map@0.6.1": {
       "integrity": "sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g=="
     },
-    "typescript@5.7.3": {
-      "integrity": "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="
+    "typescript@5.8.2": {
+      "integrity": "sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ=="
     },
     "uglify-js@3.19.3": {
       "integrity": "sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ=="
@@ -350,12 +372,12 @@
       "jsr:@std/log@~0.224.14",
       "jsr:@std/path@^1.0.8",
       "jsr:@std/testing@^1.0.9",
-      "npm:@swc/core@^1.10.18",
+      "npm:@swc/core@^1.11.5",
       "npm:clean-css@^5.3.3",
       "npm:htm@^3.1.1",
       "npm:preact-iso@^2.9.0",
       "npm:preact-render-to-string@^6.5.13",
-      "npm:preact@10.26.2",
+      "npm:preact@10.26.4",
       "npm:typescript@^5.7.3",
       "npm:uglify-js@^3.19.3"
     ]

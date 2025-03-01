@@ -1,6 +1,7 @@
 import type { Output } from "@swc/core";
-import { IS_DEBUG, LogDebug, LogError, LogWarn } from "./utils.ts";
+import { LogDebug, LogError, LogWarn } from "./utils.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
+import { IS_DEBUG, IS_DEV } from "./getEnv.ts";
 
 /**
  * given a file path (ideally absolute path) to a component file (e.g. `.tsx`),
@@ -22,10 +23,13 @@ export async function getComponentJs(
       env: {
         debug: IS_DEBUG && true,
       },
-      minify: true, // @TODO disable for dev
+      // @TODO enable **only for PROD** after we find a way
+      // to cover the transform for `from"./` BEFORE any
+      // transformation happens
+      minify: true,
       jsc: {
         parser: {
-          // @TODO consider supporting .jsx
+          // @TODO confirm that .jsx is also supported
           syntax: "typescript",
           tsx: true,
         },
@@ -34,7 +38,7 @@ export async function getComponentJs(
             runtime: "automatic",
             pragma: "h",
             pragmaFrag: "Fragment",
-            refresh: true, // @TODO disable for prod
+            refresh: IS_DEV,
           },
           // "optimizer": {
           //   "globals": {

@@ -1,9 +1,9 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.14.0",
+  "version": "0.15.0-alpha.6",
   "nodeModulesDir": "auto",
   "tasks": {
-    "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-sys -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,DENO_DIR",
+    "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-sys -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,DENO_DIR,NODE_ENV",
     "test-update": "deno task test -W -- --update",
     "cov:html": "deno coverage cov_profile --html --exclude=node_modules",
     "cov:lcov": "deno coverage cov_profile --lcov --exclude=node_modules --output=cov_profile.lcov",
@@ -11,7 +11,7 @@
       "description": "Run tests and generate coverage reports",
       "dependencies": ["test", "cov:html", "cov:lcov"]
     },
-    "doc": "deno doc --html mod.ts",
+    "doc": "deno doc --html mod*.ts",
     "check-doc": "deno check --allow-import=jspm.dev,deno.land,jsr.io --doc ."
   },
   "imports": {
@@ -22,22 +22,23 @@
     "@std/path": "jsr:@std/path@^1.0.8",
     "@std/log": "jsr:@std/log@^0.224.14",
     "@std/testing": "jsr:@std/testing@^1.0.9",
-    "preact": "npm:preact@10.26.2",
+    "preact": "npm:preact@10.26.4",
     "preact-render-to-string": "npm:preact-render-to-string@^6.5.13",
     "preact-iso": "npm:preact-iso@^2.9.0",
-    "react": "npm:preact@10.26.2/compat/",
-    "react/jsx-runtime": "npm:preact@10.26.2/jsx-runtime",
-    "react-dom": "npm:preact@10.26.2/compat/",
-    "react-dom/": "npm:preact@10.26.2/compat/",
+    "react": "npm:preact@10.26.4/compat/",
+    "react/jsx-runtime": "npm:preact@10.26.4/jsx-runtime",
+    "react-dom": "npm:preact@10.26.4/compat/",
+    "react-dom/": "npm:preact@10.26.4/compat/",
     "htm/preact": "npm:htm@^3.1.1/preact",
-    "@swc/core": "npm:@swc/core@^1.10.18",
+    "@swc/core": "npm:@swc/core@^1.11.5",
     "typescript": "npm:typescript@^5.7.3",
     "uglify-js": "npm:uglify-js@^3.19.3",
     "clean-css": "npm:clean-css@^5.3.3"
   },
   "exports": {
     ".": "./mod.ts",
-    "./mod": "./mod.ts",
+    "./useFullSoak": "./mod-useFullSoak.ts",
+    // "./mod": "./mod.ts",
     "./manual": "./mod-manual.ts",
     "./testing": "./mod-testing.ts",
     "./preact-iso": "./mod-preact-iso.ts"

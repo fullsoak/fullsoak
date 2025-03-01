@@ -1,3 +1,18 @@
+## [0.15.0] - 2025-03-01
+
+### Fixed
+
+- JSR docu
+
+### Changed
+
+- upgraded dependencies: `npm:preact@10.26.4`, `npm:@swc/core@^1.11.5`
+
+### Added
+
+- `@preact/signals` importmap is built in
+- support for preact DevTools (with env `DEBUG=true` or `NODE_ENV=development`)
+
 ## [0.14.0] - 2025-02-27
 
 ### Added

@@ -120,9 +120,10 @@ or simply served directly on production and/or inside a Docker container:
 deno src/main.ts
 ```
 
-## Isomorphic Components
+## Route-awate Isomorphic Components
 
-Rendering isomorphic components is supported via `preact-iso`. See examples:
+Rendering route-aware isomorphic components is supported via `preact-iso`. See
+examples:
 
 - [SSR](https://github.com/fullsoak/deno-examples/blob/v0.3.0/src/main.ts#L23-L29)
 - [Isomorphic components](https://github.com/fullsoak/deno-examples/blob/v0.3.0/src/components/MyRouteAwareComponent/index.tsx#L24-L47)
@@ -131,8 +132,10 @@ Rendering isomorphic components is supported via `preact-iso`. See examples:
 
 - https://fullsoak-examples.deno.dev (example on Deno runtime)
 - https://fullsoak.onrender.com (example on Bun runtime)
-- https://fullsoak-cloudflare-workers-examples.dklab.workers.dev/ (example on
+- https://fullsoak.up.railway.app (example on Node.js runtime)
+- https://fullsoak-cloudflare-workers-examples.dklab.workers.dev (example on
   Cloudflare Workers)
+- https://fullsoak-guestbook.deno.dev (example with authentication logic)
 - wanna list yours? please feel free to open a PR
 
 ## Trade-offs
