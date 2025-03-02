@@ -14,6 +14,10 @@
 - using env var `PREACT_DEVTOOLS` to enable preact devtools when not in `DEBUG`
   mode
 
+### Fixed
+
+- startup issue on Windows platform
+
 ## [0.15.0] - 2025-03-01
 
 ### Fixed

@@ -10,7 +10,7 @@ import {
 } from "@oak/oak";
 import { useOakServer, useOas } from "@dklab/oak-routing-ctrl";
 import { CsrController } from "./CsrController.ts";
-import { CWD, LogDebug, LogInfo } from "./utils.ts";
+import { CWD, LogDebug, LogInfo, OS } from "./utils.ts";
 import { getComponentJs } from "./getComponentJs.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
 import { process } from "./getProcess.ts";
@@ -240,7 +240,8 @@ function useFullSoakInternal({
         () => abrtCtl.abort("SIGTERM"),
       );
     } else {
-      process?.on("SIGTERM", () => abrtCtl.abort("SIGTERM"));
+      const SIGNAL = OS === "windows" ? "SIGINT" : "SIGTERM";
+      process?.on(SIGNAL, () => abrtCtl.abort(SIGNAL));
     }
 
     app.listen({ hostname, port, signal: abrtCtl.signal });

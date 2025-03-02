@@ -36,7 +36,7 @@ if (!DENO_DIR) {
     : `${HOME}/.cache`; // @TODO consider adding support for other systems?
 }
 
-export { DENO_DIR };
+export { DENO_DIR, OS };
 
 /**
  * read a file to string, supporting both file system path and network path
