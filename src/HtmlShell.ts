@@ -94,6 +94,8 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
   opts = {},
 }) => {
   const { headContent } = opts;
+  const jsMountPointSrc = `/components/${componentName}/mount`;
+  const jsMainCompSrc = `/components/${componentName}/index.tsx`;
   const preloadedProps = `window.preloadedProps = ${
     JSON.stringify(componentProps || {})
   }`;
@@ -110,6 +112,8 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
         type="importmap"
         dangerouslySetInnerHTML=${{ __html: buildImportMapJs() }}
       />
+      <link rel="modulepreload" href=${jsMountPointSrc} as="script" type="text/javascript" />
+      <link rel="modulepreload" href=${jsMainCompSrc} as="script" type="text/javascript" />
       <script
         type="text/javascript"
         dangerouslySetInnerHTML=${{ __html: js }}
@@ -119,14 +123,14 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
       />
     </head>
     <body>
-      <main id="${FULLSOAK_HTMLSHELL_MAINID}">
+      <main id=${FULLSOAK_HTMLSHELL_MAINID}>
         ${children}
       </main>
       <script
         type="text/javascript"
         dangerouslySetInnerHTML=${{ __html: preloadedProps }}
       />
-      <script type="module" src="${`/components/${componentName}/mount`}"></script>
+      <script defer type="module" src=${jsMountPointSrc}></script>
     </body>
   </html>`;
 };

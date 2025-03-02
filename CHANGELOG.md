@@ -5,6 +5,7 @@
 - `ssr()` accepts another (optional) argument: `{ headContent }` to help
   customize the content of the HTML `<head>` element in the output HTML
 - 2 batteries added: `Hat` and `byoHat`
+- `rel=modulepreload` support for initial js resources
 
 ### Changed
 
