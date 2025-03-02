@@ -6,6 +6,7 @@
     "jsr:@oak/oak@^17.1.4": "17.1.4",
     "jsr:@std/assert@1": "1.0.11",
     "jsr:@std/assert@^1.0.10": "1.0.11",
+    "jsr:@std/assert@^1.0.11": "1.0.11",
     "jsr:@std/bytes@1": "1.0.5",
     "jsr:@std/crypto@1": "1.0.4",
     "jsr:@std/encoding@1": "1.0.7",
@@ -68,7 +69,10 @@
       ]
     },
     "@std/assert@1.0.11": {
-      "integrity": "2461ef3c368fe88bc60e186e7744a93112f16fd110022e113a0849e94d1c83c1"
+      "integrity": "2461ef3c368fe88bc60e186e7744a93112f16fd110022e113a0849e94d1c83c1",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
     },
     "@std/bytes@1.0.5": {
       "integrity": "4465dd739d7963d964c809202ebea6d5c6b8e3829ef25c6a224290fbb8a1021e"
@@ -347,6 +351,7 @@
     "dependencies": [
       "jsr:@dklab/oak-routing-ctrl@~0.14.1",
       "jsr:@oak/oak@^17.1.4",
+      "jsr:@std/assert@^1.0.11",
       "jsr:@std/log@~0.224.14",
       "jsr:@std/path@^1.0.8",
       "jsr:@std/testing@^1.0.9",
