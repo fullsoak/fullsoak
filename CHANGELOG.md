@@ -8,7 +8,7 @@
 
 ### Changed
 
-- `HtmlShell` and `cleanCss()` exports are moved to
+- `byoHtml()`, `HtmlShell`, and `cleanCss()` exports are moved to
   `@fullsoak/fullsoak/batteries`
 - using env var `PREACT_DEVTOOLS` to enable preact devtools when not in `DEBUG`
   mode

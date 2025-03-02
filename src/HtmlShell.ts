@@ -75,7 +75,7 @@ type HtmlShellProps<P> = {
  *
  * @example
  * ```tsx
- * import { byoHtml, HtmlShell } from "@fullsoak/fullsoak";
+ * import { byoHtml, HtmlShell } from "@fullsoak/fullsoak/batteries";
  * byoHtml(
  *   <HtmlShell
  *     componentName="MyApp"

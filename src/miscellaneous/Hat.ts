@@ -1,5 +1,6 @@
 import type { FunctionComponent } from "preact";
 import { html } from "htm/preact";
+import type { VNode } from "preact";
 
 enum HtmlMetaKey {
   name = "name",
@@ -32,13 +33,14 @@ export const Hat: FunctionComponent<HatProps> = ({ title, meta }) => {
  * use this inside {@link ssr} to add optional contents to the `<head>` element
  * of the output HTML
  * @example
- * ```ts
+ * ```tsx
  * import { ssr } from "@fullsoak/fullsoak";
  * import { byoHat } from "@fullsoak/fullsoak/batteries";
  *
  * const MyComponent = () => <>my content</>;
  *
- * ssr(MyComponents, { foo: "bar" }, { headContent: byoHat() });
+ * ssr(MyComponent, { foo: "bar" }, { headContent: byoHat({}) });
  * ```
  */
-export const byoHat = (props: HatProps) => html`<${Hat} ...${props} />`;
+export const byoHat: (props: HatProps) => VNode = (props) =>
+  html`<${Hat} ...${props} />`;
