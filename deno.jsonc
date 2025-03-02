@@ -3,7 +3,7 @@
   "version": "0.15.0",
   "nodeModulesDir": "auto",
   "tasks": {
-    "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-sys -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,DENO_DIR,NODE_ENV",
+    "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-sys -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,DENO_DIR,NODE_ENV,PREACT_DEVTOOLS",
     "test-update": "deno task test -W -- --update",
     "cov:html": "deno coverage cov_profile --html --exclude=node_modules",
     "cov:lcov": "deno coverage cov_profile --lcov --exclude=node_modules --output=cov_profile.lcov",

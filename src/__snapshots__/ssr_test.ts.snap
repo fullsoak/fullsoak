@@ -1,7 +1,7 @@
 export const snapshot = {};
 
 snapshot[`ssr a TSX component 1`] = `
-'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><title></title><script type="importmap">{
+'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{
     "imports": {
       "preact": "https://esm.sh/preact@10.26.4",
       "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
@@ -25,7 +25,7 @@ snapshot[`ssr a TSX component 1`] = `
 `;
 
 snapshot[`ssr a TSX component with props 1`] = `
-'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><title></title><script type="importmap">{
+'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{
     "imports": {
       "preact": "https://esm.sh/preact@10.26.4",
       "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
@@ -49,7 +49,7 @@ snapshot[`ssr a TSX component with props 1`] = `
 `;
 
 snapshot[`ssr a VNode using HTM 1`] = `
-'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><title></title><script type="importmap">{
+'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{
     "imports": {
       "preact": "https://esm.sh/preact@10.26.4",
       "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
@@ -72,8 +72,32 @@ snapshot[`ssr a VNode using HTM 1`] = `
   }</script><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponentWithProps=Bob</div></main><script type="text/javascript">window.preloadedProps = {"name":"Bob"}</script><script type="module" src="/components/SimpleTsxComponentWithProps/mount"></script></body></html>'
 `;
 
-snapshot[`ssr a StandardComponent 1`] = `
-'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><title></title><script type="importmap">{
+snapshot[`ssr a StandardComponent with byoHat 1`] = `
+'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><title>Standard Component</title><script type="importmap">{
+    "imports": {
+      "preact": "https://esm.sh/preact@10.26.4",
+      "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
+      "preact/debug": "https://esm.sh/preact@10.26.4/debug",
+      "preact/devtools": "https://esm.sh/preact@10.26.4/devtools",
+      "react": "https://esm.sh/preact@10.26.4",
+      "react/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
+      "preact/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
+      "react-dom": "https://esm.sh/preact@10.26.4/compat/",
+      "react-dom/*": "https://esm.sh/preact@10.26.4/compat/*",
+      "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
+      "preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
+      "preact-iso/prerender": "/fullsoak",
+      "@preact/signals": "https://esm.sh/@preact/signals",
+      "fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
+      "@fullsoak/fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
+      "fullsoak": "/fullsoak",
+      "@fullsoak/fullsoak": "/fullsoak"
+    }
+  }</script><script type="text/javascript"></script><style>@import url(/components/Shared/styles.css);.foo{background-color:#55c456}</style></head><body><main id="fullsoak-htmlshell-main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script type="module" src="/components/StandardComponent/mount"></script></body></html>'
+`;
+
+snapshot[`ssr a StandardComponent with Hat 1`] = `
+'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><title>SC2</title><meta name="og:title" content="SC2"/><script type="importmap">{
     "imports": {
       "preact": "https://esm.sh/preact@10.26.4",
       "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
