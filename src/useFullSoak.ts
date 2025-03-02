@@ -234,14 +234,14 @@ function useFullSoakInternal({
   );
 
   if (autoStart) {
+    const STOP_SIGNAL = OS === "windows" ? "SIGINT" : "SIGTERM";
     if (globalThis.Deno) {
       globalThis.Deno.addSignalListener(
-        "SIGTERM",
-        () => abrtCtl.abort("SIGTERM"),
+        STOP_SIGNAL,
+        () => abrtCtl.abort(STOP_SIGNAL),
       );
     } else {
-      const SIGNAL = OS === "windows" ? "SIGINT" : "SIGTERM";
-      process?.on(SIGNAL, () => abrtCtl.abort(SIGNAL));
+      process?.on(STOP_SIGNAL, () => abrtCtl.abort(STOP_SIGNAL));
     }
 
     app.listen({ hostname, port, signal: abrtCtl.signal });
