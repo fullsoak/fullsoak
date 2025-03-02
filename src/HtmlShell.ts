@@ -1,6 +1,6 @@
 import type { FunctionComponent, VNode } from "preact";
 import { html } from "htm/preact";
-import type { CP } from "./types.ts";
+import type { CP, SsrAdditionalOptions } from "./types.ts";
 import { FULLSOAK_HTMLSHELL_MAINID } from "./constants.ts";
 import { importJsonc } from "./importJsonc.ts";
 
@@ -59,9 +59,9 @@ type HtmlShellProps<P> = {
    */
   componentName: string;
   componentProps?: P | null;
-  pageTitle?: string;
   js?: string;
   css?: string;
+  opts?: SsrAdditionalOptions;
 };
 
 /**
@@ -89,10 +89,11 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
   componentName,
   componentProps = null,
   children,
-  pageTitle,
-  js,
-  css,
+  js = "",
+  css = "",
+  opts = {},
 }) => {
+  const { headContent } = opts;
   const preloadedProps = `window.preloadedProps = ${
     JSON.stringify(componentProps || {})
   }`;
@@ -104,17 +105,17 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
         name="viewport"
         content="width=device-width,initial-scale=1.0,maximum-scale=1.0"
       />
-      <title>${pageTitle}</title>
+      ${headContent}
       <script
         type="importmap"
         dangerouslySetInnerHTML=${{ __html: buildImportMapJs() }}
       />
       <script
         type="text/javascript"
-        dangerouslySetInnerHTML=${{ __html: js || "" }}
+        dangerouslySetInnerHTML=${{ __html: js }}
       />
       <style
-        dangerouslySetInnerHTML=${{ __html: css || "" }}
+        dangerouslySetInnerHTML=${{ __html: css }}
       />
     </head>
     <body>
@@ -136,6 +137,7 @@ type WithHtmlShellProps<CP> = {
   componentProps: CP | null;
   js?: string;
   css?: string;
+  opts: SsrAdditionalOptions;
 };
 
 export const withHtmlShell = <P extends CP>({
@@ -144,6 +146,7 @@ export const withHtmlShell = <P extends CP>({
   componentProps = null,
   js,
   css,
+  opts = {},
 }: WithHtmlShellProps<P>): VNode =>
   html`
 <${HtmlShell}
@@ -151,6 +154,7 @@ export const withHtmlShell = <P extends CP>({
   componentProps=${componentProps}
   js=${js}
   css=${css}
+  opts=${opts}
 >
   ${component}
 <//>`;

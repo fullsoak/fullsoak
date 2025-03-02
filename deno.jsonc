@@ -38,7 +38,7 @@
   "exports": {
     ".": "./mod.ts",
     "./useFullSoak": "./mod-useFullSoak.ts",
-    // "./mod": "./mod.ts",
+    "./batteries": "./mod-batteries.ts",
     "./manual": "./mod-manual.ts",
     "./testing": "./mod-testing.ts",
     "./preact-iso": "./mod-preact-iso.ts"

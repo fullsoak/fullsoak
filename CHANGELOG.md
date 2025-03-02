@@ -1,3 +1,18 @@
+## Unreleased
+
+### Added
+
+- `ssr()` accepts another (optional) argument: `{ headContent }` to help
+  customize the content of the HTML `<head>` element in the output HTML
+- 2 batteries added: `Hat` and `byoHat`
+
+### Changed
+
+- `HtmlShell` and `cleanCss()` exports are moved to
+  `@fullsoak/fullsoak/batteries`
+- using env var `PREACT_DEVTOOLS` to enable preact devtools when not in `DEBUG`
+  mode
+
 ## [0.15.0] - 2025-03-01
 
 ### Fixed

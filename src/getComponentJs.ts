@@ -1,7 +1,7 @@
 import type { Output } from "@swc/core";
 import { LogDebug, LogError, LogWarn } from "./utils.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
-import { IS_DEBUG, IS_DEV } from "./getEnv.ts";
+import { IS_DEBUG, IS_PROD } from "./getEnv.ts";
 
 /**
  * given a file path (ideally absolute path) to a component file (e.g. `.tsx`),
@@ -38,7 +38,7 @@ export async function getComponentJs(
             runtime: "automatic",
             pragma: "h",
             pragmaFrag: "Fragment",
-            refresh: IS_DEV,
+            refresh: !IS_PROD,
           },
           // "optimizer": {
           //   "globals": {

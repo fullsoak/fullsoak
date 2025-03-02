@@ -1,6 +1,6 @@
 import { FULLSOAK_HTMLSHELL_MAINID } from "./constants.ts";
 import { getGlobalComponentsDirName } from "./metastore.ts";
-import { IS_DEBUG, IS_DEV } from "./getEnv.ts";
+import { IS_DEBUG, PREACT_DEVTOOLS_ENABLED } from "./getEnv.ts";
 
 /**
  * retrieve the initial javascript to be loaded into the html document generated with
@@ -15,7 +15,11 @@ export const getClientSideJsForRoute = (compName: string): string => {
   `;
 
   return `
-  ${IS_DEBUG ? `import "preact/debug";` : IS_DEV && `import "preact/devtools";`}
+  ${
+    IS_DEBUG
+      ? `import "preact/debug";`
+      : PREACT_DEVTOOLS_ENABLED && `import "preact/devtools";`
+  }
   import { hydrate } from "preact";
   import { html } from "htm/preact";
   ${importByRoute}
