@@ -17,6 +17,7 @@
 ### Fixed
 
 - startup issue on Windows platform
+- `components` dir name config should be applied correctly in various places
 
 ## [0.15.0] - 2025-03-01
 

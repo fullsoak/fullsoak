@@ -4,7 +4,7 @@ import { IS_DEBUG, PREACT_DEVTOOLS_ENABLED } from "./getEnv.ts";
 
 /**
  * retrieve the initial javascript to be loaded into the html document generated with
- * {@link HtmlShell} via the "static" path `/components/:compName/mount`; if this javascript
+ * {@link HtmlShell} via the "static" path `/:globalComponentsDirName/:compName/mount`; if this javascript
  * content fails to load (for any reason), the SSR document should still be enough for
  * human or bot users (we'll lose any interactivity that's `hydrated` by this javascript though)
  */

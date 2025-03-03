@@ -3,6 +3,7 @@ import { html } from "htm/preact";
 import type { CP, SsrAdditionalOptions } from "./types.ts";
 import { FULLSOAK_HTMLSHELL_MAINID } from "./constants.ts";
 import { importJsonc } from "./importJsonc.ts";
+import { getGlobalComponentsDirName } from "./metastore.ts";
 
 let importMapJs: string = "";
 
@@ -94,8 +95,9 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
   opts = {},
 }) => {
   const { headContent } = opts;
-  const jsMountPointSrc = `/components/${componentName}/mount`;
-  const jsMainCompSrc = `/components/${componentName}/index.tsx`;
+  const componentDirName = getGlobalComponentsDirName(); // defaults to `components`
+  const jsMountPointSrc = `/${componentDirName}/${componentName}/mount`;
+  const jsMainCompSrc = `/${componentDirName}/${componentName}/index.tsx`;
   const preloadedProps = `window.preloadedProps = ${
     JSON.stringify(componentProps || {})
   }`;
