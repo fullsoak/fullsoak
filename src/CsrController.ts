@@ -6,6 +6,7 @@ import type { Output } from "@swc/core";
 import { DENO_DIR, LogError } from "./utils.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
 import { getComponentCss } from "./getComponentCss.ts";
+import { getGlobalComponentsDirName } from "./metastore.ts";
 
 @Controller()
 export class CsrController {
@@ -64,7 +65,7 @@ export class CsrController {
    * of the same isomorphic component, so that hydration can
    * then take place on the client side
    */
-  @Get("/components/:compName/mount")
+  @Get(`/${getGlobalComponentsDirName()}/:compName/mount`)
   @ControllerMethodArgs("param")
   async serveClientJsEntryPoint(
     param: { compName: string },
@@ -89,7 +90,7 @@ export class CsrController {
     return retVal;
   }
 
-  @Get("/components/:compName/styles.css")
+  @Get(`/${getGlobalComponentsDirName()}/:compName/styles.css`)
   @ControllerMethodArgs("param")
   async serveComponentCss(
     { compName }: { compName: string },
