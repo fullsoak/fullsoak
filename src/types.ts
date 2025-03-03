@@ -15,3 +15,6 @@ export type SsrAdditionalOptions = {
 export type CP = ComponentProps<ComponentType>;
 
 export type { LevelName as LogLevel } from "@std/log";
+
+// deno-lint-ignore no-explicit-any
+export type ReqHandler = (req: Request, ...args: any[]) => Promise<Response>;

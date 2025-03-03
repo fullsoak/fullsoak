@@ -13,7 +13,7 @@ import { useFullSoakManual } from "./src/useFullSoak.ts";
  *
  * class MyController {}
  *
- * const app = useFullSoak({ controllers: [MyController] });
+ * const app = await useFullSoak({ controllers: [MyController] });
  * const abrtCtrl = new AbortController();
  * app.listen({ port: 3991, signal: abrtCtrl.signal })
  * ```

@@ -9,12 +9,12 @@ import {
   type MiddlewareOrMiddlewareObject,
 } from "@oak/oak";
 import { useOakServer, useOas } from "@dklab/oak-routing-ctrl";
-import { CsrController } from "./CsrController.ts";
 import { CWD, getPlatformAwarePath, LogDebug, LogInfo, OS } from "./utils.ts";
 import { getComponentJs } from "./getComponentJs.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
 import { process } from "./getProcess.ts";
-import { normalize, SEPARATOR } from "@std/path";
+import { SEPARATOR } from "@std/path";
+import type { ReqHandler } from "./types.ts";
 
 // deno-lint-ignore no-explicit-any
 type Abort = (reason?: any) => void;
@@ -79,16 +79,20 @@ type UseCloudflareWorkersModeOptions = AppSetupOptions & {
   cloudflareStaticAssetsBinding?: string;
 };
 
-function setupApp({
+async function setupApp({
   middlewares = [],
   controllers = [],
   componentsDir,
-}: AppSetupOptions): Application {
+}: AppSetupOptions): Promise<Application> {
   // memorize the user-provided path to the `components` directory,
   // falling back to a default framework-appointed "magic" location
   setGlobalComponentsDir(
     componentsDir || CWD + `${SEPARATOR}src${SEPARATOR}components`,
   );
+
+  // `CsrController` relies on global components dir setting, so it
+  // must only be loaded dynamically & after `setGlobalComponentsDir()`
+  const { CsrController } = await import("./CsrController.ts");
 
   const app = new Application();
 
@@ -139,11 +143,11 @@ let fetchMode = false;
  * ```
  * @experimental this feature is experimental, can be unstable, and might not even work at all
  */
-export function _unstable_useCloudflareWorkersMode(
+export async function _unstable_useCloudflareWorkersMode(
   opts: UseCloudflareWorkersModeOptions,
-): Application {
+): Promise<Application> {
   fetchMode = true;
-  const app = setupApp(opts);
+  const app = await setupApp(opts);
   const { cloudflareStaticAssetsBinding } = opts;
 
   if (!cloudflareStaticAssetsBinding) return app;
@@ -209,7 +213,7 @@ export function _unstable_useCloudflareWorkersMode(
   return app;
 }
 
-function useFullSoakInternal({
+async function useFullSoakInternal({
   // @TODO consider adding support for unix socket path
   hostname,
   port,
@@ -217,12 +221,12 @@ function useFullSoakInternal({
   controllers = [],
   componentsDir,
   autoStart = true,
-}: UseFullSoakOptionsInternal): Abort | Application {
+}: UseFullSoakOptionsInternal): Promise<Abort | Application> {
   if (fetchMode) {
     throw new Error("FullSoak app already initialized for fetch mode");
   }
 
-  const app = setupApp({ middlewares, controllers, componentsDir });
+  const app = await setupApp({ middlewares, controllers, componentsDir });
   const abrtCtl = new AbortController();
 
   app.addEventListener(
@@ -264,11 +268,13 @@ function useFullSoakInternal({
  * });
  * ```
  */
-export const useFullSoak: (opts: UseFullSoakOptions) => Abort = (opts) =>
+export const useFullSoak: (opts: UseFullSoakOptions) => Promise<Abort> = (
+  opts,
+) =>
   useFullSoakInternal({
     ...opts,
     autoStart: true,
-  }) as Abort;
+  }) as Promise<Abort>;
 
 /**
  * _entry function_ to initialize FullSoak framework in manual mode (for writing tests or customized use-cases).
@@ -292,13 +298,15 @@ export const useFullSoak: (opts: UseFullSoakOptions) => Abort = (opts) =>
  * });
  * ```
  */
-export const useFullSoakManual: (opts: UseFullSoakOptions) => Application = (
+export const useFullSoakManual: (
+  opts: UseFullSoakOptions,
+) => Promise<Application> = (
   opts,
 ) =>
   useFullSoakInternal({
     ...opts,
     autoStart: false,
-  }) as Application;
+  }) as Promise<Application>;
 
 /**
  * _entry function_ to initialize FullSoak framework in "fetch" mode
@@ -318,11 +326,10 @@ export const useFetchMode: (
     UseFullSoakOptions,
     "middlewares" | "controllers" | "componentsDir"
   >,
-  // deno-lint-ignore no-explicit-any
-) => (req: Request, ...args: any[]) => Promise<Response> = (
+) => Promise<ReqHandler> = async (
   opts,
 ) => {
   const { middlewares, controllers, componentsDir } = opts;
-  const app = setupApp({ middlewares, controllers, componentsDir });
+  const app = await setupApp({ middlewares, controllers, componentsDir });
   return app.fetch;
 };

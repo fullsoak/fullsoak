@@ -13,6 +13,9 @@
   `@fullsoak/fullsoak/batteries`
 - using env var `PREACT_DEVTOOLS` to enable preact devtools when not in `DEBUG`
   mode
+- BREAKING: all init functions (e.g. `useFullSoak()`) now returns a `Promise` of
+  whatever it used to return. This is needed so that the "global components dir"
+  setting is correctly applied dynamically as per user setting
 
 ### Fixed
 

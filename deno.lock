@@ -1,7 +1,7 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@dklab/oak-routing-ctrl@~0.14.1": "0.14.1",
+    "jsr:@dklab/oak-routing-ctrl@~0.14.2": "0.14.2",
     "jsr:@oak/commons@1": "1.0.0",
     "jsr:@oak/oak@^17.1.4": "17.1.4",
     "jsr:@std/assert@1": "1.0.11",
@@ -36,8 +36,8 @@
     "npm:zod@^3.24.2": "3.24.2"
   },
   "jsr": {
-    "@dklab/oak-routing-ctrl@0.14.1": {
-      "integrity": "6146a4ae2094b721fd66cf26c5251f97698fb3dc9b892cd7552db1906832240a",
+    "@dklab/oak-routing-ctrl@0.14.2": {
+      "integrity": "acacbbac775fc05c171494f391304904844224a03b222442c0f38dbc3837edd7",
       "dependencies": [
         "jsr:@oak/oak",
         "jsr:@std/path@^1.0.8",
@@ -349,7 +349,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@dklab/oak-routing-ctrl@~0.14.1",
+      "jsr:@dklab/oak-routing-ctrl@~0.14.2",
       "jsr:@oak/oak@^17.1.4",
       "jsr:@std/assert@^1.0.11",
       "jsr:@std/log@~0.224.14",
