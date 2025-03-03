@@ -35,12 +35,12 @@ export const Hat: FunctionComponent<HatProps> = ({ title, meta }) => {
  * @example
  * ```tsx
  * import { ssr } from "@fullsoak/fullsoak";
- * import { byoHat } from "@fullsoak/fullsoak/batteries";
+ * import { makeHat } from "@fullsoak/fullsoak/batteries";
  *
  * const MyComponent = () => <>my content</>;
  *
- * ssr(MyComponent, { foo: "bar" }, { headContent: byoHat({}) });
+ * ssr(MyComponent, { foo: "bar" }, { headContent: makeHat({}) });
  * ```
  */
-export const byoHat: (props: HatProps) => VNode = (props) =>
+export const makeHat: (props: HatProps) => VNode = (props) =>
   html`<${Hat} ...${props} />`;

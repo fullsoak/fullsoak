@@ -1,10 +1,10 @@
-## Unreleased
+## [0.16.0] - 2025-03-03
 
 ### Added
 
 - `ssr()` accepts another (optional) argument: `{ headContent }` to help
   customize the content of the HTML `<head>` element in the output HTML
-- 2 batteries added: `Hat` and `byoHat`
+- 2 new batteries: `Hat` and `makeHat`
 - `rel=modulepreload` support for initial js resources
 
 ### Changed

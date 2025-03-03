@@ -72,7 +72,7 @@ snapshot[`ssr a VNode using HTM 1`] = `
   }</script><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponentWithProps=Bob</div></main><script type="text/javascript">window.preloadedProps = {"name":"Bob"}</script><script defer type="module" src="/components/SimpleTsxComponentWithProps/mount"></script></body></html>'
 `;
 
-snapshot[`ssr a StandardComponent with byoHat 1`] = `
+snapshot[`ssr a StandardComponent with makeHat 1`] = `
 '<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><title>Standard Component</title><script type="importmap">{
     "imports": {
       "preact": "https://esm.sh/preact@10.26.4",

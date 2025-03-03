@@ -5,7 +5,7 @@ import { SimpleTsxComponentWithProps } from "@mocks/components/SimpleTsxComponen
 import { StandardComponent } from "@mocks/components/StandardComponent/index.tsx";
 import { assertSnapshot } from "@std/testing/snapshot";
 import { setGlobalComponentsDir } from "./metastore.ts";
-import { byoHat, Hat } from "../mod-batteries.ts";
+import { Hat, makeHat } from "../mod-batteries.ts";
 
 // this is called in `useFullsoak`, but we call it here to make unit tests simpler
 setGlobalComponentsDir("./mocks/components");
@@ -28,9 +28,9 @@ Deno.test("ssr a VNode using HTM", async (t) => {
   await assertSnapshot(t, output);
 });
 
-Deno.test("ssr a StandardComponent with byoHat", async (t) => {
+Deno.test("ssr a StandardComponent with makeHat", async (t) => {
   const output = await ssr(StandardComponent, { name: "Charlie" }, {
-    headContent: byoHat({ title: "Standard Component" }),
+    headContent: makeHat({ title: "Standard Component" }),
   });
   await assertSnapshot(t, output);
 });
