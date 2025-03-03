@@ -14,7 +14,7 @@
 - using env var `PREACT_DEVTOOLS` to enable preact devtools when not in `DEBUG`
   mode
 - BREAKING CHANGE: all init functions (e.g. `useFullSoak()`) now return the
-  `Promise`d version of whatever it used to return directly before. This is
+  `Promise`d version of whatever that was returned directly before. This is
   needed so that `getGlobalComponentsDir()` works properly in various contexts
   later on
 
