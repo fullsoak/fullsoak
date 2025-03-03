@@ -1,4 +1,13 @@
 import type { ComponentProps, ComponentType } from "preact";
+import type { VNode } from "preact";
+
+export type SsrAdditionalOptions = {
+  /**
+   * the content of all tags found in the html <head> element
+   * such as `<meta>`, `<title>`, and so on
+   */
+  headContent?: VNode;
+};
 
 /**
  * @ignore
@@ -6,3 +15,6 @@ import type { ComponentProps, ComponentType } from "preact";
 export type CP = ComponentProps<ComponentType>;
 
 export type { LevelName as LogLevel } from "@std/log";
+
+// deno-lint-ignore no-explicit-any
+export type ReqHandler = (req: Request, ...args: any[]) => Promise<Response>;

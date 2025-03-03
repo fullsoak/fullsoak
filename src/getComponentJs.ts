@@ -1,7 +1,11 @@
 import type { Output } from "@swc/core";
-import { LogDebug, LogError, LogWarn } from "./utils.ts";
+import { LogDebug, LogError, LogWarn, OS } from "./utils.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
-import { IS_DEBUG, IS_DEV } from "./getEnv.ts";
+import { IS_DEBUG, IS_PROD } from "./getEnv.ts";
+
+const componentFilePathMatcher = OS === "windows"
+  ? (path: string) => path.match(/\\index(\.(?:t|j)sx)$/)
+  : (path: string) => path.match(/\/index(\.(?:t|j)sx)$/);
 
 /**
  * given a file path (ideally absolute path) to a component file (e.g. `.tsx`),
@@ -38,7 +42,7 @@ export async function getComponentJs(
             runtime: "automatic",
             pragma: "h",
             pragmaFrag: "Fragment",
-            refresh: IS_DEV,
+            refresh: !IS_PROD,
           },
           // "optimizer": {
           //   "globals": {
@@ -61,7 +65,7 @@ export async function getComponentJs(
     // @NOTE totally different approaches would be 1) to let user define the
     // exact path to the file, or 2) use file-based routing, each with their
     // own trade-offs
-    const matches = filePath.match(/\/index(\.(?:t|j)sx)$/);
+    const matches = componentFilePathMatcher(filePath);
     if (matches?.length === 2) {
       const triedPath = filePath;
       filePath = filePath.replace(matches[0], "");

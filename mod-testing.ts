@@ -22,7 +22,7 @@ import { useFullSoakManual } from "./src/useFullSoak.ts";
  * class TestTargetController {}
  *
  * Deno.test("it should serve [POST] /api/login", async () => {
- *   const app = useFullSoak({ controllers: [TestTargetController] });
+ *   const app = await useFullSoak({ controllers: [TestTargetController] });
  *
  *   const req1 = await superoak(app);
  *   await req1.post("/api/login")

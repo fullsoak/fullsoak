@@ -1,8 +1,9 @@
 import type { FunctionComponent, VNode } from "preact";
 import { html } from "htm/preact";
-import type { CP } from "./types.ts";
+import type { CP, SsrAdditionalOptions } from "./types.ts";
 import { FULLSOAK_HTMLSHELL_MAINID } from "./constants.ts";
 import { importJsonc } from "./importJsonc.ts";
+import { getGlobalComponentsDirName } from "./metastore.ts";
 
 let importMapJs: string = "";
 
@@ -59,9 +60,9 @@ type HtmlShellProps<P> = {
    */
   componentName: string;
   componentProps?: P | null;
-  pageTitle?: string;
   js?: string;
   css?: string;
+  opts?: SsrAdditionalOptions;
 };
 
 /**
@@ -75,7 +76,7 @@ type HtmlShellProps<P> = {
  *
  * @example
  * ```tsx
- * import { byoHtml, HtmlShell } from "@fullsoak/fullsoak";
+ * import { byoHtml, HtmlShell } from "@fullsoak/fullsoak/batteries";
  * byoHtml(
  *   <HtmlShell
  *     componentName="MyApp"
@@ -89,10 +90,14 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
   componentName,
   componentProps = null,
   children,
-  pageTitle,
-  js,
-  css,
+  js = "",
+  css = "",
+  opts = {},
 }) => {
+  const { headContent } = opts;
+  const componentDirName = getGlobalComponentsDirName(); // defaults to `components`
+  const jsMountPointSrc = `/${componentDirName}/${componentName}/mount`;
+  const jsMainCompSrc = `/${componentDirName}/${componentName}/index.tsx`;
   const preloadedProps = `window.preloadedProps = ${
     JSON.stringify(componentProps || {})
   }`;
@@ -104,28 +109,30 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
         name="viewport"
         content="width=device-width,initial-scale=1.0,maximum-scale=1.0"
       />
-      <title>${pageTitle}</title>
+      ${headContent}
       <script
         type="importmap"
         dangerouslySetInnerHTML=${{ __html: buildImportMapJs() }}
       />
+      <link rel="modulepreload" href=${jsMountPointSrc} as="script" type="text/javascript" />
+      <link rel="modulepreload" href=${jsMainCompSrc} as="script" type="text/javascript" />
       <script
         type="text/javascript"
-        dangerouslySetInnerHTML=${{ __html: js || "" }}
+        dangerouslySetInnerHTML=${{ __html: js }}
       />
       <style
-        dangerouslySetInnerHTML=${{ __html: css || "" }}
+        dangerouslySetInnerHTML=${{ __html: css }}
       />
     </head>
     <body>
-      <main id="${FULLSOAK_HTMLSHELL_MAINID}">
+      <main id=${FULLSOAK_HTMLSHELL_MAINID}>
         ${children}
       </main>
       <script
         type="text/javascript"
         dangerouslySetInnerHTML=${{ __html: preloadedProps }}
       />
-      <script type="module" src="${`/components/${componentName}/mount`}"></script>
+      <script defer type="module" src=${jsMountPointSrc}></script>
     </body>
   </html>`;
 };
@@ -136,6 +143,7 @@ type WithHtmlShellProps<CP> = {
   componentProps: CP | null;
   js?: string;
   css?: string;
+  opts: SsrAdditionalOptions;
 };
 
 export const withHtmlShell = <P extends CP>({
@@ -144,6 +152,7 @@ export const withHtmlShell = <P extends CP>({
   componentProps = null,
   js,
   css,
+  opts = {},
 }: WithHtmlShellProps<P>): VNode =>
   html`
 <${HtmlShell}
@@ -151,6 +160,7 @@ export const withHtmlShell = <P extends CP>({
   componentProps=${componentProps}
   js=${js}
   css=${css}
+  opts=${opts}
 >
   ${component}
 <//>`;

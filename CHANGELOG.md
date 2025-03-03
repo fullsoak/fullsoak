@@ -1,3 +1,28 @@
+## [0.16.0] - 2025-03-03
+
+### Added
+
+- `ssr()` accepts another (optional) argument: `{ headContent }` to help
+  customize the content of the HTML `<head>` element in the output HTML
+- 2 new batteries: `Hat` and `makeHat`
+- `rel=modulepreload` support for initial js resources
+
+### Changed
+
+- `byoHtml()`, `HtmlShell`, and `cleanCss()` exports are moved to
+  `@fullsoak/fullsoak/batteries`
+- using env var `PREACT_DEVTOOLS` to enable preact devtools when not in `DEBUG`
+  mode
+- BREAKING CHANGE: all init functions (e.g. `useFullSoak()`) now return the
+  `Promise`d version of whatever that was returned directly before. This is
+  needed so that `getGlobalComponentsDir()` works properly in various contexts
+  later on
+
+### Fixed
+
+- startup & routing issues on Windows platform
+- `components` dir name config should be applied correctly in various places
+
 ## [0.15.0] - 2025-03-01
 
 ### Fixed
