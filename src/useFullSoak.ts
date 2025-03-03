@@ -10,11 +10,11 @@ import {
 } from "@oak/oak";
 import { useOakServer, useOas } from "@dklab/oak-routing-ctrl";
 import { CsrController } from "./CsrController.ts";
-import { CWD, LogDebug, LogInfo, OS } from "./utils.ts";
+import { CWD, getPlatformAwarePath, LogDebug, LogInfo, OS } from "./utils.ts";
 import { getComponentJs } from "./getComponentJs.ts";
 import { getJsTransformFns } from "./jsxTransformer.ts";
 import { process } from "./getProcess.ts";
-import { SEPARATOR } from "@std/path";
+import { normalize, SEPARATOR } from "@std/path";
 
 // deno-lint-ignore no-explicit-any
 type Abort = (reason?: any) => void;
@@ -101,7 +101,7 @@ function setupApp({
     if (/\.(?:t|j)sx?$/.test(p)) {
       ctx.response.headers.set("content-type", "text/javascript");
       ctx.response.body = await getComponentJs(
-        `${getGlobalComponentsParentDir()}${p}`,
+        `${getGlobalComponentsParentDir()}${getPlatformAwarePath(p)}`,
       );
       return next();
     }

@@ -1,4 +1,5 @@
 import { ConsoleHandler, getLogger, type LevelName, setup } from "@std/log";
+import { normalize } from "@std/path";
 import { getEnv } from "./getEnv.ts";
 import { process } from "./getProcess.ts";
 
@@ -82,3 +83,11 @@ export const setupDefaultFullsoakLogger = (
     },
   });
 };
+
+/**
+ * handles convering `/` to `\` on Windows
+ * while being no-op for other platforms
+ */
+export const getPlatformAwarePath = OS === "windows"
+  ? (path: string): string => normalize(path)
+  : (path: string): string => path;
