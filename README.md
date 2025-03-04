@@ -4,6 +4,7 @@
 [![JSR Score](https://jsr.io/badges/@fullsoak/fullsoak/score)](https://jsr.io/@fullsoak/fullsoak)
 [![Built with the Deno Standard Library](https://raw.githubusercontent.com/denoland/deno_std/main/badge.svg)](https://jsr.io/@std)
 [![codecov](https://codecov.io/gh/fullsoak/fullsoak/graph/badge.svg?token=P84VP42BYB)](https://codecov.io/gh/fullsoak/fullsoak)
+![GitHub Repo stars](https://img.shields.io/github/stars/fullsoak/fullsoak)
 ![Discord](https://img.shields.io/discord/1341201350108905566?style=flat)
 
 FullS(tack)oak (FullSoak for short) is a modern (born 2025), no-build TypeScript
@@ -64,8 +65,8 @@ fullsoak-example
 // deno.jsonc
 {
   "imports": {
-    "fullsoak": "jsr:@fullsoak/fullsoak@0.14.0",
-    "preact": "npm:preact@10.26.2"
+    "fullsoak": "jsr:@fullsoak/fullsoak@0.16.1",
+    "preact": "npm:preact@10.26.4"
   },
   "nodeModulesDir": "auto",
   "compilerOptions": {
@@ -95,7 +96,7 @@ const port = 3991;
 useFullSoak({ port, controllers: [MyController] });
 ```
 
-```ts
+```tsx
 // src/components/MyComponent/index.tsx
 import type { FunctionComponent } from "preact";
 export const MyComponent: FunctionComponent = () => <div>hello, world</div>;
@@ -163,6 +164,8 @@ approach is, and for which scenarios.
 - Code examples with Bun runtime: https://github.com/fullsoak/bun-examples
 - Code examples with Cloudflare Workers:
   https://github.com/fullsoak/cloudflare-workers-examples
+- Discord announcements on
+  [library interoperability updates](https://discord.gg/6GVFxMXYCh)
 - Preact's take on
   [No-build Workflows](https://preactjs.com/guide/v10/no-build-workflows/)
 

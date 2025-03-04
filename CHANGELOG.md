@@ -1,3 +1,10 @@
+## [0.16.1] - 2025-03-04
+
+### Added
+
+- when loading `/:componentsDir/:compName/styles.css`, if fails, falls back to
+  `/:componentsDir/:compName.css`, before giving up
+
 ## [0.16.0] - 2025-03-03
 
 ### Added
