@@ -56,7 +56,10 @@ const ssrTsxComponent = async <P extends CP>(
   // deepest DOM element is rendered (which is the whole point of SSR)
   const componentVNode = html`<${component} ...${props} />`;
 
+  // @TODO possibility to build a collection of css files for the whole component tree
+  // below `componentName` (related issue: https://github.com/fullsoak/fullsoak/issues/17)
   const componentCss = await getComponentCss(componentName);
+
   return byoHtml(withHtmlShell({
     componentName,
     componentProps: props,
