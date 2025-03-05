@@ -1,0 +1,14 @@
+export const snapshot = {};
+
+snapshot[`tsc transformation 1`] = `
+'import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "preact/jsx-runtime";
+import { Foo } from "./Foo/index.tsx";
+import { Bar } from "../Bar.tsx";
+import { Chaz } from "Chaz.tsx";
+import * as Daz from "./Daz/file.ts";
+import * as Daz1 from "./Daz1/file.ts";
+export const Eas = () => {
+    return _jsxs(_Fragment, { children: [Daz.getSomething(), _jsx(Foo, {}), _jsx(Bar, { foo: "bar", chaz: _jsx(Chaz, { onClick: () => console.log("Chaz clicked") }) }), _jsx(Daz1, {})] });
+};
+'
+`;

@@ -100,7 +100,8 @@ export async function getComponentJs(
     // but for CSR, the import url would be e.g. `/components/Foo/Nav.tsx`
     // which makes no sense, and should be translated into `/components/Nav.tsx`;
     // hence, this edgy hack
-    retVal = retVal.replaceAll(`from"./`, `from"../`);
+    // @NOTE this feature is provided best-effort only
+    retVal = retVal.replace(/from\s?"\.\//, `from"../`);
   }
 
   // @TODO consider what to do with source map
