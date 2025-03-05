@@ -88,3 +88,5 @@ export const getJsTransformFns: () => Promise<{
     minify: _minifyFn,
   };
 };
+
+export const _internal = { getTscJsTransform };

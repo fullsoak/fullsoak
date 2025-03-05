@@ -1,3 +1,9 @@
+## [0.16.2] - 2025-03-05
+
+### Fixed
+
+- improved best-effort fool-proof remedy for JSX transpilation logic
+
 ## [0.16.1] - 2025-03-04
 
 ### Added
