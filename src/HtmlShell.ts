@@ -5,12 +5,19 @@ import { FULLSOAK_HTMLSHELL_MAINID } from "./constants.ts";
 import { importJsonc } from "./importJsonc.ts";
 import { getGlobalComponentsDirName } from "./metastore.ts";
 
-let importMapJs: string = "";
+const cachedImportMapJs: Record<string, string> = {};
 
-// @TODO add user configuration option to allow declaring additional
-// import map entries
-const buildImportMapJs = async (): Promise<string> => {
-  if (importMapJs) return importMapJs;
+/**
+ * populate the import map js module to be included in the output
+ * HTML. This helps the CSR modules know where to fetch remote modules from
+ */
+const buildImportMapJs = async (
+  customMap?: Record<string, string>,
+): Promise<string> => {
+  const mapCacheKey: string = customMap != null
+    ? JSON.stringify(customMap)
+    : "null";
+  if (cachedImportMapJs[mapCacheKey]) return cachedImportMapJs[mapCacheKey];
 
   let denoJson = null;
   let preactVersion = "";
@@ -31,7 +38,7 @@ const buildImportMapJs = async (): Promise<string> => {
   }
 
   // @NOTE consider auto-sync verion values for other isomorphic candidates as well?
-  return importMapJs = `{
+  const defaultImportMapJs = `{
     "imports": {
       "preact": "https://esm.sh/preact${preactVersion}",
       "preact/hooks": "https://esm.sh/preact${preactVersion}/hooks",
@@ -52,6 +59,15 @@ const buildImportMapJs = async (): Promise<string> => {
       "@fullsoak/fullsoak": "/fullsoak"
     }
   }`;
+
+  const importMapJson = Object.assign(
+    JSON.parse(defaultImportMapJs),
+    customMap,
+  );
+
+  cachedImportMapJs[mapCacheKey] = JSON.stringify(importMapJson);
+
+  return cachedImportMapJs[mapCacheKey];
 };
 
 type HtmlShellProps<P> = {
@@ -94,7 +110,7 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
   css = "",
   opts = {},
 }) => {
-  const { headContent } = opts;
+  const { headContent, customImportMap } = opts;
   const componentDirName = getGlobalComponentsDirName(); // defaults to `components`
   const jsMountPointSrc = `/${componentDirName}/${componentName}/mount`;
   const jsMainCompSrc = `/${componentDirName}/${componentName}/index.tsx`;
@@ -109,11 +125,11 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
         name="viewport"
         content="width=device-width,initial-scale=1.0,maximum-scale=1.0"
       />
-      ${headContent}
       <script
         type="importmap"
-        dangerouslySetInnerHTML=${{ __html: buildImportMapJs() }}
+        dangerouslySetInnerHTML=${{ __html: buildImportMapJs(customImportMap) }}
       />
+      ${headContent}
       <link rel="modulepreload" href=${jsMountPointSrc} as="script" type="text/javascript" />
       <link rel="modulepreload" href=${jsMainCompSrc} as="script" type="text/javascript" />
       <script

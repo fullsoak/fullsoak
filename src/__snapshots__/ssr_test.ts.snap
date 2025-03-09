@@ -1,121 +1,13 @@
 export const snapshot = {};
 
-snapshot[`ssr a TSX component 1`] = `
-'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{
-    "imports": {
-      "preact": "https://esm.sh/preact@10.26.4",
-      "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
-      "preact/debug": "https://esm.sh/preact@10.26.4/debug",
-      "preact/devtools": "https://esm.sh/preact@10.26.4/devtools",
-      "react": "https://esm.sh/preact@10.26.4",
-      "react/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "preact/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "react-dom": "https://esm.sh/preact@10.26.4/compat/",
-      "react-dom/*": "https://esm.sh/preact@10.26.4/compat/*",
-      "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
-      "preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "preact-iso/prerender": "/fullsoak",
-      "@preact/signals": "https://esm.sh/@preact/signals",
-      "fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "@fullsoak/fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "fullsoak": "/fullsoak",
-      "@fullsoak/fullsoak": "/fullsoak"
-    }
-  }</script><link rel="modulepreload" href="/components/SimpleTsxComponent/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/SimpleTsxComponent/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponent</div></main><script type="text/javascript">window.preloadedProps = {}</script><script defer type="module" src="/components/SimpleTsxComponent/mount"></script></body></html>'
-`;
+snapshot[`ssr a TSX component 1`] = `'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{"imports":{"preact":"https://esm.sh/preact@10.26.4","preact/hooks":"https://esm.sh/preact@10.26.4/hooks","preact/debug":"https://esm.sh/preact@10.26.4/debug","preact/devtools":"https://esm.sh/preact@10.26.4/devtools","react":"https://esm.sh/preact@10.26.4","react/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","preact/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","react-dom":"https://esm.sh/preact@10.26.4/compat/","react-dom/*":"https://esm.sh/preact@10.26.4/compat/*","htm/preact":"https://esm.sh/htm@3.1.1/preact?external=preact","preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","preact-iso/prerender":"/fullsoak","@preact/signals":"https://esm.sh/@preact/signals","fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","@fullsoak/fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","fullsoak":"/fullsoak","@fullsoak/fullsoak":"/fullsoak"}}</script><link rel="modulepreload" href="/components/SimpleTsxComponent/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/SimpleTsxComponent/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponent</div></main><script type="text/javascript">window.preloadedProps = {}</script><script defer type="module" src="/components/SimpleTsxComponent/mount"></script></body></html>'`;
 
-snapshot[`ssr a TSX component with props 1`] = `
-'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{
-    "imports": {
-      "preact": "https://esm.sh/preact@10.26.4",
-      "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
-      "preact/debug": "https://esm.sh/preact@10.26.4/debug",
-      "preact/devtools": "https://esm.sh/preact@10.26.4/devtools",
-      "react": "https://esm.sh/preact@10.26.4",
-      "react/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "preact/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "react-dom": "https://esm.sh/preact@10.26.4/compat/",
-      "react-dom/*": "https://esm.sh/preact@10.26.4/compat/*",
-      "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
-      "preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "preact-iso/prerender": "/fullsoak",
-      "@preact/signals": "https://esm.sh/@preact/signals",
-      "fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "@fullsoak/fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "fullsoak": "/fullsoak",
-      "@fullsoak/fullsoak": "/fullsoak"
-    }
-  }</script><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponentWithProps=Alice</div></main><script type="text/javascript">window.preloadedProps = {"name":"Alice"}</script><script defer type="module" src="/components/SimpleTsxComponentWithProps/mount"></script></body></html>'
-`;
+snapshot[`ssr a TSX component with props 1`] = `'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{"imports":{"preact":"https://esm.sh/preact@10.26.4","preact/hooks":"https://esm.sh/preact@10.26.4/hooks","preact/debug":"https://esm.sh/preact@10.26.4/debug","preact/devtools":"https://esm.sh/preact@10.26.4/devtools","react":"https://esm.sh/preact@10.26.4","react/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","preact/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","react-dom":"https://esm.sh/preact@10.26.4/compat/","react-dom/*":"https://esm.sh/preact@10.26.4/compat/*","htm/preact":"https://esm.sh/htm@3.1.1/preact?external=preact","preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","preact-iso/prerender":"/fullsoak","@preact/signals":"https://esm.sh/@preact/signals","fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","@fullsoak/fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","fullsoak":"/fullsoak","@fullsoak/fullsoak":"/fullsoak"}}</script><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponentWithProps=Alice</div></main><script type="text/javascript">window.preloadedProps = {"name":"Alice"}</script><script defer type="module" src="/components/SimpleTsxComponentWithProps/mount"></script></body></html>'`;
 
-snapshot[`ssr a VNode using HTM 1`] = `
-'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{
-    "imports": {
-      "preact": "https://esm.sh/preact@10.26.4",
-      "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
-      "preact/debug": "https://esm.sh/preact@10.26.4/debug",
-      "preact/devtools": "https://esm.sh/preact@10.26.4/devtools",
-      "react": "https://esm.sh/preact@10.26.4",
-      "react/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "preact/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "react-dom": "https://esm.sh/preact@10.26.4/compat/",
-      "react-dom/*": "https://esm.sh/preact@10.26.4/compat/*",
-      "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
-      "preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "preact-iso/prerender": "/fullsoak",
-      "@preact/signals": "https://esm.sh/@preact/signals",
-      "fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "@fullsoak/fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "fullsoak": "/fullsoak",
-      "@fullsoak/fullsoak": "/fullsoak"
-    }
-  }</script><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponentWithProps=Bob</div></main><script type="text/javascript">window.preloadedProps = {"name":"Bob"}</script><script defer type="module" src="/components/SimpleTsxComponentWithProps/mount"></script></body></html>'
-`;
+snapshot[`ssr a VNode using HTM 1`] = `'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{"imports":{"preact":"https://esm.sh/preact@10.26.4","preact/hooks":"https://esm.sh/preact@10.26.4/hooks","preact/debug":"https://esm.sh/preact@10.26.4/debug","preact/devtools":"https://esm.sh/preact@10.26.4/devtools","react":"https://esm.sh/preact@10.26.4","react/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","preact/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","react-dom":"https://esm.sh/preact@10.26.4/compat/","react-dom/*":"https://esm.sh/preact@10.26.4/compat/*","htm/preact":"https://esm.sh/htm@3.1.1/preact?external=preact","preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","preact-iso/prerender":"/fullsoak","@preact/signals":"https://esm.sh/@preact/signals","fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","@fullsoak/fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","fullsoak":"/fullsoak","@fullsoak/fullsoak":"/fullsoak"}}</script><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/SimpleTsxComponentWithProps/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style></style></head><body><main id="fullsoak-htmlshell-main"><div>SimpleTsxComponentWithProps=Bob</div></main><script type="text/javascript">window.preloadedProps = {"name":"Bob"}</script><script defer type="module" src="/components/SimpleTsxComponentWithProps/mount"></script></body></html>'`;
 
-snapshot[`ssr a StandardComponent with makeHat 1`] = `
-'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><title>Standard Component</title><script type="importmap">{
-    "imports": {
-      "preact": "https://esm.sh/preact@10.26.4",
-      "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
-      "preact/debug": "https://esm.sh/preact@10.26.4/debug",
-      "preact/devtools": "https://esm.sh/preact@10.26.4/devtools",
-      "react": "https://esm.sh/preact@10.26.4",
-      "react/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "preact/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "react-dom": "https://esm.sh/preact@10.26.4/compat/",
-      "react-dom/*": "https://esm.sh/preact@10.26.4/compat/*",
-      "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
-      "preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "preact-iso/prerender": "/fullsoak",
-      "@preact/signals": "https://esm.sh/@preact/signals",
-      "fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "@fullsoak/fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "fullsoak": "/fullsoak",
-      "@fullsoak/fullsoak": "/fullsoak"
-    }
-  }</script><link rel="modulepreload" href="/components/StandardComponent/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/StandardComponent/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style>@import url(/components/Shared/styles.css);.foo{background-color:#55c456}</style></head><body><main id="fullsoak-htmlshell-main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script defer type="module" src="/components/StandardComponent/mount"></script></body></html>'
-`;
+snapshot[`ssr a StandardComponent with makeHat - title 1`] = `'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{"imports":{"preact":"https://esm.sh/preact@10.26.4","preact/hooks":"https://esm.sh/preact@10.26.4/hooks","preact/debug":"https://esm.sh/preact@10.26.4/debug","preact/devtools":"https://esm.sh/preact@10.26.4/devtools","react":"https://esm.sh/preact@10.26.4","react/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","preact/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","react-dom":"https://esm.sh/preact@10.26.4/compat/","react-dom/*":"https://esm.sh/preact@10.26.4/compat/*","htm/preact":"https://esm.sh/htm@3.1.1/preact?external=preact","preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","preact-iso/prerender":"/fullsoak","@preact/signals":"https://esm.sh/@preact/signals","fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","@fullsoak/fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","fullsoak":"/fullsoak","@fullsoak/fullsoak":"/fullsoak"}}</script><title>Standard Component</title><link rel="modulepreload" href="/components/StandardComponent/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/StandardComponent/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style>@import url(/components/Shared/styles.css);.foo{background-color:#55c456}</style></head><body><main id="fullsoak-htmlshell-main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script defer type="module" src="/components/StandardComponent/mount"></script></body></html>'`;
 
-snapshot[`ssr a StandardComponent with Hat 1`] = `
-'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><title>SC2</title><meta name="og:title" content="SC2"/><script type="importmap">{
-    "imports": {
-      "preact": "https://esm.sh/preact@10.26.4",
-      "preact/hooks": "https://esm.sh/preact@10.26.4/hooks",
-      "preact/debug": "https://esm.sh/preact@10.26.4/debug",
-      "preact/devtools": "https://esm.sh/preact@10.26.4/devtools",
-      "react": "https://esm.sh/preact@10.26.4",
-      "react/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "preact/jsx-runtime": "https://esm.sh/preact@10.26.4/jsx-runtime",
-      "react-dom": "https://esm.sh/preact@10.26.4/compat/",
-      "react-dom/*": "https://esm.sh/preact@10.26.4/compat/*",
-      "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
-      "preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "preact-iso/prerender": "/fullsoak",
-      "@preact/signals": "https://esm.sh/@preact/signals",
-      "fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "@fullsoak/fullsoak/preact-iso": "https://esm.sh/preact-iso@^2.9.0?external=preact",
-      "fullsoak": "/fullsoak",
-      "@fullsoak/fullsoak": "/fullsoak"
-    }
-  }</script><link rel="modulepreload" href="/components/StandardComponent/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/StandardComponent/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style>@import url(/components/Shared/styles.css);.foo{background-color:#55c456}</style></head><body><main id="fullsoak-htmlshell-main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script defer type="module" src="/components/StandardComponent/mount"></script></body></html>'
-`;
+snapshot[`ssr a StandardComponent with makeHat - full options 1`] = `'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{"imports":{"preact":"https://esm.sh/preact@10.26.4","preact/hooks":"https://esm.sh/preact@10.26.4/hooks","preact/debug":"https://esm.sh/preact@10.26.4/debug","preact/devtools":"https://esm.sh/preact@10.26.4/devtools","react":"https://esm.sh/preact@10.26.4","react/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","preact/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","react-dom":"https://esm.sh/preact@10.26.4/compat/","react-dom/*":"https://esm.sh/preact@10.26.4/compat/*","htm/preact":"https://esm.sh/htm@3.1.1/preact?external=preact","preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","preact-iso/prerender":"/fullsoak","@preact/signals":"https://esm.sh/@preact/signals","fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","@fullsoak/fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","fullsoak":"/fullsoak","@fullsoak/fullsoak":"/fullsoak"},"@myscope/mything":"/fullsoak/myscope/mything"}</script><title>Standard Component</title><meta name="blah" property="foo" content="bar"/><link href="/some/styles.css" rel="stylesheet"/><script src="/some/script.js" type="text/javascript"></script><link rel="modulepreload" href="/components/StandardComponent/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/StandardComponent/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style>@import url(/components/Shared/styles.css);.foo{background-color:#55c456}</style></head><body><main id="fullsoak-htmlshell-main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script defer type="module" src="/components/StandardComponent/mount"></script></body></html>'`;
+
+snapshot[`ssr a StandardComponent with Hat 1`] = `'<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><script type="importmap">{"imports":{"preact":"https://esm.sh/preact@10.26.4","preact/hooks":"https://esm.sh/preact@10.26.4/hooks","preact/debug":"https://esm.sh/preact@10.26.4/debug","preact/devtools":"https://esm.sh/preact@10.26.4/devtools","react":"https://esm.sh/preact@10.26.4","react/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","preact/jsx-runtime":"https://esm.sh/preact@10.26.4/jsx-runtime","react-dom":"https://esm.sh/preact@10.26.4/compat/","react-dom/*":"https://esm.sh/preact@10.26.4/compat/*","htm/preact":"https://esm.sh/htm@3.1.1/preact?external=preact","preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","preact-iso/prerender":"/fullsoak","@preact/signals":"https://esm.sh/@preact/signals","fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","@fullsoak/fullsoak/preact-iso":"https://esm.sh/preact-iso@^2.9.1?external=preact","fullsoak":"/fullsoak","@fullsoak/fullsoak":"/fullsoak"}}</script><title>SC2</title><meta name="og:title" content="SC2"/><link rel="modulepreload" href="/components/StandardComponent/mount" as="script" type="text/javascript"/><link rel="modulepreload" href="/components/StandardComponent/index.tsx" as="script" type="text/javascript"/><script type="text/javascript"></script><style>@import url(/components/Shared/styles.css);.foo{background-color:#55c456}</style></head><body><main id="fullsoak-htmlshell-main"><div>StandardComponent=Charlie</div></main><script type="text/javascript">window.preloadedProps = {"name":"Charlie"}</script><script defer type="module" src="/components/StandardComponent/mount"></script></body></html>'`;

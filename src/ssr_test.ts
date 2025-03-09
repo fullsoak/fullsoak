@@ -28,9 +28,24 @@ Deno.test("ssr a VNode using HTM", async (t) => {
   await assertSnapshot(t, output);
 });
 
-Deno.test("ssr a StandardComponent with makeHat", async (t) => {
+Deno.test("ssr a StandardComponent with makeHat - title", async (t) => {
   const output = await ssr(StandardComponent, { name: "Charlie" }, {
     headContent: makeHat({ title: "Standard Component" }),
+  });
+  await assertSnapshot(t, output);
+});
+
+Deno.test("ssr a StandardComponent with makeHat - full options", async (t) => {
+  const output = await ssr(StandardComponent, { name: "Charlie" }, {
+    headContent: makeHat({
+      title: "Standard Component",
+      meta: [{ name: "blah", property: "foo", content: "bar" }],
+      links: [{ href: "/some/styles.css", rel: "stylesheet" }],
+      scripts: [{ src: "/some/script.js", type: "text/javascript" }],
+    }),
+    customImportMap: {
+      "@myscope/mything": "/fullsoak/myscope/mything",
+    },
   });
   await assertSnapshot(t, output);
 });

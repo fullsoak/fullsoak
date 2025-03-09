@@ -7,6 +7,12 @@ export type SsrAdditionalOptions = {
    * such as `<meta>`, `<title>`, and so on
    */
   headContent?: VNode;
+  /**
+   * standard import-map content to include in the final output HTML.
+   *
+   * See more at https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap
+   */
+  customImportMap?: Record<string, string>;
 };
 
 /**
