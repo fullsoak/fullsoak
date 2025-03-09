@@ -1,3 +1,15 @@
+## [0.17.0] - 2025-03-10
+
+### Changed
+
+- upgraded dependencies: `npm:@swc/core@^1.11.8`, `npm:preact-iso@2.9.1`
+
+### Added
+
+- `Hat` and `makeHat` now support `<link>` and `<script>` elements
+- optional arg `customImportMap` added to ssr `headContent`, allowing developers
+  to specify and/or overwrite custom importmap entries
+
 ## [0.16.2] - 2025-03-05
 
 ### Fixed
