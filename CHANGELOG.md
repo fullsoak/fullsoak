@@ -1,3 +1,15 @@
+## [0.18.0] - 2025-04-28
+
+### Added
+
+- scss support
+
+### Changed
+
+- upgraded dependencies: `jsr:@dklab/oak-routing-ctrl@^0.14.3`,
+  `npm:preact@10.26.5`, `jsr:@std/path@^1.0.9`, `jsr:@std/assert@^1.0.13`,
+  `jsr:@std/testing@^1.0.11`, `npm:@swc/core@^1.11.22`, `npm:typescript@^5.8.3`
+
 ## [0.17.0] - 2025-03-10
 
 ### Changed

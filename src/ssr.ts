@@ -35,12 +35,13 @@ const ssrVNode = async (
   const componentName = typeof node.type === "string"
     ? node.type
     : node.type.name;
-  const componentCss = await getComponentCss(componentName);
+  const componentCss = await getComponentCss(componentName, "css");
+  const componentScss = await getComponentCss(componentName, "scss");
   return byoHtml(withHtmlShell({
     componentName,
     componentProps: node.props,
     component: node,
-    css: cleanCss(componentCss),
+    css: cleanCss(componentCss + "\n" + componentScss),
     opts,
   }));
 };
@@ -58,7 +59,8 @@ const ssrTsxComponent = async <P extends CP>(
 
   // @TODO possibility to build a collection of css files for the whole component tree
   // below `componentName` (related issue: https://github.com/fullsoak/fullsoak/issues/17)
-  const componentCss = await getComponentCss(componentName);
+  const componentCss = await getComponentCss(componentName, "css");
+  const componentScss = await getComponentCss(componentName, "scss");
 
   return byoHtml(withHtmlShell({
     componentName,
@@ -66,7 +68,7 @@ const ssrTsxComponent = async <P extends CP>(
     // while using `h` also works, it doesn't render the deepest DOM element
     // component: h<CP>(componentName, props),
     component: componentVNode,
-    css: cleanCss(componentCss),
+    css: cleanCss(componentCss + "\n" + componentScss),
     opts,
   }));
 };

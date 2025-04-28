@@ -65,8 +65,8 @@ fullsoak-example
 // deno.jsonc
 {
   "imports": {
-    "fullsoak": "jsr:@fullsoak/fullsoak@0.16.1",
-    "preact": "npm:preact@10.26.4"
+    "fullsoak": "jsr:@fullsoak/fullsoak@0.18.0",
+    "preact": "npm:preact@10.26.5"
   },
   "nodeModulesDir": "auto",
   "compilerOptions": {

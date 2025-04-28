@@ -2,7 +2,7 @@ import type { FunctionComponent, VNode } from "preact";
 import { html } from "htm/preact";
 import type { CP, SsrAdditionalOptions } from "./types.ts";
 import { FULLSOAK_HTMLSHELL_MAINID } from "./constants.ts";
-import { importJsonc } from "./importJsonc.ts";
+import { importJsoncFromDesignatedPath } from "./importJsonc.ts";
 import { getGlobalComponentsDirName } from "./metastore.ts";
 
 const cachedImportMapJs: Record<string, string> = {};
@@ -23,7 +23,7 @@ const buildImportMapJs = async (
   let preactVersion = "";
   let preactIsoVersion = "";
   try {
-    denoJson = await importJsonc();
+    denoJson = await importJsoncFromDesignatedPath();
     const preactImportComps = denoJson.imports.preact.split("@");
     const preactIsoImportComps = denoJson.imports["preact-iso"].split("@");
     preactVersion = preactImportComps[preactImportComps.length - 1];

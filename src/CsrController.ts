@@ -97,7 +97,7 @@ export class CsrController {
     ctx: Context,
   ): Promise<string> {
     ctx.response.headers.set("content-type", "text/css");
-    const css = await getComponentCss(compName);
+    const css = await getComponentCss(compName, "css");
     return cleanCss(css);
   }
 }
