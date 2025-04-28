@@ -20,6 +20,5 @@ Deno.test("transformScss", async (t) => {
 
 Deno.test("StandardComponent", async (t) => {
   const output = await ssr(StandardComponent);
-  // console.log(output);
   await assertSnapshot(t, output);
 });
