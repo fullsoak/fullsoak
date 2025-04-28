@@ -1,9 +1,9 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "nodeModulesDir": "auto",
   "tasks": {
-    "test": "deno test --allow-ffi=$PWD/node_modules/.deno -R=$PWD -E=DEBUG,LOG_LEVEL,HOME,HOMEPATH,DENO_DIR,NODE_ENV,PREACT_DEVTOOLS",
+    "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-run -R=$PWD,$(which deno) -E", // =DEBUG,LOG_LEVEL,HOME,HOMEPATH,DENO_DIR,NODE_ENV,PREACT_DEVTOOLS
     "test-update": "deno task test -W -- --update",
     "cov:html": "deno coverage cov_profile --html --exclude=node_modules",
     "cov:lcov": "deno coverage cov_profile --lcov --exclude=node_modules --output=cov_profile.lcov",
@@ -18,23 +18,24 @@
     // no `*` needed after folder name (it's also not supported)
     "@mocks/": "./mocks/",
     "@oak/oak": "jsr:@oak/oak@^17.1.4",
-    "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.14.2",
-    "@std/path": "jsr:@std/path@^1.0.8",
+    "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.14.3",
+    "@std/path": "jsr:@std/path@^1.0.9",
     "@std/log": "jsr:@std/log@^0.224.14",
-    "@std/assert": "jsr:@std/assert@^1.0.11",
-    "@std/testing": "jsr:@std/testing@^1.0.9",
-    "preact": "npm:preact@10.26.4",
+    "@std/assert": "jsr:@std/assert@^1.0.13",
+    "@std/testing": "jsr:@std/testing@^1.0.11",
+    "preact": "npm:preact@10.26.5",
     "preact-render-to-string": "npm:preact-render-to-string@^6.5.13",
     "preact-iso": "npm:preact-iso@^2.9.1",
-    "react": "npm:preact@10.26.4/compat/",
-    "react/jsx-runtime": "npm:preact@10.26.4/jsx-runtime",
-    "react-dom": "npm:preact@10.26.4/compat/",
-    "react-dom/": "npm:preact@10.26.4/compat/",
+    "react": "npm:preact@10.26.5/compat/",
+    "react/jsx-runtime": "npm:preact@10.26.5/jsx-runtime",
+    "react-dom": "npm:preact@10.26.5/compat/",
+    "react-dom/": "npm:preact@10.26.5/compat/",
     "htm/preact": "npm:htm@^3.1.1/preact",
-    "@swc/core": "npm:@swc/core@^1.11.8",
-    "typescript": "npm:typescript@^5.8.2",
+    "@swc/core": "npm:@swc/core@^1.11.22",
+    "typescript": "npm:typescript@^5.8.3",
     "uglify-js": "npm:uglify-js@^3.19.3",
-    "clean-css": "npm:clean-css@^5.3.3"
+    "clean-css": "npm:clean-css@^5.3.3",
+    "sass-embedded": "npm:sass-embedded@^1.87.0"
   },
   "exports": {
     ".": "./mod.ts",
@@ -71,6 +72,11 @@
       ".vscode",
       "mocks",
       "**/*test.ts"
+    ]
+  },
+  "lint": {
+    "plugins": [
+      "./.lint_plugins/experimental-fullsoak.ts"
     ]
   }
 }
