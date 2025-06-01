@@ -23,7 +23,9 @@ Deno.test("ssr a TSX component with props", async (t) => {
 Deno.test("ssr a VNode using HTM", async (t) => {
   const props = { name: "Bob" };
   const output = await ssr(
-    html`<${SimpleTsxComponentWithProps} ...${props} />`,
+    html`
+      <${SimpleTsxComponentWithProps} ...${props} />
+    `,
   );
   await assertSnapshot(t, output);
 });
@@ -59,7 +61,9 @@ Deno.test("ssr a StandardComponent with Hat", async (t) => {
     }],
   };
   const output = await ssr(StandardComponent, { name: "Charlie" }, {
-    headContent: html`<${Hat} ...${hatProps} />`,
+    headContent: html`
+      <${Hat} ...${hatProps} />
+    `,
   });
   await assertSnapshot(t, output);
 });
