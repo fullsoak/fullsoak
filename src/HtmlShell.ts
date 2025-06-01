@@ -60,8 +60,9 @@ const buildImportMapJs = async (
     }
   }`;
 
-  const importMapJson = Object.assign(
-    JSON.parse(defaultImportMapJs),
+  const importMapJson = JSON.parse(defaultImportMapJs);
+  Object.assign(
+    importMapJson.imports,
     customMap,
   );
 
@@ -169,14 +170,12 @@ export const withHtmlShell = <P extends CP>({
   js,
   css,
   opts = {},
-}: WithHtmlShellProps<P>): VNode =>
-  html`
-<${HtmlShell}
-  componentName=${componentName}
-  componentProps=${componentProps}
-  js=${js}
-  css=${css}
-  opts=${opts}
->
-  ${component}
-<//>`;
+}: WithHtmlShellProps<P>): VNode => {
+  return html`<${HtmlShell}
+    componentName=${componentName}
+    componentProps=${componentProps}
+    js=${js}
+    css=${css}
+    opts=${opts}
+  >${component}<//>`;
+}

@@ -55,7 +55,9 @@ const ssrTsxComponent = async <P extends CP>(
 
   // this is the only way to render a TSX component where the
   // deepest DOM element is rendered (which is the whole point of SSR)
-  const componentVNode = html`<${component} ...${props} />`;
+  const componentVNode = html`
+    <${component} ...${props} />
+  `;
 
   // @TODO possibility to build a collection of css files for the whole component tree
   // below `componentName` (related issue: https://github.com/fullsoak/fullsoak/issues/17)

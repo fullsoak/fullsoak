@@ -45,12 +45,21 @@ export const Hat: FunctionComponent<HatProps> = (
   { title, meta, links, scripts },
 ) => {
   return html`
-    ${
-    title && html`<title dangerouslySetInnerHTML=${{ __html: title }}></title>`
-  }
-    ${meta?.map((m) => html`<meta ...${m} />`)}
-    ${links?.map((l) => html`<link ...${l} />`)}
-    ${scripts?.map((s) => html`<script ...${s} />`)}
+    ${title && html`
+      <title dangerouslySetInnerHTML="${{ __html: title }}"></title>
+    `} ${meta?.map((m) =>
+      html`
+        <meta ...${m} />
+      `
+    )} ${links?.map((l) =>
+      html`
+        <link ...${l} />
+      `
+    )} ${scripts?.map((s) =>
+      html`
+        <script ...${s} />
+      `
+    )}
   `;
 };
 
@@ -68,4 +77,6 @@ export const Hat: FunctionComponent<HatProps> = (
  * ```
  */
 export const makeHat: (props: HatProps) => VNode = (props) =>
-  html`<${Hat} ...${props} />`;
+  html`
+    <${Hat} ...${props} />
+  `;

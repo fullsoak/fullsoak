@@ -1,3 +1,11 @@
+## Unreleased
+
+- upgraded dependencies: `jsr:@dklab/oak-routing-ctrl@^0.15.1`,
+  `jsr:@std/testing@^1.0.13`, `jsr:@std/path@^1.1.0`, `npm:@swc/core@^1.11.29`,
+  `npm:sass-embedded@^1.89.1`
+- BYOIM (bring your own import-map) should work
+- scss support should no longer crash on Deno Deploy
+
 ## [0.18.0] - 2025-04-28
 
 ### Added

@@ -1,6 +1,6 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.18.0",
+  "version": "0.18.1-alpha.6",
   "nodeModulesDir": "auto",
   "tasks": {
     "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-run -R=$PWD,$(which deno) -E", // =DEBUG,LOG_LEVEL,HOME,HOMEPATH,DENO_DIR,NODE_ENV,PREACT_DEVTOOLS
@@ -18,12 +18,12 @@
     // no `*` needed after folder name (it's also not supported)
     "@mocks/": "./mocks/",
     "@oak/oak": "jsr:@oak/oak@^17.1.4",
-    "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.14.3",
-    "@std/path": "jsr:@std/path@^1.0.9",
+    "@dklab/oak-routing-ctrl": "jsr:@dklab/oak-routing-ctrl@^0.15.1",
+    "@std/path": "jsr:@std/path@^1.1.0",
     "@std/log": "jsr:@std/log@^0.224.14",
     "@std/assert": "jsr:@std/assert@^1.0.13",
-    "@std/testing": "jsr:@std/testing@^1.0.11",
-    "preact": "npm:preact@10.26.5",
+    "@std/testing": "jsr:@std/testing@^1.0.13",
+    "preact": "npm:preact@10.26.5", // 10.26.8 gives `.__H` crash
     "preact-render-to-string": "npm:preact-render-to-string@^6.5.13",
     "preact-iso": "npm:preact-iso@^2.9.1",
     "react": "npm:preact@10.26.5/compat/",
@@ -31,11 +31,11 @@
     "react-dom": "npm:preact@10.26.5/compat/",
     "react-dom/": "npm:preact@10.26.5/compat/",
     "htm/preact": "npm:htm@^3.1.1/preact",
-    "@swc/core": "npm:@swc/core@^1.11.22",
+    "@swc/core": "npm:@swc/core@^1.11.29",
     "typescript": "npm:typescript@^5.8.3",
     "uglify-js": "npm:uglify-js@^3.19.3",
     "clean-css": "npm:clean-css@^5.3.3",
-    "sass-embedded": "npm:sass-embedded@^1.87.0"
+    "sass-embedded": "npm:sass-embedded@^1.89.1"
   },
   "exports": {
     ".": "./mod.ts",
