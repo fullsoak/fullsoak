@@ -119,39 +119,50 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
     JSON.stringify(componentProps || {})
   }`;
   return html`
-  <html>
-    <head>
-      <meta charSet="utf-8" />
-      <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1.0,maximum-scale=1.0"
-      />
-      <script
-        type="importmap"
-        dangerouslySetInnerHTML=${{ __html: buildImportMapJs(customImportMap) }}
-      />
-      ${headContent}
-      <link rel="modulepreload" href=${jsMountPointSrc} as="script" type="text/javascript" />
-      <link rel="modulepreload" href=${jsMainCompSrc} as="script" type="text/javascript" />
-      <script
-        type="text/javascript"
-        dangerouslySetInnerHTML=${{ __html: js }}
-      />
-      <style
-        dangerouslySetInnerHTML=${{ __html: css }}
-      />
-    </head>
-    <body>
-      <main id=${FULLSOAK_HTMLSHELL_MAINID}>
-        ${children}
-      </main>
-      <script
-        type="text/javascript"
-        dangerouslySetInnerHTML=${{ __html: preloadedProps }}
-      />
-      <script defer type="module" src=${jsMountPointSrc}></script>
-    </body>
-  </html>`;
+    <html>
+      <head>
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0"
+        />
+        <script
+          type="importmap"
+          dangerouslySetInnerHTML="${{
+      __html: buildImportMapJs(customImportMap),
+    }}"
+        />
+        ${headContent}
+        <link
+          rel="modulepreload"
+          href="${jsMountPointSrc}"
+          as="script"
+          type="text/javascript"
+        />
+        <link
+          rel="modulepreload"
+          href="${jsMainCompSrc}"
+          as="script"
+          type="text/javascript"
+        />
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML="${{ __html: js }}"
+        />
+        <style dangerouslySetInnerHTML="${{ __html: css }}" />
+      </head>
+      <body>
+        <main id="${FULLSOAK_HTMLSHELL_MAINID}">
+          ${children}
+        </main>
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML="${{ __html: preloadedProps }}"
+        />
+        <script defer type="module" src="${jsMountPointSrc}"></script>
+      </body>
+    </html>
+  `;
 };
 
 type WithHtmlShellProps<CP> = {
@@ -171,6 +182,8 @@ export const withHtmlShell = <P extends CP>({
   css,
   opts = {},
 }: WithHtmlShellProps<P>): VNode => {
+  // ignored until the "syntax error 'expected tag name' at line ..." issue is fixed
+  // deno-fmt-ignore
   return html`<${HtmlShell}
     componentName=${componentName}
     componentProps=${componentProps}
@@ -178,4 +191,4 @@ export const withHtmlShell = <P extends CP>({
     css=${css}
     opts=${opts}
   >${component}<//>`;
-}
+};
