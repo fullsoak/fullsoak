@@ -129,8 +129,8 @@ export const HtmlShell: FunctionComponent<HtmlShellProps<CP>> = ({
         <script
           type="importmap"
           dangerouslySetInnerHTML="${{
-      __html: buildImportMapJs(customImportMap),
-    }}"
+            __html: buildImportMapJs(customImportMap),
+          }}"
         />
         ${headContent}
         <link
