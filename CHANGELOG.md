@@ -1,4 +1,4 @@
-## Unreleased
+## [0.18.1] - 2025-11-27
 
 ### Added
 
@@ -6,9 +6,12 @@
 
 ### Changed
 
-- upgraded dependencies: `jsr:@dklab/oak-routing-ctrl@^0.16.0`,
-  `jsr:@std/testing@^1.0.16`, `jsr:@std/path@^1.1.3`, `npm:@swc/core@^1.15.3`,
-  `npm:sass-embedded@^1.93.3`, `npm:typescript@^5.9.3`
+- upgraded dependencies: `jsr:@oak/oak@^17.2.0`,
+  `jsr:@dklab/oak-routing-ctrl@^0.16.0`, `jsr:@std/assert@^1.0.16`,
+  `jsr:@std/path@^1.1.3`, `jsr:@std/testing@^1.0.16`, `npm:preact@10.27.2`,
+  `npm:preact-render-to-string@^6.6.3`, `npm:preact-iso@^2.11.0`,
+  `npm:@swc/core@^1.15.3`, `npm:typescript@^5.9.3`, `npm:uglify-js@^3.19.3`,
+  `npm:clean-css@^5.3.3`, `npm:sass-embedded@^1.93.3`
 - BYOIM (bring your own import-map) should work
 - scss support should no longer crash on Deno Deploy
 

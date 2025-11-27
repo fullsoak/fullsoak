@@ -1,6 +1,6 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.18.1-alpha.7",
+  "version": "0.18.1",
   "nodeModulesDir": "auto",
   "tasks": {
     "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-run -R=$PWD,$(which deno) -E", // =DEBUG,LOG_LEVEL,HOME,HOMEPATH,DENO_DIR,NODE_ENV,PREACT_DEVTOOLS
@@ -23,13 +23,13 @@
     "@std/log": "jsr:@std/log@^0.224.14",
     "@std/assert": "jsr:@std/assert@^1.0.16",
     "@std/testing": "jsr:@std/testing@^1.0.16",
-    "preact": "npm:preact@10.26.5", // 10.26.8 gives `.__H` crash
-    "preact-render-to-string": "npm:preact-render-to-string@^6.5.13",
-    "preact-iso": "npm:preact-iso@^2.9.1",
-    "react": "npm:preact@10.26.5/compat/",
-    "react/jsx-runtime": "npm:preact@10.26.5/jsx-runtime",
-    "react-dom": "npm:preact@10.26.5/compat/",
-    "react-dom/": "npm:preact@10.26.5/compat/",
+    "preact": "npm:preact@10.27.2",
+    "preact-render-to-string": "npm:preact-render-to-string@^6.6.3",
+    "preact-iso": "npm:preact-iso@^2.11.0",
+    "react": "npm:preact@10.27.2/compat/",
+    "react/jsx-runtime": "npm:preact@10.27.2/jsx-runtime",
+    "react-dom": "npm:preact@10.27.2/compat/",
+    "react-dom/": "npm:preact@10.27.2/compat/",
     "htm/preact": "npm:htm@^3.1.1/preact",
     "@swc/core": "npm:@swc/core@^1.15.3",
     "typescript": "npm:typescript@^5.9.3",
