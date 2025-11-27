@@ -1,5 +1,11 @@
 ## Unreleased
 
+### Added
+
+- `getFrameworkVersion` util fn exported via `mod.ts`
+
+### Changed
+
 - upgraded dependencies: `jsr:@dklab/oak-routing-ctrl@^0.16.0`,
   `jsr:@std/testing@^1.0.16`, `jsr:@std/path@^1.1.3`, `npm:@swc/core@^1.15.3`,
   `npm:sass-embedded@^1.93.3`, `npm:typescript@^5.9.3`

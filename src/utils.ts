@@ -2,6 +2,7 @@ import { ConsoleHandler, getLogger, type LevelName, setup } from "@std/log";
 import { normalize } from "@std/path";
 import { getEnv } from "./getEnv.ts";
 import { process } from "./getProcess.ts";
+import { importJsoncFromDesignatedPath } from "./importJsonc.ts";
 
 function logger() {
   return getLogger("@fullsoak/fullsoak");
@@ -91,3 +92,11 @@ export const setupDefaultFullsoakLogger = (
 export const getPlatformAwarePath = OS === "windows"
   ? (path: string): string => normalize(path)
   : (path: string): string => path;
+
+/**
+ * get fullsoak framework version
+ */
+export const getFrameworkVersion = async (): Promise<string> => {
+  const denoJson = await importJsoncFromDesignatedPath();
+  return denoJson.version;
+};
