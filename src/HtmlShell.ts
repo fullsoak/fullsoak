@@ -182,7 +182,7 @@ export const withHtmlShell = <P extends CP>({
   css,
   opts = {},
 }: WithHtmlShellProps<P>): VNode => {
-  // ignored until the "syntax error 'expected tag name' at line ..." issue is fixed
+  // ignored until the "syntax error 'expected tag name' at line ..." issue when running `deno fmt` is fixed
   // deno-fmt-ignore
   return html`<${HtmlShell}
     componentName=${componentName}
