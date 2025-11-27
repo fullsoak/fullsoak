@@ -1,6 +1,6 @@
 {
   "name": "@fullsoak/fullsoak",
-  "version": "0.18.1-alpha.6",
+  "version": "0.18.1-alpha.7",
   "nodeModulesDir": "auto",
   "tasks": {
     "test": "deno test --allow-ffi=$PWD/node_modules/.deno --allow-run -R=$PWD,$(which deno) -E", // =DEBUG,LOG_LEVEL,HOME,HOMEPATH,DENO_DIR,NODE_ENV,PREACT_DEVTOOLS
@@ -32,7 +32,7 @@
     "react-dom/": "npm:preact@10.26.5/compat/",
     "htm/preact": "npm:htm@^3.1.1/preact",
     "@swc/core": "npm:@swc/core@^1.15.3",
-    "typescript": "npm:typescript@^5.8.3",
+    "typescript": "npm:typescript@^5.9.3",
     "uglify-js": "npm:uglify-js@^3.19.3",
     "clean-css": "npm:clean-css@^5.3.3",
     "sass-embedded": "npm:sass-embedded@^1.93.3"
